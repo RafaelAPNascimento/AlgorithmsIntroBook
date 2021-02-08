@@ -1,5 +1,7 @@
 package _02SortingAndOrderStatistics.heapSort;
 
+import java.util.Arrays;
+
 public class MaxHeap {
 
     private int[] heap;
@@ -62,10 +64,10 @@ public class MaxHeap {
         int right = rightChild(i);
         int largest = i;
 
-        if (i < getSize() && heap[left] > heap[i])
+        if (left < getSize() && heap[left] > heap[i])
             largest = left;
 
-        if (i < getSize() && heap[right] > heap[largest])
+        if (right < getSize() && heap[right] > heap[largest])
             largest = right;
 
         if (largest != i) {
@@ -122,7 +124,9 @@ public class MaxHeap {
         }
     }
 
-
+    public int[] getHeap() {
+        return Arrays.copyOf(heap, size);
+    }
 
 
 }
