@@ -40,7 +40,7 @@ public class PeakFinder1DTest {
 
     private static int[] getRandomIntArr() {
 
-        final int SIZE = ThreadLocalRandom.current().nextInt(2, 100_000);
+        final int SIZE = ThreadLocalRandom.current().nextInt(2, 50_000);
         int[] arr = new int[SIZE];
         for (int i = 0; i < SIZE; i++) {
             arr[i] = ThreadLocalRandom.current().nextInt(0, 10_000);
