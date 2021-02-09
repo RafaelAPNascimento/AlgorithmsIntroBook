@@ -49,6 +49,16 @@ public class MaxHeapTest {
     }
 
     @Test
+    public void shouldReturnHeapSizeCorrectly() {
+
+        MaxHeap maxHeap = new MaxHeap(6);
+        maxHeap.insert(1);
+        maxHeap.insert(2);
+        maxHeap.insert(3);
+        assertEquals(3, maxHeap.getSize());
+    }
+
+    @Test
     public void shouldReturnMax() {
 
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
@@ -82,6 +92,7 @@ public class MaxHeapTest {
         assertTrue(isHeap(maxHeap.getHeap()));
     }
 
+    @Test
     public void shouldSortArray() {
 
         int[] arr = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
@@ -90,6 +101,7 @@ public class MaxHeapTest {
         maxHeap.heapSort();
         assertTrue(isSorted(maxHeap.getHeap()));
     }
+
 
     private static boolean isSorted(int[] arr) {
 
