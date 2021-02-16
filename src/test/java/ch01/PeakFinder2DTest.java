@@ -15,14 +15,13 @@ public class PeakFinder2DTest {
                             { 16, 17, 2, 21, 9 }};
 
     @Test
-    @DisplayName("Deve retornar")
+    @DisplayName("Should pass")
     public void test01() {
 
         PeakFinder2D peakFinder = new PeakFinder2D(matrix);
         int[] result = peakFinder.findPeak();
 
         int[] expected = {2, 1};
-        System.out.println(result[0]+", "+result[1]);
         Assertions.assertArrayEquals(expected, result);
     }
 
