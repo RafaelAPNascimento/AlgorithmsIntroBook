@@ -33,11 +33,13 @@ public class MaxHeap {
     }
 
     public int leftChild(int i) {
-        return i * 2 + 1;
+        return 2 * i + 1;
+        //return (i << 1) + 1;
     }
 
     public int rightChild(int i) {
-        return i * 2 + 2;
+        return 2 * i + 2;
+        //return (i << 1) + 2;
     }
 
     public boolean isLeaf(int i) {

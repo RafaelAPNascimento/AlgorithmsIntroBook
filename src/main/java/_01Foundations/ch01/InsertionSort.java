@@ -19,7 +19,7 @@ public class InsertionSort {
                 arr[j] = arr[j - 1];
                 j--;
             }
-            arr[i] = key;
+            arr[j] = key;
         }
     }
 }
