@@ -1,10 +1,9 @@
 package ch01;
 
 import _01Foundations.ch01.InsertionSort;
+import _01Foundations.ch01.MergeSort;
 import _02SortingAndOrderStatistics.heapSort.QuickSort;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -26,6 +25,16 @@ public class SortingTests {
         int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
         QuickSort quickSort = new QuickSort(arr);
         quickSort.quickSort();
+
+        assertTrue(isSorted(arr));
+    }
+
+    @Test
+    public void shouldSortByMergeSort() {
+
+        int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
+        MergeSort mergeSort = new MergeSort(arr);
+        mergeSort.mergeSort();
 
         assertTrue(isSorted(arr));
     }
