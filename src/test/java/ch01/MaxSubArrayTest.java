@@ -20,4 +20,37 @@ public class MaxSubArrayTest {
         MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr1);
         Assertions.assertEquals(7, maxSubArray.resolveQuadratic());
     }
+
+    @Test
+    public void shouldBeOKwithRange() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr1);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveQuadraticShowRange();
+
+        Assertions.assertEquals(7, result.getMax());
+        Assertions.assertEquals(2, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
+
+    @Test
+    public void shouldBeOKwithRange2() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr2);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveQuadraticShowRange();
+
+        Assertions.assertEquals(7, result.getMax());
+        Assertions.assertEquals(2, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
+
+    @Test
+    public void shouldBeOKwithRange3() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr3);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveQuadraticShowRange();
+
+        Assertions.assertEquals(6, result.getMax());
+        Assertions.assertEquals(3, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
 }

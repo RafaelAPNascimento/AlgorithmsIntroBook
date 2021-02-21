@@ -17,13 +17,13 @@ public class QuickSort {
     private void quickSort(int[] arr, int start, int end) {
 
         if (start < end) {
-            int p = partition(arr, start, end);
+            int p = partition(arr, end);
             quickSort(arr, 0, p - 1);
             quickSort(arr, p + 1, end);
         }
     }
 
-    private int partition(int[] arr, int start, int end) {
+    private int partition(int[] arr, int end) {
 
         int pv = 0;
         for (int i = 0; i < end; i++) {
