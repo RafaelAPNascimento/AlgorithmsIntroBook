@@ -1,5 +1,7 @@
 package _01Foundations.ch01;
 
+import java.util.Objects;
+
 public class MaxSubArrayProblem {
 
     private int[] arr;
@@ -47,6 +49,39 @@ public class MaxSubArrayProblem {
         return new MaxSubArrayResult(max, init, end);
     }
 
+    public int resolveWithKadenes() {
+
+        int max = arr[0];
+        int localMax = max;
+        for (int i = 1; i < arr.length; i++) {
+            localMax = Math.max(arr[i], localMax + arr[i]);
+            max = Math.max(max, localMax);
+        }
+        return max;
+    }
+
+    public MaxSubArrayResult resolveWithKadenesShowRange() {
+
+        int max = arr[0];
+        int localMax = max;
+        int init = 0;
+        int end = 0;
+        for (int i = 1; i < arr.length; i++) {
+
+            localMax += arr[i];
+            if (arr[i] > localMax) {
+                localMax = arr[i];
+                init = i;
+            }
+            if (localMax > max) {
+                max = localMax;
+                end = i;
+            }
+        }
+        return new MaxSubArrayResult(max, init, end);
+    }
+
+
     public class MaxSubArrayResult {
         private int max;
         private int initRange = -1;
@@ -72,6 +107,22 @@ public class MaxSubArrayProblem {
 
         public int getEndRange() {
             return endRange;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            MaxSubArrayResult that = (MaxSubArrayResult) o;
+            return max == that.max &&
+                    initRange == that.initRange &&
+                    endRange == that.endRange;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(max, initRange, endRange);
         }
     }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+// https://www.arhohuttunen.com/junit-5-parameterized-tests/
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MaxSubArrayTest {
 
@@ -19,6 +20,15 @@ public class MaxSubArrayTest {
 
         MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr1);
         Assertions.assertEquals(7, maxSubArray.resolveQuadratic());
+        Assertions.assertEquals(7, maxSubArray.resolveWithKadenes());
+    }
+
+    @Test
+    public void shouldPassScenario2() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr3);
+        Assertions.assertEquals(6, maxSubArray.resolveQuadratic());
+        Assertions.assertEquals(6, maxSubArray.resolveWithKadenes());
     }
 
     @Test
@@ -48,6 +58,39 @@ public class MaxSubArrayTest {
 
         MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr3);
         MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveQuadraticShowRange();
+
+        Assertions.assertEquals(6, result.getMax());
+        Assertions.assertEquals(3, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
+
+    @Test
+    public void shouldBeOKwithRangeByKadenes() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr1);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveWithKadenesShowRange();
+
+        Assertions.assertEquals(7, result.getMax());
+        Assertions.assertEquals(2, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
+
+    @Test
+    public void shouldBeOKwithRange2ByKadenes() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr2);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveQuadraticShowRange();
+
+        Assertions.assertEquals(7, result.getMax());
+        Assertions.assertEquals(2, result.getInitRange());
+        Assertions.assertEquals(6, result.getEndRange());
+    }
+
+    @Test
+    public void shouldBeOKwithRange3ByKadenes() {
+
+        MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(arr3);
+        MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveWithKadenesShowRange();
 
         Assertions.assertEquals(6, result.getMax());
         Assertions.assertEquals(3, result.getInitRange());
