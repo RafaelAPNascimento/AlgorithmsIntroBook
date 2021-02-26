@@ -2,7 +2,7 @@ package ch01;
 
 import _01Foundations.ch01.InsertionSort;
 import _01Foundations.ch01.MergeSort;
-import _02SortingAndOrderStatistics.heapSort.QuickSort;
+import _02SortingAndOrderStatistics.QuickSort;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
