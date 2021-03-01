@@ -12,7 +12,7 @@ public class CountingSortTest {
     public void test01() {
 
         int[] input = {1, 4, 1, 2, 7, 5, 2};
-        CountingSort countingSort = new CountingSort(input, 0, 9);
+        CountingSort countingSort = new CountingSort(input, 7);
         countingSort.countingSort();
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
     }
