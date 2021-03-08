@@ -1,6 +1,6 @@
 package ch02;
 
-import _02SortingAndOrderStatistics.CountingSort;
+import _02SortingAndOrderStatistics.ConstantTimeSorting;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -11,9 +11,9 @@ public class CountingSortTest {
     @Test
     public void test01() {
 
-        int[] input = {1, 4, 1, 2, 7, 5, 2};
-        CountingSort countingSort = new CountingSort(input, 7);
-        countingSort.countingSort();
+        int[] input = {1, 4, 1, 2, 7, 5, 2, 9, 1};
+        ConstantTimeSorting countingSort = new ConstantTimeSorting();
+        countingSort.countingSort(input, 9);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
     }
 

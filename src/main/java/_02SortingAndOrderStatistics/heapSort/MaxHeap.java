@@ -1,134 +1,30 @@
 package _02SortingAndOrderStatistics.heapSort;
 
-import java.util.Arrays;
+public interface MaxHeap {
 
-public class MaxHeap {
+    int parent(int i);
 
-    private int[] heap;
-    private int size;
-    private int limit;
+    int leftChild(int i);
 
-    public MaxHeap(int[] arr) {
+    int rightChild(int i);
 
-        if (arr == null)
-            throw new NullPointerException("Initial array can't be null");
+    boolean isLeaf(int i);
 
-        this.heap = arr;
-        this.size = arr.length;
-        limit = size;
-    }
+    int getSize();
 
-    public MaxHeap(int limit) {
+    int height();
 
-        if (limit < 0)
-            throw new NullPointerException("Limit can't be less than 0");
+    int[] getHeap();
 
-        this.heap = new int[limit];
-        this.limit = limit;
-        size = 0;
-    }
+    void maxHeapify(int i);
 
-    public int parent(int i) {
-        return (i - 1) / 2;
-    }
+    void buildMaxHeap();
 
-    public int leftChild(int i) {
-        return 2 * i + 1;
-        //return (i << 1) + 1;
-    }
+    void heapSort();
 
-    public int rightChild(int i) {
-        return 2 * i + 2;
-        //return (i << 1) + 2;
-    }
+    int getMax();
 
-    public boolean isLeaf(int i) {
-        return i >= (size / 2);
-    }
+    int extractMax();
 
-    public int getSize() {
-        return size;
-    }
-
-    public int height() {
-        return size / 2;
-    }
-
-    private void swap(int i1, int i2) {
-        int tmp = heap[i1];
-        heap[i1] = heap[i2];
-        heap[i2] = tmp;
-    }
-
-    public void maxHeapify(int i) {
-
-        int left = leftChild(i);
-        int right = rightChild(i);
-        int largest = i;
-
-        if (left < getSize() && heap[left] > heap[i])
-            largest = left;
-
-        if (right < getSize() && heap[right] > heap[largest])
-            largest = right;
-
-        if (largest != i) {
-            swap(largest, i);
-            maxHeapify(largest);
-        }
-    }
-
-    public void buildMaxHeap() {
-        for (int i = getSize() - 1; i >= 0; i--)
-            maxHeapify(i);
-    }
-
-    public void heapSort() {
-
-        for (int i = getSize() - 1; i > 0; i--) {
-            swap(0, i);
-            --size;
-            maxHeapify(0);
-        }
-        size = 0;
-    }
-
-    // priority key operations
-    public int getMax() {
-        if (getSize() > 0)
-            return heap[0];
-        else
-            throw new UnsupportedOperationException("Heap underflow");
-    }
-
-    public int extractMax() {
-
-        if (getSize() == 0)
-            throw new UnsupportedOperationException("Heap underflow");
-
-        int max = heap[0];
-        swap(0, getSize() - 1);
-        --size;
-        maxHeapify(0);
-        return max;
-    }
-
-    public void insert(int key) {
-        if (getSize() == limit)
-            throw new UnsupportedOperationException("Heap overflow");
-
-        heap[getSize()] = key;
-        int current = getSize();
-        size++;
-        while (heap[current] > heap[parent(current)]) {
-            swap(current, parent(current));
-            current = parent(current);
-        }
-    }
-
-    public int[] getHeap() {
-        return Arrays.copyOf(heap, size);
-    }
-
-
+    void insert(int key);
 }

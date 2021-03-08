@@ -1,18 +1,14 @@
 package _02SortingAndOrderStatistics;
 
-public class CountingSort {
+public class ConstantTimeSorting {
 
-    private int[] inputs;
-    private int[] countArray;
     private int[] sortedInput;
 
-    public CountingSort(int[] arr, int endRange) {
-        inputs = arr;
-        sortedInput = new int[inputs.length];
-        countArray = new int[endRange + 1];
-    }
+    public void countingSort(int[] arr, int endRange) {
 
-    public void countingSort() {
+        int[] inputs = arr;
+        int[] countArray = new int[endRange + 1];
+        sortedInput = new int[inputs.length];
 
         // count inputs frequency
         for (int i = 0; i < inputs.length; i++)

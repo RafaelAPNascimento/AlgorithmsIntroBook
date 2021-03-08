@@ -1,6 +1,7 @@
 package ch02;
 
 import _02SortingAndOrderStatistics.heapSort.MaxHeap;
+import _02SortingAndOrderStatistics.heapSort.MaxHeapImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -15,7 +16,7 @@ public class MaxHeapTest {
     public void shouldThrowNullPointerExceptionWhenPassingNullInConstructor() {
 
         assertThrows(NullPointerException.class, () -> {
-            new MaxHeap(null);
+            new MaxHeapImpl(null);
         });
     }
 
@@ -24,7 +25,7 @@ public class MaxHeapTest {
     public void shouldBuildMaxHeapArray() {
 
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 0};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         maxHeap.buildMaxHeap();
         assertTrue(isHeap(maxHeap.getHeap()));
     }
@@ -33,7 +34,7 @@ public class MaxHeapTest {
     @DisplayName("Should keep max heap property after insert")
     public void shouldKeepMaxHeapPropertyAfterInsert() {
 
-        MaxHeap maxHeap = new MaxHeap(11);
+        MaxHeap maxHeap = new MaxHeapImpl(11);
         maxHeap.insert(1);
         maxHeap.insert(4);
         maxHeap.insert(2);
@@ -51,7 +52,7 @@ public class MaxHeapTest {
     @Test
     public void shouldReturnHeapSizeCorrectly() {
 
-        MaxHeap maxHeap = new MaxHeap(6);
+        MaxHeap maxHeap = new MaxHeapImpl(6);
         maxHeap.insert(1);
         maxHeap.insert(2);
         maxHeap.insert(3);
@@ -62,14 +63,14 @@ public class MaxHeapTest {
     public void shouldReturnMax() {
 
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         assertEquals(16, maxHeap.getMax());
     }
 
     @Test
     public void shouldDecreaseHeapSizeAfterExtracting() {
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         int oldSize = maxHeap.getSize();
         maxHeap.extractMax();
         assertEquals(oldSize - 1, maxHeap.getSize());
@@ -79,7 +80,7 @@ public class MaxHeapTest {
     public void shouldExtractMax() {
 
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         assertEquals(16, maxHeap.extractMax());
     }
 
@@ -87,7 +88,7 @@ public class MaxHeapTest {
     public void shouldKeepMaxHeapPropertyAfterExtractMax() {
 
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         maxHeap.extractMax();
         assertTrue(isHeap(maxHeap.getHeap()));
     }
@@ -96,7 +97,7 @@ public class MaxHeapTest {
     public void shouldSortArray() {
 
         int[] arr = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-        MaxHeap maxHeap = new MaxHeap(arr);
+        MaxHeap maxHeap = new MaxHeapImpl(arr);
         maxHeap.buildMaxHeap();
         maxHeap.heapSort();
         assertTrue(isSorted(maxHeap.getHeap()));
