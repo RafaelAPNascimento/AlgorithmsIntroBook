@@ -79,6 +79,7 @@ public class MaxHeapImpl implements MaxHeap{
     }
 
     public void buildMaxHeap() {
+        size = heap.length;
         for (int i = getSize() / 2 - 1; i >= 0; i--)
             maxHeapify(i);
     }
