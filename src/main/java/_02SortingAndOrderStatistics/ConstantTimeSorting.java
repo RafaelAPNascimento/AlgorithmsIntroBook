@@ -40,7 +40,7 @@ public class ConstantTimeSorting {
 
         int range = 10;
 
-
+        return null;
     }
 
     private int getMax(int[] arr) {
