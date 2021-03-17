@@ -7,7 +7,7 @@ public class Drafts {
     public static void main(String[] args) throws Exception {
 
         int[] arr = {170,45,75,90,802,24,2,66};
-        radixsort(arr);
+        _radixsort(arr);
         System.out.println(Arrays.toString(arr));
 //        int max = Arrays.stream(arr).max().getAsInt();
 //
@@ -19,8 +19,10 @@ public class Drafts {
 
     }
 
+
+
     // http://www.geekviewpoint.com/java/sorting/radixsort
-    static void radixsort(int[] input) {
+    static void _radixsort(int[] input) {
         final int RADIX = 10;
         // declare and initialize bucket[]
         List<Integer>[] bucket = new ArrayList[RADIX];
