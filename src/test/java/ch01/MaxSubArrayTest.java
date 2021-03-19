@@ -3,6 +3,7 @@ package ch01;
 import _01Foundations.ch01.MaxSubArrayProblem;
 import ch01.util.MaxSubArrayTestArgumentProvider;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MaxSubArrayTest {
 
+    @Tag("Calculate max subarray sum in quadratic time")
     @ParameterizedTest
     @ArgumentsSource(MaxSubArrayTestArgumentProvider.class)
     public void shouldResolveQuadratic(MaxSubArrayTestArgumentProvider.TestElements testElements, TestInfo testInfo) {
@@ -19,6 +21,7 @@ public class MaxSubArrayTest {
         Assertions.assertEquals(testElements.getExpectedMaxSum(), maxSubArray.resolveQuadratic());
     }
 
+    @Tag("Calculate in linear time")
     @ParameterizedTest
     @ArgumentsSource(MaxSubArrayTestArgumentProvider.class)
     public void shouldResolveLinear(MaxSubArrayTestArgumentProvider.TestElements testElements, TestInfo testInfo) {
@@ -40,6 +43,7 @@ public class MaxSubArrayTest {
         Assertions.assertEquals(testElements.getFinalRange(), result.getEndRange());
     }
 
+    @Tag("Calculete in linear time, show range")
     @ParameterizedTest
     @ArgumentsSource(MaxSubArrayTestArgumentProvider.class)
     public void shouldBeOKwithRangeLinear(MaxSubArrayTestArgumentProvider.TestElements testElements, TestInfo testInfo) {
