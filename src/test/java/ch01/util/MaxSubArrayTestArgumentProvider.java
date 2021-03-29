@@ -13,8 +13,8 @@ public class MaxSubArrayTestArgumentProvider implements ArgumentsProvider {
     private int[] arr2 = {-2, -5, 6, -2, -3, 1, 5, -6};    // 7
     private int[] arr3 = {-3, 1, -8, 4, -1, 2, 1, -5, 5};   // 6
     private int[] arr4 = {31, -41, 59, 26, -53, 58, 97, -93, -23, 84};   // 187
-    private int[] arr5 = {1000, -41, 59, 26, -53, 58, 97, -93, -23, 84};   // 1000
-    private int[] arr6 = {31, -41, 59, 26, -53, 58, 97, -93, -23, 1000};   // 1000
+    private int[] arr5 = {1000, -41, 59, 26, -53, 58, 97, -93, -23, 84};   // 1146
+    private int[] arr6 = {31, -41, 59, 26, -53, 58, 97, -93, -23, 1000};   // 1071
 
     private TestElements[] testElements;
 
@@ -26,7 +26,7 @@ public class MaxSubArrayTestArgumentProvider implements ArgumentsProvider {
         testElements[2] = new TestElements(arr3, 6, 3, 6);
         testElements[3] = new TestElements(arr4, 187, 2, 6);
         testElements[4] = new TestElements(arr5, 1146, 0, 6);
-        testElements[5] = new TestElements(arr6, 1061, 2, 9);
+        testElements[5] = new TestElements(arr6, 1071, 2, 9);
     }
 
     @Override

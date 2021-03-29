@@ -49,7 +49,7 @@ public class ConstantTimeSorting {
         sortedInput = new int[arr.length];
         int count[] = new int[10];
 
-        Arrays.fill(count,0);
+        Arrays.fill(count, 0);
 
         for (int i = 0; i < arr_len; i++)
             count[ (arr[i] / exp) % 10 ]++;
