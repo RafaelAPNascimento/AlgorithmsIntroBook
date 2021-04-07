@@ -10,7 +10,7 @@ public interface MaxHeap {
 
     boolean isLeaf(int i);
 
-    int getSize();
+    int getHeapSize();
 
     int height();
 

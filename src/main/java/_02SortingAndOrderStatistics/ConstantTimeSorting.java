@@ -10,9 +10,9 @@ public class ConstantTimeSorting {
     private int[] sortedInput;
     private float[] sortedInputFloats;
 
-    public void countingSort(int[] arr, int endRange) {
+    public void countingSort(int[] I, int endRange) {
 
-        int[] inputs = arr;
+        int[] inputs = I;
         int[] countArray = new int[endRange + 1];
         sortedInput = new int[inputs.length];
 

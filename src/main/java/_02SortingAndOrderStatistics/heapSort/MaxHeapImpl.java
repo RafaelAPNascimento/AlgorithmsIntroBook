@@ -46,7 +46,7 @@ public class MaxHeapImpl implements MaxHeap{
         return i >= (size / 2);
     }
 
-    public int getSize() {
+    public int getHeapSize() {
         return size;
     }
 
@@ -66,10 +66,10 @@ public class MaxHeapImpl implements MaxHeap{
         int right = rightChild(i);
         int largest = i;
 
-        if (left < getSize() && heap[left] > heap[i])
+        if (left < getHeapSize() && heap[left] > heap[i])
             largest = left;
 
-        if (right < getSize() && heap[right] > heap[largest])
+        if (right < getHeapSize() && heap[right] > heap[largest])
             largest = right;
 
         if (largest != i) {
@@ -80,13 +80,13 @@ public class MaxHeapImpl implements MaxHeap{
 
     public void buildMaxHeap() {
         size = heap.length;
-        for (int i = getSize() / 2 - 1; i >= 0; i--)
+        for (int i = getHeapSize() / 2 - 1; i >= 0; i--)
             maxHeapify(i);
     }
 
     public void heapSort() {
 
-        for (int i = getSize() - 1; i > 0; i--) {
+        for (int i = getHeapSize() - 1; i > 0; i--) {
             swap(0, i);
             --size;
             maxHeapify(0);
@@ -96,7 +96,7 @@ public class MaxHeapImpl implements MaxHeap{
 
     // priority key operations
     public int getMax() {
-        if (getSize() > 0)
+        if (getHeapSize() > 0)
             return heap[0];
         else
             throw new UnsupportedOperationException("Heap underflow");
@@ -104,22 +104,22 @@ public class MaxHeapImpl implements MaxHeap{
 
     public int extractMax() {
 
-        if (getSize() == 0)
+        if (getHeapSize() == 0)
             throw new UnsupportedOperationException("Heap underflow");
 
         int max = heap[0];
-        swap(0, getSize() - 1);
+        swap(0, getHeapSize() - 1);
         --size;
         maxHeapify(0);
         return max;
     }
 
     public void insert(int key) {
-        if (getSize() == limit)
+        if (getHeapSize() == limit)
             throw new UnsupportedOperationException("Heap overflow");
 
-        heap[getSize()] = key;
-        int current = getSize();
+        heap[getHeapSize()] = key;
+        int current = getHeapSize();
         size++;
         while (heap[current] > heap[parent(current)]) {
             swap(current, parent(current));

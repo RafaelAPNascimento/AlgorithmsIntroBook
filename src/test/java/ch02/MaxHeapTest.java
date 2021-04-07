@@ -16,7 +16,7 @@ public class MaxHeapTest {
     public void shouldThrowNullPointerExceptionWhenPassingNullInConstructor() {
 
         assertThrows(NullPointerException.class, () -> {
-            new MaxHeapImpl(null);
+           new MaxHeapImpl(null);
         });
     }
 
@@ -56,7 +56,7 @@ public class MaxHeapTest {
         maxHeap.insert(1);
         maxHeap.insert(2);
         maxHeap.insert(3);
-        assertEquals(3, maxHeap.getSize());
+        assertEquals(3, maxHeap.getHeapSize());
     }
 
     @Test
@@ -71,9 +71,9 @@ public class MaxHeapTest {
     public void shouldDecreaseHeapSizeAfterExtracting() {
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
         MaxHeap maxHeap = new MaxHeapImpl(arr);
-        int oldSize = maxHeap.getSize();
+        int oldSize = maxHeap.getHeapSize();
         maxHeap.extractMax();
-        assertEquals(oldSize - 1, maxHeap.getSize());
+        assertEquals(oldSize - 1, maxHeap.getHeapSize());
     }
 
     @Test
@@ -104,6 +104,16 @@ public class MaxHeapTest {
     }
 
 
+    public void shouldReturnCorrectParentIndex() {
+
+    }
+
+
+    public void shouldReturnCorrectHeapHeight() {
+
+    }
+
+
     private static boolean isSorted(int[] arr) {
 
         for (int i = 0; i < arr.length - 1; i++) {
@@ -116,10 +126,13 @@ public class MaxHeapTest {
     private static boolean isHeap(int[] arr) {
 
         int N = arr.length;
+
         for (int i = (N - 2) / 2; i > -1; --i) { // start from the first internal node who has children;
+
             int j = 2 * i + 1; // the left child;
             if (j < N - 1 && arr[i] < arr[j+1]) j++; // select the bigger child;
-            if (arr[i] < arr[j]) return false; // if parent is smaller than the child;
+            if (arr[i] < arr[j])
+                return false; // if parent is smaller than the child;
         }
         return true;
     }

@@ -1,6 +1,6 @@
 package _02SortingAndOrderStatistics;
 
-// also called RandomizedSelection
+// also called RandomizedSelection, or SelectionSort
 public class QuickSelection {
 
     private int[] arr;
@@ -36,10 +36,8 @@ public class QuickSelection {
 
         for (int i = start; i < end; i++ ) {
 
-            if (arr[i] <= arr[end]) {
-                swap(arr, i, storeIndex);
-                storeIndex++;
-            }
+            if (arr[i] <= arr[end])
+                swap(arr, i, storeIndex++);
         }
         swap(arr, end, storeIndex);
 
