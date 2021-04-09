@@ -2,6 +2,10 @@ package _03DataStructures;
 
 import java.lang.reflect.Array;
 
+/**
+ * LIFO
+ * @param <E>
+ */
 public class StackImpl<E> implements Stack<E> {
 
     private E[] arr;
@@ -19,11 +23,19 @@ public class StackImpl<E> implements Stack<E> {
 
     @Override
     public void push(E e) {
+
+        if (top + 1 == arr.length)
+            throw new IndexOutOfBoundsException("Stack overflow");
+
         arr[++top] = e;
     }
 
     @Override
     public E pop() {
+
+        if (top < 0)
+            throw new RuntimeException("Stack underflow");
+
         return arr[top--];
     }
 }
