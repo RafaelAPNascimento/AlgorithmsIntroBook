@@ -32,21 +32,21 @@ public class MaxSubArrayProblem {
     public MaxSubArrayResult resolveQuadraticShowRange() {
 
         int max = arr[0];
-        int init = 0;
-        int end = 0;
+        int start = 0, end = 0;
 
-        for (int i = 1; i < arr.length; i++) {
-            int localMax = arr[i - 1];
-            for (int j = i; j < arr.length; j++) {
+        for (int i = 0; i < arr.length; i++) {
+            int localMax = arr[i];
+
+            for (int j = i + 1; j < arr.length; j++) {
                 localMax += arr[j];
                 if (localMax > max) {
                     max = localMax;
-                    init = i - 1;
+                    start = i;
                     end = j;
                 }
             }
         }
-        return new MaxSubArrayResult(max, init, end);
+        return new MaxSubArrayResult(max, start, end);
     }
 
     public int resolveWithKadenes() {
@@ -80,7 +80,6 @@ public class MaxSubArrayProblem {
         }
         return new MaxSubArrayResult(max, init, end);
     }
-
 
     public class MaxSubArrayResult {
         private int max;

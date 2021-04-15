@@ -33,7 +33,7 @@ public class StackImpl<E> implements Stack<E> {
     @Override
     public E pop() {
 
-        if (top < 0)
+        if (isEmpty())
             throw new RuntimeException("Stack underflow");
 
         return arr[top--];
