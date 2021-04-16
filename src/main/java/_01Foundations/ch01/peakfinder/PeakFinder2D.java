@@ -25,7 +25,7 @@ public class PeakFinder2D {
 
         int largestRow = findMaxInCol(midCol);
 
-        if (midCol > 0 && arr[largestRow][midCol] < arr[largestRow][midCol - 1])
+        if (midCol - 1 >= 0 && arr[largestRow][midCol] < arr[largestRow][midCol - 1])
             return findPeak(startCol, midCol - 1);
 
         else if (midCol < arr.length - 1 && arr[largestRow][midCol] < arr[largestRow][midCol + 1])
@@ -44,7 +44,5 @@ public class PeakFinder2D {
 
         return maxIndex;
     }
-
-
 
 }
