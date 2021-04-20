@@ -10,26 +10,22 @@ public class ConstantTimeSorting {
     private int[] sortedInput;
     private float[] sortedInputFloats;
 
-    public void countingSort(int[] I, int endRange) {
+    public void countingSort(int[] input, int endRange) {
 
-        int[] inputs = I;
         int[] countArray = new int[endRange + 1];
-        sortedInput = new int[inputs.length];
 
-        // count inputs frequency
-        for (int i = 0; i < inputs.length; i++)
-            countArray[inputs[i]]++;
-
-        // increment countArray
+        for (int i = 0; i < input.length; i++) {
+            countArray[input[i]]++;
+        }
         for (int i = 1; i < countArray.length; i++)
             countArray[i] += countArray[i - 1];
 
-        // place into sorted order
-        for (int i = 0; i < sortedInput.length; i++) {
-            int input = inputs[i];
-            int position = countArray[input];
-            sortedInput[--position] = input;
-            countArray[input]--;
+        sortedInput = new int[input.length];
+
+        for (int i = 0; i < input.length; i++) {
+            int element = input[i];
+            int index = --countArray[element];
+            sortedInput[index] = element;
         }
     }
 
@@ -98,4 +94,6 @@ public class ConstantTimeSorting {
     public float[] getSortedInputFloats() {
         return sortedInputFloats;
     }
+
+
 }

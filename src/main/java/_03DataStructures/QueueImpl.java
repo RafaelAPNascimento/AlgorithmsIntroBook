@@ -57,7 +57,8 @@ public class QueueImpl<E> implements Queue<E> {
         return counter == 0;
     }
 
-    private boolean isFull() {
+    @Override
+    public boolean isFull() {
         return capacity == counter;
     }
 }

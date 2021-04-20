@@ -7,4 +7,6 @@ public interface Queue<E> {
     E dequeue();
 
     boolean isEmpty();
+
+    boolean isFull();
 }
