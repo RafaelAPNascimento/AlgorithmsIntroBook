@@ -108,8 +108,7 @@ public class MaxHeapImpl implements MaxHeap{
             throw new UnsupportedOperationException("Heap underflow");
 
         int max = heap[0];
-        swap(0, getHeapSize() - 1);
-        --size;
+        swap(0, --size);
         maxHeapify(0);
         return max;
     }
@@ -118,12 +117,12 @@ public class MaxHeapImpl implements MaxHeap{
         if (getHeapSize() == limit)
             throw new UnsupportedOperationException("Heap overflow");
 
-        heap[getHeapSize()] = key;
-        int current = getHeapSize();
-        size++;
-        while (heap[current] > heap[parent(current)]) {
-            swap(current, parent(current));
-            current = parent(current);
+        heap[size++] = key;
+        int index = size - 1;
+
+        while (heap[index] > heap[parent(index)]) {
+            swap(index, parent(index));
+            index = parent(index);
         }
     }
 

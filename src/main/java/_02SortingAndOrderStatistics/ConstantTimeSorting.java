@@ -39,25 +39,25 @@ public class ConstantTimeSorting {
         }
     }
 
-    private void countingSort(int[] arr, int arr_len, int exp) {
+    private void countingSort(int[] arr, int inputsize, int exp) {
 
-        int result[] = new int[arr_len];
+        int result[] = new int[inputsize];
         sortedInput = new int[arr.length];
-        int count[] = new int[10];
+        int freq[] = new int[10];   // size 10 because decimal values range form 0 - 9
 
-        Arrays.fill(count, 0);
+        Arrays.fill(freq, 0);
 
-        for (int i = 0; i < arr_len; i++)
-            count[ (arr[i] / exp) % 10 ]++;
+        for (int i = 0; i < inputsize; i++)
+            freq[ (arr[i] / exp) % 10 ]++;
 
         for (int i = 1; i < 10; i++)
-            count[i] += count[i - 1];
+            freq[i] += freq[i - 1];
 
-        for (int i = arr_len - 1; i >= 0; i--) {
-            result[count[ (arr[i] / exp) % 10 ] - 1] = arr[i];
-            count[ (arr[i] / exp) % 10 ]--;
+        for (int i = inputsize - 1; i >= 0; i--) {
+            result[freq[ (arr[i] / exp) % 10 ] - 1] = arr[i];
+            freq[ (arr[i] / exp) % 10 ]--;
         }
-        for (int i = 0; i < arr_len; i++)
+        for (int i = 0; i < inputsize; i++)
             sortedInput[i] = result[i];
     }
 

@@ -12,15 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MaxHeapTest {
 
     @Test
-    @DisplayName("Should throws NullPointerException when passing null to constructor")
-    public void shouldThrowNullPointerExceptionWhenPassingNullInConstructor() {
-
-        assertThrows(NullPointerException.class, () -> {
-           new MaxHeapImpl(null);
-        });
-    }
-
-    @Test
     @DisplayName("Should set max heap property in the whole array")
     public void shouldBuildMaxHeapArray() {
 

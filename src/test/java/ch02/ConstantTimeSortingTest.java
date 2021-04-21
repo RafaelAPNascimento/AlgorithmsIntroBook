@@ -11,16 +11,16 @@ public class ConstantTimeSortingTest {
     @Test
     public void shouldSortByCountingSort() {
 
-        int[] input = {1, 4, 1, 2, 7, 5, 2, 9, 1};
+        int[] input = {1, 4, 1, 2, 7, 5, 2, 300, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
-        countingSort.countingSort(input, 9);
+        countingSort.countingSort(input, 300);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
     }
 
     @Test
     public void shouldSortByRadixSort() {
 
-        int[] input = {1, 4, 1, 2, 7, 5, 2, 9, 1};
+        int[] input = {1, 4, 1, 2, 7, 5, 2, 9,  8, 8, 6, 2, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.radixSort(input);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
