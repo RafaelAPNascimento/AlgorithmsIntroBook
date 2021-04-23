@@ -22,7 +22,7 @@ public class ConstantTimeSortingTest {
 
         int[] input = {1, 4, 1, 2, 7, 5, 2, 9,  8, 8, 6, 2, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
-        countingSort._radixSort(input);
+        countingSort.radixSort(input);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
     }
 

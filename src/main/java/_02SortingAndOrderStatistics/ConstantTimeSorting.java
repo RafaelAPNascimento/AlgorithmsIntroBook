@@ -32,6 +32,7 @@ public class ConstantTimeSorting {
     // https://www.tutorialspoint.com/java-program-for-radix-sort
     public void radixSort(int[] arr) {
 
+        sortedInput = new int[arr.length];
         int max = Arrays.stream(arr).max().getAsInt();
 
         for (int exp = 1; max / exp > 0; exp *= 10) {
@@ -41,22 +42,24 @@ public class ConstantTimeSorting {
 
     private void countingSortRadixImpl(int[] arr, int place) {
 
-        int inputsize = arr.length;
 
-        int result[] = new int[inputsize];
-        sortedInput = new int[inputsize];
-        int countArray[] = new int[10];   // size 10 because decimal values range form 0 - 9
+        int[] freq = new int[10];
+        int[] result = new int[arr.length];
 
-        for (int i = 0; i < inputsize; i++)
-            countArray[ (arr[i] / place) % 10 ]++;
+        for (int i = 0; i < arr.length; i++)
+            freq[ (arr[i] / place) % 10 ]++;
 
         for (int i = 1; i < 10; i++)
-            countArray[i] += countArray[i - 1];
+            freq[i] += freq[i-1];
 
-        for (int i = inputsize - 1; i >= 0; i--)
-            result[ --countArray[ (arr[i] / place) % 10 ] ] = arr[i];
+        for (int i = arr.length - 1; i >= 0; i--) {
+//            result[ --freq[ (arr[i] / place) % 10 ] ] = arr[i];       good practices: sometimes 3 lines are better than 1 alone
+            int element = arr[i];
+            int index = --freq[ (element / place) % 10 ];
+            result[index] = element;
+        }
 
-        for (int i = 0; i < inputsize; i++)
+        for (int i = 0; i < arr.length; i++)
             sortedInput[i] = result[i];
     }
 
