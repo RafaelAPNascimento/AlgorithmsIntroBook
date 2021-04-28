@@ -31,6 +31,7 @@ public class MaxSubArrayTest {
     }
 
 
+    @Tag("Calculate in quadratic time, show ranges")
     @ParameterizedTest
     @ArgumentsSource(MaxSubArrayTestArgumentProvider.class)
     public void shouldBeOKwithRangeQuadratic(MaxSubArrayTestArgumentProvider.TestElements testElements, TestInfo testInfo) {

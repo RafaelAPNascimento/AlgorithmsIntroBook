@@ -49,6 +49,7 @@ public class MaxSubArrayProblem {
         return new MaxSubArrayResult(max, start, end);
     }
 
+
     public int resolveWithKadenes() {
 
         int max = arr[0];

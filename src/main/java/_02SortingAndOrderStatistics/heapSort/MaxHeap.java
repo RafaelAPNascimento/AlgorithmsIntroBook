@@ -27,4 +27,5 @@ public interface MaxHeap {
     int extractMax();
 
     void insert(int key);
+
 }

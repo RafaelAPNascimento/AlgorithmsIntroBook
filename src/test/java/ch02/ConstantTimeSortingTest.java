@@ -1,7 +1,9 @@
 package ch02;
 
 import _02SortingAndOrderStatistics.ConstantTimeSorting;
+import ch01.util.TestUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -21,6 +23,16 @@ public class ConstantTimeSortingTest {
     public void shouldSortByRadixSort() {
 
         int[] input = {1, 4, 1, 2, 7, 5, 2, 9,  8, 8, 6, 2, 1};
+        ConstantTimeSorting countingSort = new ConstantTimeSorting();
+        countingSort.radixSort(input);
+        Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
+    }
+
+    @Test
+    @RepeatedTest(5)
+    public void shouldSortByRadixSort2() {
+
+        int[] input = TestUtil.getRandomIntArr(50, 1_000);
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.radixSort(input);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
