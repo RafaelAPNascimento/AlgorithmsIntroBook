@@ -44,7 +44,7 @@ public class MaxSubArrayTest {
         Assertions.assertEquals(testElements.getFinalRange(), result.getEndRange());
     }
 
-    @Tag("Calculete in linear time, show range")
+    @Tag("Calculate in linear time, show range")
     @ParameterizedTest
     @ArgumentsSource(MaxSubArrayTestArgumentProvider.class)
     public void shouldBeOKwithRangeLinear(MaxSubArrayTestArgumentProvider.TestElements testElements, TestInfo testInfo) {

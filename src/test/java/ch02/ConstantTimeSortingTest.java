@@ -32,7 +32,7 @@ public class ConstantTimeSortingTest {
     @RepeatedTest(5)
     public void shouldSortByRadixSort2() {
 
-        int[] input = TestUtil.getRandomIntArr(50, 1_000);
+        int[] input = TestUtil.getRandomIntArray(50, 1_000);
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.radixSort(input);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
