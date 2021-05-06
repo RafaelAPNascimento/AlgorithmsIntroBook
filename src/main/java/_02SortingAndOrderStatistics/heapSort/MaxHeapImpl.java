@@ -2,7 +2,7 @@ package _02SortingAndOrderStatistics.heapSort;
 
 import java.util.Arrays;
 
-public class MaxHeapImpl implements MaxHeap{
+public class MaxHeapImpl implements MaxHeap {
 
     private int[] heap;
     private int size;

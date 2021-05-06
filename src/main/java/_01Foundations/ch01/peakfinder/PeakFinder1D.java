@@ -37,8 +37,4 @@ public class PeakFinder1D {
         else
             return mid;
     }
-
-
-
-
 }

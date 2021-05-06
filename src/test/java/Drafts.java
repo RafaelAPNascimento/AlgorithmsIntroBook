@@ -12,9 +12,10 @@ public class Drafts {
 
     static void test() {
 
-        String s = " {\"timestamp\":\"2021-04-14T15:39:01.143\",\"status\":406,\"error\":\"Not Acceptable\",\"mensagem\":\"VE═CULO J┴ POSSUI INTENÃ├O DE VENDA\",\"codigo\":507,\"path\":\"/SevDocumento/rest/registra/intencao/venda/\"}";
-        s = s.replaceAll("[^\\x20-\\x7e]", "");
-        System.out.println(s);
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "A");
+        map.computeIfPresent(1, (k, v) -> "B");
+        System.out.println(map.get(1));
     }
 
 

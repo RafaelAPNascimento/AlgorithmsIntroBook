@@ -15,7 +15,7 @@ public class QuickSelection {
     }
 
     // index = k - 1, k'th smallest
-    // index = N - k, k'th grea test
+    // index = N - k, k'th greatest
     private int quickSelection(int[] arr, int start, int end, int k) {
 
         int index = partition(arr, start, end);
@@ -44,9 +44,11 @@ public class QuickSelection {
         return storeIndex;
     }
 
+
     private void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
+        var temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
 }
