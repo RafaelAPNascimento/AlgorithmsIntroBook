@@ -44,7 +44,6 @@ public class QuickSelection {
         return storeIndex;
     }
 
-
     private void swap(int[] arr, int i, int j) {
         var temp = arr[i];
         arr[i] = arr[j];
