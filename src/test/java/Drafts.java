@@ -12,10 +12,9 @@ public class Drafts {
 
     static void test() {
 
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "A");
-        map.computeIfPresent(1, (k, v) -> "B");
-        System.out.println(map.get(1));
+        String x = "abc";
+        String y = "abc";
+        System.out.println(x == y);
     }
 
 

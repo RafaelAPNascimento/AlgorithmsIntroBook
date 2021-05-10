@@ -5,12 +5,15 @@ import java.util.Objects;
 public class LinkedList<E> {
 
     private Node<E> head;
+    private int counter = 0;
 
     public LinkedList() {
 
     }
 
     public void push(E element) {
+
+        counter++;
 
         // splices newNode into the front of head (so the current head becomes the 'new next')
         Node newNode = new Node(element, head, null);
@@ -21,6 +24,7 @@ public class LinkedList<E> {
 
         Node newNode = new Node(element);
 
+        counter++;
         // list is empty
         if (head == null) {
             head = newNode;
@@ -38,13 +42,16 @@ public class LinkedList<E> {
 
     public boolean remove(E element) {
 
-        Node current = head;
+        Node<E> current = head;
 
         while (current != null) {
-            if (current.data == element) {
+
+            if (isEquals(current.data, element)) {
                 current.previous.next = current.next;
+                counter--;
                 return true;
             }
+            current = current.next;
         }
         return false;
     }
@@ -52,16 +59,25 @@ public class LinkedList<E> {
     // like search
     public boolean contains(E element) {
 
-        Node current = head;
+        Node<E> current = head;
 
         while (current != null) {
 
-            if (current.data == element)
+            if (isEquals(current.data, element))
                 return true;
 
             current = current.next;
         }
         return false;
+    }
+
+    public int getSize() {
+
+        return counter;
+    }
+
+    private boolean isEquals(E e, E other) {
+        return Objects.equals(e, other);
     }
 
     class Node<E> {
@@ -86,8 +102,4 @@ public class LinkedList<E> {
                 next.previous = this;
         }
     }
-
-
-
-
 }
