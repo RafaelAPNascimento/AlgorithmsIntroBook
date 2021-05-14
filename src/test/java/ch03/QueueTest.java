@@ -59,6 +59,7 @@ public class QueueTest {
         queue.enqueue(4);
         queue.enqueue(5);
         queue.enqueue(6);
+
         for (int i = 4; i >= 0; i--)
             queue.dequeue();
 

@@ -10,7 +10,7 @@ public class MaxSubArrayProblem {
         this.arr = arr;
     }
 
-    public int _resolveQuadratic() {
+    public int resolveQuadratic() {
 
         int max = arr[0];
 
@@ -22,20 +22,6 @@ public class MaxSubArrayProblem {
 
                 localMax += arr[j];
                 max = Math.max(max, localMax);
-            }
-        }
-        return max;
-    }
-
-    public int resolveQuadratic() {
-
-        int max = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            int local = arr[i - 1];
-            for (int j = i; j < arr.length; j++) {
-
-                local = Math.max(local + arr[j], arr[j]);
-                max = Math.max(local, max);
             }
         }
         return max;

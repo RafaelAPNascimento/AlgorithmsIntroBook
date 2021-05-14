@@ -1,6 +1,8 @@
 package ch03;
 
 import _03DataStructures.LinkedList;
+import _03DataStructures.LinkedListImpl;
+import _03DataStructures.TestLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +11,7 @@ public class LinkedListTest {
     @Test
     public void shouldReturnCorrectSize() {
 
-        LinkedList<Integer> lk = new LinkedList<>();
+        LinkedList<Integer> lk = new TestLinkedList<>();
         lk.append(1);
         lk.append(2);
         lk.append(3);
@@ -21,7 +23,7 @@ public class LinkedListTest {
     @Test
     public void shouldReturnCorrectSizeAfterRemoving() {
 
-        LinkedList<Integer> lk = new LinkedList<>();
+        LinkedList<Integer> lk = new TestLinkedList<>();
         lk.append(1);
         lk.append(2);
         lk.append(3);
@@ -31,13 +33,61 @@ public class LinkedListTest {
     }
 
     @Test
-    public void shouldConfirmContainedElement() {
+    public void shouldConfirmElementAfterAppend() {
 
-        LinkedList<String> lk = new LinkedList<>();
+        LinkedList<String> lk = new TestLinkedList<>();
         lk.append("A");
         lk.append("B");
         lk.append("C");
         lk.append("D");
         Assertions.assertTrue(lk.contains("C"));
+    }
+
+    @Test
+    public void shouldConfirmElementAfterPush() {
+
+        LinkedList<String> lk = new TestLinkedList<>();
+        lk.append("A");
+        lk.push("B");
+        lk.push("C");
+        lk.push("D");
+        Assertions.assertTrue(lk.contains("C"));
+    }
+
+    @Test
+    public void shouldNotContainElement() {
+
+        LinkedList<String> lk = new TestLinkedList<>();
+        lk.append("A");
+        lk.push("B");
+        lk.push("C");
+        lk.push("D");
+        Assertions.assertFalse(lk.contains("E"));
+    }
+
+    @Test
+    public void shouldNotContainElementAfterRemoving() {
+
+        LinkedList<String> lk = new TestLinkedList<>();
+        lk.push("E");
+        lk.append("A");
+        lk.push("B");
+        lk.push("C");
+        lk.push("D");
+        lk.remove("E");
+        Assertions.assertFalse(lk.contains("E"));
+    }
+
+    @Test
+    public void shouldBeEmptyAfterRemovingAll() {
+
+        LinkedList<Integer> lk = new TestLinkedList<>();
+        lk.append(1);
+        lk.append(2);
+        lk.append(3);
+        lk.remove(1);
+        lk.remove(2);
+        lk.remove(3);
+        Assertions.assertEquals(0, lk.getSize());
     }
 }
