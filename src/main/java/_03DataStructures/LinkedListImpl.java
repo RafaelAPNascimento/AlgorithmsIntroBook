@@ -1,112 +1,112 @@
 package _03DataStructures;
 
-import java.util.Objects;
-
 public class LinkedListImpl<E> implements LinkedList<E> {
 
     private Node<E> head;
+    private Node<E> tail;
     private int counter = 0;
 
-    public LinkedListImpl() {
+    @Override
+    public void push(E e) {
 
-    }
+        Node newNode = new Node(e);
 
-    public void push(E element) {
+        if (isEmpty())
+            head = tail = newNode;
 
-        counter++;
-
-        // splices newNode into the front of head (so the current head becomes the 'new next')
-        Node newNode = new Node(element, head, null);
-        head = newNode;
-    }
-
-    public void append(E element) {
-
-        Node newNode = new Node(element);
-
-        counter++;
-        // list is empty
-        if (head == null) {
+        else {
+            head.previous = newNode;
+            newNode.next = head;
             head = newNode;
-            return;
         }
-
-        Node last = head;
-
-        while (last.next != null) {
-            last = last.next;
-        }
-        last.next = newNode;
-        newNode.previous = last;
+        counter++;
     }
 
-    public boolean remove(E element) {
+    @Override
+    public void append(E e) {
 
-        Node<E> current = head;
+        Node<E> newNode = new Node<>(e);
 
-        while (current != null) {
+        if (isEmpty()) {
+            head = tail = newNode;
+        }
+        else {
+            tail.next = newNode;
+            newNode.previous = tail;
+            tail = newNode;
+        }
+        counter++;
+    }
 
-            if (isEquals(current.data, element)) {
+    @Override
+    public boolean remove(E e) {
 
-                if (current == head) {
-                    head = current.next;
-                    head.previous = null;
-                }
-                else
-                    current.previous.next = current.next;
+        if (isEmpty())
+            return false;
 
-                counter--;
-                return true;
-            }
+        Node current = head;
+        while (current != null && current.data != e)
             current = current.next;
+
+        boolean removed = removeNode(current);
+        return removed;
+    }
+
+    private boolean removeNode(Node node) {
+
+        if (node != null) {
+            if (node.previous != null)
+                node.previous.next = node.next;
+            else
+                head = node.next;
+
+            if (node.next != null)
+                node.next.previous = node.previous;
+            else
+                tail = node.previous;
+
+            counter--;
+            return true;
         }
         return false;
     }
 
-    // like search
-    public boolean contains(E element) {
+    @Override
+    public boolean contains(E e) {
 
-        Node<E> current = head;
+        if (isEmpty())
+            return false;
+
+        Node current = head;
 
         while (current != null) {
 
-            if (isEquals(current.data, element))
+            if (current.data == e)
                 return true;
 
             current = current.next;
         }
+
         return false;
     }
 
+    @Override
     public int getSize() {
-
         return counter;
     }
 
-    private boolean isEquals(E e, E other) {
-        return Objects.equals(e, other);
+    private boolean isEmpty() {
+        return counter == 0;
     }
 
-    class Node<E> {
+    private class Node<E> {
 
         E data;
-        Node<E> previous;
         Node<E> next;
+        Node<E> previous;
 
-        public Node(E data) {
-            this.data = data;
-            next = null;
-            previous = null;
-        }
-
-        public Node(E data, Node next, Node previous) {
-
-            this(data);
-            this.next = next;
-            this.previous = previous;
-
-            if (!Objects.isNull(next))
-                next.previous = this;
+        private Node(E e) {
+            this.data = e;
         }
     }
 }

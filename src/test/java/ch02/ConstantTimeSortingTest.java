@@ -13,7 +13,7 @@ public class ConstantTimeSortingTest {
     @Test
     public void shouldSortByCountingSort() {
 
-        int[] input = {1, 4, 1, 2, 7, 5, 2, 300, 1};
+        int[] input = {100, 1, 4, 1, 2, 7, 5, 2, 300, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.countingSort(input, 300);
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));

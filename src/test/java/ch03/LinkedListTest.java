@@ -2,7 +2,6 @@ package ch03;
 
 import _03DataStructures.LinkedList;
 import _03DataStructures.LinkedListImpl;
-import _03DataStructures.TestLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ public class LinkedListTest {
     @Test
     public void shouldReturnCorrectSize() {
 
-        LinkedList<Integer> lk = new TestLinkedList<>();
+        LinkedList<Integer> lk = new LinkedListImpl<>();
         lk.append(1);
         lk.append(2);
         lk.append(3);
@@ -23,7 +22,7 @@ public class LinkedListTest {
     @Test
     public void shouldReturnCorrectSizeAfterRemoving() {
 
-        LinkedList<Integer> lk = new TestLinkedList<>();
+        LinkedList<Integer> lk = new LinkedListImpl<>();
         lk.append(1);
         lk.append(2);
         lk.append(3);
@@ -35,7 +34,7 @@ public class LinkedListTest {
     @Test
     public void shouldConfirmElementAfterAppend() {
 
-        LinkedList<String> lk = new TestLinkedList<>();
+        LinkedList<String> lk = new LinkedListImpl<>();
         lk.append("A");
         lk.append("B");
         lk.append("C");
@@ -46,7 +45,7 @@ public class LinkedListTest {
     @Test
     public void shouldConfirmElementAfterPush() {
 
-        LinkedList<String> lk = new TestLinkedList<>();
+        LinkedList<String> lk = new LinkedListImpl<>();
         lk.append("A");
         lk.push("B");
         lk.push("C");
@@ -57,7 +56,7 @@ public class LinkedListTest {
     @Test
     public void shouldNotContainElement() {
 
-        LinkedList<String> lk = new TestLinkedList<>();
+        LinkedList<String> lk = new LinkedListImpl<>();
         lk.append("A");
         lk.push("B");
         lk.push("C");
@@ -68,7 +67,7 @@ public class LinkedListTest {
     @Test
     public void shouldNotContainElementAfterRemoving() {
 
-        LinkedList<String> lk = new TestLinkedList<>();
+        LinkedList<String> lk = new LinkedListImpl<>();
         lk.push("E");
         lk.append("A");
         lk.push("B");
@@ -81,7 +80,7 @@ public class LinkedListTest {
     @Test
     public void shouldBeEmptyAfterRemovingAll() {
 
-        LinkedList<Integer> lk = new TestLinkedList<>();
+        LinkedList<Integer> lk = new LinkedListImpl<>();
         lk.append(1);
         lk.append(2);
         lk.append(3);
