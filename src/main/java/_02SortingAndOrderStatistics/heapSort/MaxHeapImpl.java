@@ -8,14 +8,18 @@ public class MaxHeapImpl implements MaxHeap {
     private int size;
     private int limit;
 
+    /**
+     * From the array in the parameter, creates a max heapified tree
+     * @param arr
+     */
     public MaxHeapImpl(int[] arr) {
 
         if (arr == null)
             throw new NullPointerException("Initial array can't be null");
 
         this.heap = arr;
-        this.size = arr.length;
-        limit = size;
+        limit = arr.length;
+        buildMaxHeap();
     }
 
     public MaxHeapImpl(int limit) {
