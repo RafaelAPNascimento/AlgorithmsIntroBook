@@ -58,7 +58,7 @@ public class ConstantTimeSorting {
         }
     }
 
-    public void bucketSort(float[] arr) {
+    public void _bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
         List<Float>[] buckets = new ArrayList[SIZE];
@@ -68,13 +68,13 @@ public class ConstantTimeSorting {
 
         // put array elements in different buckets
         for (int i = 0; i < SIZE; i++) {
-            float index = arr[i] * SIZE;
-            buckets[(int) index].add(arr[i]);
+            int index = (int) (arr[i] * SIZE);
+            buckets[index].add(arr[i]);
         }
 
         // sort individual buckets
-        for (int i = 0; i < buckets.length; i++)
-            Collections.sort(buckets[i]);
+        for (List bucket : buckets)
+            Collections.sort(bucket);
 
         // concatenate all buckets into sortedInput
         sortedInputFloats = new float[arr.length];
@@ -83,8 +83,6 @@ public class ConstantTimeSorting {
             for (int j = 0; j < buckets[i].size(); j++)
                 sortedInputFloats[index++] = buckets[i].get(j);
     }
-
-
 
     public int[] getSortedInput() {
         return sortedInput;
