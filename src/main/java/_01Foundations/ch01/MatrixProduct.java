@@ -11,7 +11,6 @@ public class MatrixProduct {
 
             for (int j = 0; j < C.length; j++) {
 
-                C[i][j] = 0;
                 for (int k = 0; k < B.length; k++) {
 
                     C[i][j] += A[i][k] * B[k][j];
@@ -20,6 +19,4 @@ public class MatrixProduct {
         }
         return C;
     }
-
-
 }

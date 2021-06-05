@@ -58,7 +58,7 @@ public class ConstantTimeSorting {
         }
     }
 
-    public void _bucketSort(float[] arr) {
+    public void bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
         List<Float>[] buckets = new ArrayList[SIZE];
