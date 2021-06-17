@@ -22,4 +22,5 @@ public class InsertionSort {
             arr[j] = key;
         }
     }
+
 }

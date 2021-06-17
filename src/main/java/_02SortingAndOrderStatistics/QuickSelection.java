@@ -16,11 +16,12 @@ public class QuickSelection {
 
     // index = k - 1, k'th smallest
     // index = N - k, k'th greatest
-    private int _quickSelection(int[] arr, int start, int end, int k) {
+    private int quickSelection(int[] arr, int start, int end, int k) {
 
         int index = partition(arr, start, end);
 
         if (index == k - 1)
+
             return arr[index];
 
         else if (index < k)
@@ -30,13 +31,13 @@ public class QuickSelection {
             return quickSelection(arr, start, index - 1, k);
     }
 
-    private int _partition(int[] arr, int start, int end) {
+    private int partition(int[] arr, int start, int end) {
 
         int storeIndex = start;
 
         for (int i = start; i < end; i++ ) {
 
-            if (arr[i] <= arr[end])
+            if (arr[i] < arr[end])
                 swap(arr, i, storeIndex++);
         }
         swap(arr, end, storeIndex);
@@ -50,28 +51,4 @@ public class QuickSelection {
         arr[j] = temp;
     }
 
-    private int quickSelection(int[] arr, int start, int end, int k) {
-
-        int pv = partition(arr, start, end);
-
-        if (pv == k - 1)
-            return arr[pv];
-
-        else if (pv < k)
-            return quickSelection(arr, pv + 1, end, k);
-
-        else
-            return quickSelection(arr, start, pv - 1, k);
-    }
-
-    private int partition(int[] arr, int start, int end) {
-
-        int pIndex = start;
-        for (int i = start; i < end; i++)
-            if (arr[i] < arr[end])
-                swap(arr, i, pIndex++);
-
-        swap(arr, pIndex, end);
-        return pIndex;
-    }
 }

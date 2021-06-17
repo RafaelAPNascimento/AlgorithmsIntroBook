@@ -4,36 +4,38 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 
     private Node<E> head;
     private Node<E> tail;
-    private int counter = 0;
+    private int counter;
+
+    public LinkedListImpl() {
+
+    }
 
     @Override
     public void push(E e) {
-
-        Node newNode = new Node(e);
-
-        if (isEmpty())
-            head = tail = newNode;
-
+        Node neww = new Node(e);
+        if (counter == 0) {
+            head = neww;
+            tail = head;
+        }
         else {
-            head.previous = newNode;
-            newNode.next = head;
-            head = newNode;
+            neww.next = head;
+            head.prev = neww;
+            head = neww;
         }
         counter++;
     }
 
     @Override
     public void append(E e) {
-
-        Node<E> newNode = new Node<>(e);
-
-        if (isEmpty()) {
-            head = tail = newNode;
+        Node neww = new Node(e);
+        if (counter == 0) {
+            head = neww;
+            tail = head;
         }
         else {
-            tail.next = newNode;
-            newNode.previous = tail;
-            tail = newNode;
+            neww.prev = tail;
+            tail.next = neww;
+            tail = neww;
         }
         counter++;
     }
@@ -41,52 +43,54 @@ public class LinkedListImpl<E> implements LinkedList<E> {
     @Override
     public boolean remove(E e) {
 
-        if (isEmpty())
+        if (counter == 0)
             return false;
 
-        Node current = head;
-        while (current != null && current.data != e)
-            current = current.next;
-
-        boolean removed = removeNode(current);
-        return removed;
-    }
-
-    private boolean removeNode(Node node) {
-
-        if (node != null) {
-            if (node.previous != null)
-                node.previous.next = node.next;
-            else
-                head = node.next;
-
-            if (node.next != null)
-                node.next.previous = node.previous;
-            else
-                tail = node.previous;
-
+        else if (counter == 1) {
+            head = tail = null;
             counter--;
             return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean contains(E e) {
-
-        if (isEmpty())
-            return false;
 
         Node current = head;
 
         while (current != null) {
-
-            if (current.data == e)
+            if (current.data == e) {
+                removeNode(current);
+                counter--;
                 return true;
-
+            }
             current = current.next;
         }
+        return false;
+    }
 
+    private void removeNode(Node node) {
+        if (node == head) {
+            head.next.prev = null;
+            head = head.next;
+        }
+        else if (node == tail) {
+            tail.prev.next = null;
+            tail = tail.prev;
+        }
+        else {
+            node.next.prev = node.prev;
+            node.prev.next = node.next;
+        }
+    }
+
+    @Override
+    public boolean contains(E e) {
+        if (counter > 0) {
+            Node current = head;
+            while (current != null) {
+                if (current.data == e)
+                    return true;
+
+                current = current.next;
+            }
+        }
         return false;
     }
 
@@ -95,15 +99,11 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         return counter;
     }
 
-    private boolean isEmpty() {
-        return counter == 0;
-    }
+    class Node<E> {
 
-    private class Node<E> {
-
-        E data;
-        Node<E> next;
-        Node<E> previous;
+        private E data;
+        private Node<E> next;
+        private Node<E> prev;
 
         private Node(E e) {
             this.data = e;
