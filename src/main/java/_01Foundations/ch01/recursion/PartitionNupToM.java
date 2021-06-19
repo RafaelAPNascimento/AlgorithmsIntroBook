@@ -17,7 +17,7 @@ package _01Foundations.ch01.recursion;
  */
 public class PartitionNupToM {
 
-    public int partition(int n, int m) {
+    public int _partition(int n, int m) {
 
         if (n == 0)
             return 1;
@@ -26,5 +26,13 @@ public class PartitionNupToM {
             return 0;
 
         return partition(n, m - 1) + partition(n - m, m);
+    }
+
+    public int partition(int n, int m) {
+        if (n <= 0 || m <= 0)
+            return 0;
+        else if (n == 1 || m == 1)
+            return 1;
+        return _partition(n, m - 1) + _partition(n - m, n - m);
     }
 }

@@ -4,12 +4,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Drafts {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println(getAlphaNumericString(15));
+        t1();
+    }
+
+    static void t1() {
+        int min = 2, max = 50;
+        int n = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+        
+
+        System.out.println(n);
     }
 
     static void test() throws UnsupportedEncodingException {
@@ -20,32 +30,6 @@ public class Drafts {
 
     }
 
-    static String getAlphaNumericString(int n)
-    {
-
-        // chose a Character random from this String
-        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                + "0123456789"
-                + "abcdefghijklmnopqrstuvxyz";
-
-        // create StringBuffer size of AlphaNumericString
-        StringBuilder sb = new StringBuilder(n);
-
-        for (int i = 0; i < n; i++) {
-
-            // generate a random number between
-            // 0 to AlphaNumericString variable length
-            int index
-                    = (int)(AlphaNumericString.length()
-                    * Math.random());
-
-            // add Character one by one in end of sb
-            sb.append(AlphaNumericString
-                    .charAt(index));
-        }
-
-        return sb.toString();
-    }
 
 
 
