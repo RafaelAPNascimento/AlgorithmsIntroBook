@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -11,14 +12,11 @@ public class Drafts {
     public static void main(String[] args) throws Exception {
 
         t1();
+        
     }
 
     static void t1() {
-        int min = 2, max = 50;
-        int n = ThreadLocalRandom.current().nextInt(min, max + 1);
-
-        
-
+        int n = (int) (0.65 * 10);
         System.out.println(n);
     }
 

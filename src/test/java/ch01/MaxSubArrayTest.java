@@ -52,8 +52,8 @@ public class MaxSubArrayTest {
         MaxSubArrayProblem maxSubArray = new MaxSubArrayProblem(testElements.getArrayParameter());
         MaxSubArrayProblem.MaxSubArrayResult result = maxSubArray.resolveWithKadenesShowRange();
 
-        Assertions.assertEquals(testElements.getExpectedMaxSum(), result.getMax());
-        Assertions.assertEquals(testElements.getInitRange(), result.getInitRange());
-        Assertions.assertEquals(testElements.getFinalRange(), result.getEndRange());
+        Assertions.assertEquals(testElements.getExpectedMaxSum(), result.getMax(), "Max sum is incorrect");
+        Assertions.assertEquals(testElements.getInitRange(), result.getInitRange(), "Init range is incorrect");
+        Assertions.assertEquals(testElements.getFinalRange(), result.getEndRange(), "End range is incorrect");
     }
 }

@@ -41,7 +41,6 @@ public class ConstantTimeSorting {
         }
     }
 
-
     private void countingSortRadixImpl(int[] arr, int place) {
 
         int[] freq = new int[10];
@@ -60,7 +59,8 @@ public class ConstantTimeSorting {
         }
     }
 
-    public void bucketSort(float[] arr) {
+
+    public void _bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
         List<Float>[] buckets = new ArrayList[SIZE];
@@ -84,6 +84,30 @@ public class ConstantTimeSorting {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < buckets[i].size(); j++)
                 sortedInputFloats[index++] = buckets[i].get(j);
+    }
+
+    public void bucketSort(float[] arr) {
+
+        sortedInputFloats = new float[arr.length];
+        List<Float>[] buckets = new List[10];
+
+        for (int i = 0; i < buckets.length; i++)
+            buckets[i] = new ArrayList<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int bucketIndex = (int) (arr[i] * 10);
+            buckets[bucketIndex].add(arr[i]);
+        }
+
+        for (List<Float> bucket : buckets)
+            Collections.sort(bucket);
+
+        int index = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < buckets[i].size(); j++) {
+                sortedInputFloats[index++] = buckets[i].get(j);
+            }
+        }
     }
 
     public int[] getSortedInput() {

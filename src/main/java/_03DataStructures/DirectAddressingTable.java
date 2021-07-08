@@ -1,7 +1,5 @@
 package _03DataStructures;
 
-import _01Foundations.ch01.InsertionSort;
-
 public interface DirectAddressingTable<V> {
 
     void insert(Integer key, V value);

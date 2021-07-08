@@ -1,9 +1,6 @@
 package _03DataStructures;
 
-import _01Foundations.ch01.InsertionSort;
-
 import java.lang.reflect.Array;
-import java.util.stream.Stream;
 
 public class DirectAddressingTableImpl<V> implements DirectAddressingTable<V> {
 
