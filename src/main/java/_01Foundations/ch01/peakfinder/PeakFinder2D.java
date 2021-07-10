@@ -21,28 +21,27 @@ public class PeakFinder2D {
 
     private int[] findPeak(int startCol, int endCol) {
 
-        int midCol = (endCol + startCol) / 2;
+        int midColIndex = (startCol + endCol) / 2;
+        int maxRowInCol = findMaxInCol(midColIndex);     // line index with max value in col
 
-        int largestRow = findMaxInCol(midCol);
+        if (midColIndex > 0 && arr[maxRowInCol][midColIndex] < arr[maxRowInCol][midColIndex - 1])
+            return findPeak(startCol, midColIndex - 1);
 
-        if (midCol - 1 >= 0 && arr[largestRow][midCol] < arr[largestRow][midCol - 1])
-            return findPeak(startCol, midCol - 1);
-
-        else if (midCol < arr.length - 1 && arr[largestRow][midCol] < arr[largestRow][midCol + 1])
-            return findPeak(midCol + 1, endCol);
+        else if (midColIndex < arr[0].length && arr[maxRowInCol][midColIndex] < arr[maxRowInCol][midColIndex + 1])
+            return findPeak(midColIndex + 1, endCol);
 
         else
-            return new int[] {largestRow, midCol};
+            return new int[]{maxRowInCol, midColIndex};
     }
 
     private int findMaxInCol(int COL) {
 
-        int maxIndex = 0;
-        for (int i = 1; i < arr.length; i++)
-            if (arr[i][COL] > arr[maxIndex][COL])
-                maxIndex = i;
+        int maxI = 0;
+        for (int row = 1; row < arr.length; row++)
+            if (arr[row][COL] > arr[maxI][COL])
+                maxI = row;
 
-        return maxIndex;
+        return maxI;
     }
 
 }
