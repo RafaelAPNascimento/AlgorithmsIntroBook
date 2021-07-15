@@ -11,4 +11,22 @@ public interface BST<E> {
     E minimum();
 
     E maximum();
+
+    /**
+     * Returns the smalest element greater than or equal to key or null if there is no such element
+     * @param key
+     * @return
+     */
+    E higher(E key);
+
+    /**
+     * Returns the greatest element smaller than or equal to key or null if there is no such element
+     * @param key
+     * @return
+     */
+    E lower(E key);
+
+    boolean insert(E key);
+
+    boolean delete(E key);
 }

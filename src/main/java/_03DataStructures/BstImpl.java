@@ -9,7 +9,7 @@ public class BstImpl<E> implements BST<E> {
 
     private final Class<E> type;
     private int size;
-    private Node<E> head;
+    private Node<E> root;
     private Node<E> tail;
     private Comparator<E> comparator;
 
@@ -22,7 +22,7 @@ public class BstImpl<E> implements BST<E> {
     public List<E> inOrderWalk() {
 
         List<E> list = new ArrayList<>(size);
-        inOrderWalk(head, list);
+        inOrderWalk(root, list);
         return list;
     }
 
@@ -30,7 +30,7 @@ public class BstImpl<E> implements BST<E> {
 
         if (!Objects.isNull(node)) {
             inOrderWalk(node.left, list);
-            list.add(node.data);
+            list.add(node.key);
             inOrderWalk(node.right, list);
         }
     }
@@ -41,11 +41,11 @@ public class BstImpl<E> implements BST<E> {
         if (key == null)
             return false;
 
-        Node<E> current = head;
-        while (current != null && current.data != key)
-            if (comparator.compare(current.data, key) == 0)
+        Node<E> current = root;
+        while (current != null && current.key != key)
+            if (comparator.compare(current.key, key) == 0)
                 return true;
-            if (comparator.compare(current.data, key) < 0)
+            if (comparator.compare(current.key, key) < 0)
                 current = current.right;
             else
                 current = current.left;
@@ -55,37 +55,102 @@ public class BstImpl<E> implements BST<E> {
 
     @Override
     public E minimum() {
-        if (head == null)
+        if (root == null)
             throw new RuntimeException("BST is empty");
 
-        Node<E> current = head;
+        Node<E> current = root;
         while (current.left != null)
             current = current.left;
 
-        return current.data;
+        return current.key;
     }
 
     @Override
     public E maximum() {
-        if (head == null)
+        if (root == null)
             throw new RuntimeException("BST is empty");
 
-        Node<E> current = head;
+        Node<E> current = root;
         while (current.right != null)
             current = current.right;
 
-        return current.data;
+        return current.key;
+    }
+
+    @Override
+    public E higher(E key) {
+        if (!contains(key))
+            throw new RuntimeException("Key does not exist");
+
+        Node<E> current = findNode(key);
+        if (current.right != null)
+            return current.right.key;
+        return null;
+    }
+
+    @Override
+    public E lower(E key) {
+        if (!contains(key))
+            throw new RuntimeException("Key does not exist");
+
+        Node<E> current = findNode(key);
+        if (current.left != null)
+            return current.left.key;
+        return null;
+    }
+
+    private Node<E> findNode(E key) {
+        Node<E> current = root;
+        while (current != null && current.key != key)
+            if (comparator.compare(current.key, key) < 0)
+                current = current.right;
+            else
+                current = current.left;
+
+        return current;
+    }
+
+    @Override
+    public boolean insert(E key) {
+        Node<E> neW = new Node(key);
+        Node<E> current = root;
+        Node<E> y = null;
+        while (current != null) {
+            y = current;
+            if (comparator.compare(current.key, key) < 0)
+                current = current.right;
+            else
+                current = current.left;
+        }
+
+        neW.parent = y;
+        if (comparator.compare(y.key, key) < 0)
+            y.right = neW;
+        else
+            y.left = neW;
+
+        return true;
+    }
+
+    @Override
+    public boolean delete(E key) {
+
+        return false;
+    }
+
+    private void transplant(Node<E> n1, Node<E> n2) {
+
     }
 
     private class Node<E> {
 
-        E data;
+        E key;
         Node<E> parent;
         Node<E> left;
         Node<E> right;
 
         Node(E data) {
-            this.data = data;
+            this.key = data;
         }
     }
 }
