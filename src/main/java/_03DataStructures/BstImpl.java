@@ -53,6 +53,13 @@ public class BstImpl<E> implements BST<E> {
         return false;
     }
 
+    public Node<E> minimum(Node<E> node) {
+        while (node.left != null)
+            node = node.left;
+
+        return node;
+    }
+
     @Override
     public E minimum() {
         if (root == null)
@@ -134,12 +141,40 @@ public class BstImpl<E> implements BST<E> {
 
     @Override
     public boolean delete(E key) {
+        Node<E> node = findNode(key);
 
-        return false;
+        if (node.left == null)
+            transplant(node, node.right);
+
+        else if (node.right == null)
+            transplant(node, node.left);
+
+        else {
+            Node y = minimum(node);
+            if (y.parent != node) {
+                transplant(y, y.right);
+                y.right = node.right;
+                y.right.parent = y;
+            }
+            transplant(node, y);
+            y.left = node.left;
+            y.left.parent = y;
+        }
+        return true;
     }
 
     private void transplant(Node<E> n1, Node<E> n2) {
+        if (n1.parent == null)
+            root = n2;
 
+        else if (n1 == n1.parent.left)
+            n1.parent.left = n2;
+
+        else
+            n1.parent.right = n2;
+
+        if (n2 != null)
+            n2.parent = n1.parent;
     }
 
     private class Node<E> {
