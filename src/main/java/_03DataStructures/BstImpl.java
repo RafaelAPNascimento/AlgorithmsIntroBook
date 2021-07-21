@@ -11,9 +11,9 @@ public class BstImpl<E> implements BST<E> {
     private int size;
     private Node<E> root;
     private Node<E> tail;
-    private Comparator<E> comparator;
+    private Comparator<? super E> comparator;
 
-    public BstImpl(Class<E> type, Comparator<E> comparator) {
+    public BstImpl(Class<E> type, Comparator<? super E> comparator) {
         this.type = type;
         this.comparator = comparator;
     }
@@ -42,18 +42,22 @@ public class BstImpl<E> implements BST<E> {
             return false;
 
         Node<E> current = root;
+
         while (current != null && current.key != key)
-            if (comparator.compare(current.key, key) == 0)
+            if (comparing(current.key, key) == 0)
                 return true;
-            if (comparator.compare(current.key, key) < 0)
+
+            if (comparing(current.key, key) < 0)
                 current = current.right;
+
             else
                 current = current.left;
 
         return false;
     }
 
-    public Node<E> minimum(Node<E> node) {
+
+    private Node<E> minimum(Node<E> node) {
         while (node.left != null)
             node = node.left;
 
@@ -108,8 +112,9 @@ public class BstImpl<E> implements BST<E> {
 
     private Node<E> findNode(E key) {
         Node<E> current = root;
+
         while (current != null && current.key != key)
-            if (comparator.compare(current.key, key) < 0)
+            if (comparing(current.key, key) < 0)
                 current = current.right;
             else
                 current = current.left;
@@ -119,19 +124,21 @@ public class BstImpl<E> implements BST<E> {
 
     @Override
     public boolean insert(E key) {
+
         Node<E> neW = new Node(key);
         Node<E> current = root;
         Node<E> y = null;
+
         while (current != null) {
             y = current;
-            if (comparator.compare(current.key, key) < 0)
+            if (comparing(current.key, key) < 0)
                 current = current.right;
             else
                 current = current.left;
         }
 
         neW.parent = y;
-        if (comparator.compare(y.key, key) < 0)
+        if (comparing(y.key, key) < 0)
             y.right = neW;
         else
             y.left = neW;
@@ -175,6 +182,10 @@ public class BstImpl<E> implements BST<E> {
 
         if (n2 != null)
             n2.parent = n1.parent;
+    }
+
+    private int comparing(E key1, E key2) {
+        return comparator.compare(key1, key2);
     }
 
     private class Node<E> {
