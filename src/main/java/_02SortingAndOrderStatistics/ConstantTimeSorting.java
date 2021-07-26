@@ -33,16 +33,17 @@ public class ConstantTimeSorting {
     // https://www.tutorialspoint.com/java-program-for-radix-sort
     public void radixSort(int[] arr) {
 
-        sortedInput = new int[arr.length];
+        //sortedInput = new int[arr.length];
         int max = Arrays.stream(arr).max().getAsInt();
 
-        for (int exp = 1; max / exp > 0; exp *= 10) {
-            countingSortRadixImpl(arr, exp);
+        for (int place = 1; max / place > 0; place *= 10) {
+            countingSortRadixImpl(arr, place);
         }
     }
 
     private void countingSortRadixImpl(int[] arr, int place) {
 
+        sortedInput = new int[arr.length];
         int[] freq = new int[10];
 
         for (int i = 0; i < arr.length; i++)
@@ -51,16 +52,19 @@ public class ConstantTimeSorting {
         for (int i = 1; i < 10; i++)
             freq[i] += freq[i - 1];
 
-        sortedInput = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            int element = arr[i];
-            int index = --freq[(element / place) % 10];
-            sortedInput[index] = element;
+        for (int i = arr.length - 1; i >= 0; i--) {
+
+            int digit = (arr[i] / place) % 10;
+            sortedInput[freq[digit] -1] = arr[i];
+            freq[digit]--;
         }
+
+//        for (int i = 0; i < arr.length; i++) {
+//            a
+//        }
     }
 
-
-    public void _bucketSort(float[] arr) {
+    public void bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
         List<Float>[] buckets = new ArrayList[SIZE];
@@ -84,30 +88,6 @@ public class ConstantTimeSorting {
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < buckets[i].size(); j++)
                 sortedInputFloats[index++] = buckets[i].get(j);
-    }
-
-    public void bucketSort(float[] arr) {
-
-        sortedInputFloats = new float[arr.length];
-        List<Float>[] buckets = new List[10];
-
-        for (int i = 0; i < buckets.length; i++)
-            buckets[i] = new ArrayList<>();
-
-        for (int i = 0; i < arr.length; i++) {
-            int bucketIndex = (int) (arr[i] * 10);
-            buckets[bucketIndex].add(arr[i]);
-        }
-
-        for (List<Float> bucket : buckets)
-            Collections.sort(bucket);
-
-        int index = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < buckets[i].size(); j++) {
-                sortedInputFloats[index++] = buckets[i].get(j);
-            }
-        }
     }
 
     public int[] getSortedInput() {

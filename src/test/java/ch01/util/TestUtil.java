@@ -15,7 +15,7 @@ public class TestUtil {
         final int SIZE = ThreadLocalRandom.current().nextInt(initRange, endRange);
         int[] arr = new int[SIZE];
         for (int i = 0; i < SIZE; i++) {
-            arr[i] = ThreadLocalRandom.current().nextInt(0, 100);
+            arr[i] = ThreadLocalRandom.current().nextInt(0, 999);
         }
         return arr;
     }
