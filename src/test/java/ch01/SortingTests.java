@@ -7,6 +7,7 @@ import ch01.util.TestUtil;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import static ch01.util.TestUtil.isSorted;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SortingTests {
@@ -50,15 +51,6 @@ public class SortingTests {
         mergeSort.mergeSort();
 
         assertTrue(isSorted(arr));
-    }
-
-    private boolean isSorted(int[] arr) {
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < arr[i - 1])
-                return false;
-        }
-        return true;
     }
 
 

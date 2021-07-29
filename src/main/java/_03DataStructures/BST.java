@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface BST<E> {
 
+    int getSize();
+
     List<E> inOrderWalk();
 
     boolean contains(E key);
@@ -13,7 +15,7 @@ public interface BST<E> {
     E maximum();
 
     /**
-     * Returns the smalest element greater than or equal to key or null if there is no such element
+     * Returns the smallest element greater than or equal to key or null if there is no such element
      * @param key
      * @return
      */

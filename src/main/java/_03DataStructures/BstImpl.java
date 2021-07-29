@@ -19,6 +19,11 @@ public class BstImpl<E> implements BST<E> {
     }
 
     @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
     public List<E> inOrderWalk() {
 
         List<E> list = new ArrayList<>(size);
@@ -43,15 +48,17 @@ public class BstImpl<E> implements BST<E> {
 
         Node<E> current = root;
 
-        while (current != null && current.key != key)
+        while (current != null) {
+
             if (comparing(current.key, key) == 0)
                 return true;
 
-            if (comparing(current.key, key) < 0)
+            else if (comparing(current.key, key) < 0)
                 current = current.right;
 
             else
                 current = current.left;
+        }
 
         return false;
     }
@@ -60,6 +67,13 @@ public class BstImpl<E> implements BST<E> {
     private Node<E> minimum(Node<E> node) {
         while (node.left != null)
             node = node.left;
+
+        return node;
+    }
+
+    private Node<E> maximum(Node<E> node) {
+        while (node.right != null)
+            node = node.right;
 
         return node;
     }
@@ -95,7 +109,8 @@ public class BstImpl<E> implements BST<E> {
 
         Node<E> current = findNode(key);
         if (current.right != null)
-            return current.right.key;
+            return minimum(current.right).key;
+
         return null;
     }
 
@@ -106,7 +121,8 @@ public class BstImpl<E> implements BST<E> {
 
         Node<E> current = findNode(key);
         if (current.left != null)
-            return current.left.key;
+            return maximum(current.left).key;
+
         return null;
     }
 
@@ -125,7 +141,13 @@ public class BstImpl<E> implements BST<E> {
     @Override
     public boolean insert(E key) {
 
+        size++;
         Node<E> neW = new Node(key);
+        if (root == null) {
+            root = neW;
+            return true;
+        }
+
         Node<E> current = root;
         Node<E> y = null;
 
@@ -167,6 +189,7 @@ public class BstImpl<E> implements BST<E> {
             y.left = node.left;
             y.left.parent = y;
         }
+        size--;
         return true;
     }
 

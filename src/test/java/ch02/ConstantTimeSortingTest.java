@@ -30,7 +30,7 @@ public class ConstantTimeSortingTest {
         int[] input = {1, 4, 1, 2, 7, 5, 2, 9,  8, 8, 6, 2, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.radixSort(input);
-        Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
+        Assertions.assertTrue(isSorted(input));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ConstantTimeSortingTest {
         int min = Arrays.stream(input).min().getAsInt();
         int max = Arrays.stream(input).max().getAsInt();
 
-        RadixSort radixSort = new RadixSort();
+        ConstantTimeSorting radixSort = new ConstantTimeSorting();
 
         radixSort.radixSort(input);
 
