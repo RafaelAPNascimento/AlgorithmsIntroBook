@@ -1,5 +1,7 @@
 package ch01.util;
 
+import org.junit.jupiter.api.Assertions;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,6 +33,20 @@ public class TestUtil {
                 return false;
         }
         return true;
+    }
+
+    public static boolean isSorted(float[] arr) {
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < arr[i - 1])
+                return false;
+        }
+        return true;
+    }
+
+    public static void assertRangesInSortedArray(int min, int max, int[] arr) {
+        Assertions.assertEquals(min, arr[0], "Min value is incorrect");
+        Assertions.assertEquals(max, arr[arr.length - 1], "Max Value is incorrect");
     }
 
     public static <T> boolean isSorted(List<T> list, Comparator<T> comparator) {

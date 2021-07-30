@@ -10,6 +10,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.util.Arrays;
 
+import static ch01.util.TestUtil.isSorted;
 import static java.util.Arrays.stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -21,7 +22,9 @@ public class ConstantTimeSortingTest {
         int[] input = {100, 1, 4, 1, 2, 7, 5, 2, 300, 1};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.countingSort(input, 300);
+
         Assertions.assertTrue(isSorted(countingSort.getSortedInput()));
+        TestUtil.assertRangesInSortedArray(1, 300, countingSort.getSortedInput());
     }
 
     @Test
@@ -56,26 +59,7 @@ public class ConstantTimeSortingTest {
         float[] input = {(float) 0.897, (float) 0.565, (float) 0.656, (float) 0.1234, (float) 0.665, (float) 0.3434};
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.bucketSort(input);
-        Assertions.assertTrue(isSorted(countingSort.getSortedInputFloats()));
+        Assertions.assertTrue(TestUtil.isSorted(countingSort.getSortedInputFloats()));
     }
 
-
-
-    private boolean isSorted(int[] arr) {
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < arr[i - 1])
-                return false;
-        }
-        return true;
-    }
-
-    private boolean isSorted(float[] arr) {
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < arr[i - 1])
-                return false;
-        }
-        return true;
-    }
 }
