@@ -30,9 +30,26 @@ public class BstTest {
         Assertions.assertTrue(sorted);
     }
 
+    @DisplayName("Should return in order after insert")
+    @Test
+    public void shouldReturnInOrderAfterInsert2() {
+
+        int[] itens = TestUtil.getRandomIntArray(100, 1_000);
+
+        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
+        BST<Integer> bst = new BstImpl(Integer.class, comparator);
+
+        Arrays.stream(itens).forEach(i -> bst.insert(i));
+
+        List<Integer> list = bst.inOrderWalk();
+
+        boolean sorted = TestUtil.isSorted(list, comparator);
+        Assertions.assertTrue(sorted);
+    }
+
     @DisplayName("Should return correct size after inserting")
     @Test
-    public void shouldReturnCorrectSize() {
+    public void shouldReturnCorrectSizeAfterInsert() {
 
         Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
         BST<Integer> bst = new BstImpl(Integer.class, comparator);
@@ -126,7 +143,7 @@ public class BstTest {
         Assertions.assertEquals(7, bst.higher(5));
     }
 
-    @DisplayName("Should return correct higher")
+    @DisplayName("Should return correct lower")
     @Test
     public void shouldReturnCorrectLower() {
 
@@ -142,6 +159,45 @@ public class BstTest {
         Assertions.assertEquals(7, bst.lower(8));
     }
 
+    @Test
+    public void shouldDelete() {
 
+        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
+        BST<Integer> bst = new BstImpl(Integer.class, comparator);
+        bst.insert(5);
+        bst.insert(10);
+        bst.insert(3);
+        bst.insert(8);
+        bst.insert(7);
+        bst.insert(9);
+
+        Assertions.assertTrue(bst.contains(9), "Inserted Item notpresent");
+        Assertions.assertEquals(6, bst.getSize(), "Size is wrong");
+        bst.delete(9);
+        Assertions.assertFalse(bst.contains(9), "Item not removed");
+        Assertions.assertEquals(5, bst.getSize(), "Size is wrong, after removing");
+    }
+
+    @Test
+    public void shouldDeleteAll() {
+
+        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
+        BST<Integer> bst = new BstImpl(Integer.class, comparator);
+        bst.insert(5);
+        bst.insert(10);
+        bst.insert(3);
+        bst.insert(8);
+        bst.insert(7);
+        bst.insert(9);
+
+        bst.delete(5);
+        bst.delete(10);
+        bst.delete(3);
+        bst.delete(8);
+        bst.delete(7);
+        bst.delete(9);
+
+        Assertions.assertEquals(0, bst.getSize(), "Size is wrong");
+    }
 
 }

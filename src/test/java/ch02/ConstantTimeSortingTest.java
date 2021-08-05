@@ -57,6 +57,7 @@ public class ConstantTimeSortingTest {
     public void shouldSortByBucketSort() {
 
         float[] input = {(float) 0.897, (float) 0.565, (float) 0.656, (float) 0.1234, (float) 0.665, (float) 0.3434};
+
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
         countingSort.bucketSort(input);
         Assertions.assertTrue(TestUtil.isSorted(countingSort.getSortedInputFloats()));

@@ -65,18 +65,17 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         return false;
     }
 
-    private void removeNode(Node node) {
-        if (node == head) {
-            head.next.prev = null;
-            head = head.next;
-        }
-        else if (node == tail) {
-            tail.prev.next = null;
-            tail = tail.prev;
-        }
+    private void removeNode(Node<E> node) {
+        if (getSize() == 1)
+            head = tail = null;
+
         else {
-            node.next.prev = node.prev;
-            node.prev.next = node.next;
+            Node<E> prev = node.prev;
+            Node<E> next = node.next;
+            if (prev != null)
+                prev.next = next;
+            if (next != null)
+                next.prev = prev;
         }
     }
 
