@@ -9,8 +9,8 @@ public class BstImpl<E> implements BST<E> {
 
     private final Class<E> type;
     private int size;
-    private Node<E> root;
-    private Node<E> tail;
+    private Node root;
+    private Node tail;
     private Comparator<? super E> comparator;
 
     public BstImpl(Class<E> type, Comparator<? super E> comparator) {
@@ -31,7 +31,7 @@ public class BstImpl<E> implements BST<E> {
         return list;
     }
 
-    private void inOrderWalk(Node<E> node, List<E> list) {
+    private void inOrderWalk(Node node, List<E> list) {
 
         if (!Objects.isNull(node)) {
             inOrderWalk(node.left, list);
@@ -46,7 +46,7 @@ public class BstImpl<E> implements BST<E> {
         if (key == null)
             return false;
 
-        Node<E> current = root;
+        Node current = root;
 
         while (current != null) {
 
@@ -64,14 +64,14 @@ public class BstImpl<E> implements BST<E> {
     }
 
 
-    private Node<E> minimum(Node<E> node) {
+    private Node minimum(Node node) {
         while (node.left != null)
             node = node.left;
 
         return node;
     }
 
-    private Node<E> maximum(Node<E> node) {
+    private Node maximum(Node node) {
         while (node.right != null)
             node = node.right;
 
@@ -83,7 +83,7 @@ public class BstImpl<E> implements BST<E> {
         if (root == null)
             throw new RuntimeException("BST is empty");
 
-        Node<E> current = root;
+        Node current = root;
         while (current.left != null)
             current = current.left;
 
@@ -95,7 +95,7 @@ public class BstImpl<E> implements BST<E> {
         if (root == null)
             throw new RuntimeException("BST is empty");
 
-        Node<E> current = root;
+        Node current = root;
         while (current.right != null)
             current = current.right;
 
@@ -107,7 +107,7 @@ public class BstImpl<E> implements BST<E> {
         if (!contains(key))
             throw new RuntimeException("Key does not exist");
 
-        Node<E> current = findNode(key);
+        Node current = findNode(key);
         if (current.right != null)
             return minimum(current.right).key;
 
@@ -119,15 +119,15 @@ public class BstImpl<E> implements BST<E> {
         if (!contains(key))
             throw new RuntimeException("Key does not exist");
 
-        Node<E> current = findNode(key);
+        Node current = findNode(key);
         if (current.left != null)
             return maximum(current.left).key;
 
         return null;
     }
 
-    private Node<E> findNode(E key) {
-        Node<E> current = root;
+    private Node findNode(E key) {
+        Node current = root;
 
         while (current != null && current.key != key)
             if (comparing(current.key, key) < 0)
@@ -142,14 +142,14 @@ public class BstImpl<E> implements BST<E> {
     public boolean insert(E key) {
 
         size++;
-        Node<E> neW = new Node(key);
+        Node neW = new Node(key);
         if (root == null) {
             root = neW;
             return true;
         }
 
-        Node<E> current = root;
-        Node<E> y = null;
+        Node current = root;
+        Node y = null;
 
         while (current != null) {
             y = current;
@@ -170,7 +170,7 @@ public class BstImpl<E> implements BST<E> {
 
     @Override
     public boolean delete(E key) {
-        Node<E> node = findNode(key);
+        Node node = findNode(key);
 
         if (node.left == null)
             transplant(node, node.right);
@@ -193,7 +193,7 @@ public class BstImpl<E> implements BST<E> {
         return true;
     }
 
-    private void transplant(Node<E> n1, Node<E> n2) {
+    private void transplant(Node n1, Node n2) {
         if (n1.parent == null)
             root = n2;
 
@@ -211,12 +211,12 @@ public class BstImpl<E> implements BST<E> {
         return comparator.compare(key1, key2);
     }
 
-    private class Node<E> {
+    private class Node {
 
         E key;
-        Node<E> parent;
-        Node<E> left;
-        Node<E> right;
+        Node parent;
+        Node left;
+        Node right;
 
         Node(E data) {
             this.key = data;
