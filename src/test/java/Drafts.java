@@ -10,6 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Drafts {
@@ -17,14 +18,12 @@ public class Drafts {
 
     public static void main(String[] args) throws Exception {
 
-        Stream<String> st = Stream.of("Hello", "World");
-        String x = st.map(s -> s.split(""))
-                .flatMap(Stream::of)
-                .distinct()
-                .peek(System.out::println)
-                .reduce(new String(), String::concat, String::concat);
+        //String regex = "/(^\\d{11})|(^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$)/";
+        String regex = "(^\\d{11}|^\\d{14})";
+        Pattern cpfCnpj = Pattern.compile(regex);
 
-        System.out.println("=======\n"+x);
+        String doc = "51277965000167";
+        System.out.println(cpfCnpj.matcher(doc).matches());
 
     }
 
