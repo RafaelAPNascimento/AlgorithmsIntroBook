@@ -27,24 +27,18 @@ public class ConstantTimeSortingTest {
         TestUtil.assertRangesInSortedArray(1, 300, countingSort.getSortedInput());
     }
 
-    @Test
-    public void shouldSortByRadixSort() {
-
-        int[] input = {1, 4, 1, 2, 7, 5, 2, 9,  8, 8, 6, 2, 1};
-        ConstantTimeSorting countingSort = new ConstantTimeSorting();
-        countingSort.radixSort(input);
-        Assertions.assertTrue(isSorted(input));
-    }
 
     @Test
-    @RepeatedTest(5)
+    @RepeatedTest(6)
     public void shouldSortByRadixSort2() {
 
-        int[] input = TestUtil.getRandomIntArray(50, 1_000);
+        int initRange = 50, endRange = 1_000;
+
+        int[] input = TestUtil.getRandomIntArray(initRange, endRange);
         int min = Arrays.stream(input).min().getAsInt();
         int max = Arrays.stream(input).max().getAsInt();
 
-        ConstantTimeSorting radixSort = new ConstantTimeSorting();
+        RadixSort radixSort = new RadixSort();
 
         radixSort.radixSort(input);
 

@@ -30,34 +30,6 @@ public class ConstantTimeSorting {
         }
     }
 
-    // https://www.tutorialspoint.com/java-program-for-radix-sort
-    public void radixSort(int[] arr) {
-
-        sortedInput = new int[arr.length];
-        int max = Arrays.stream(arr).max().getAsInt();
-        for (int place = 1; max / place > 0; place *= 10)
-            countingSortRadixImpl(arr, place);
-
-    }
-
-    private void countingSortRadixImpl(int[] arr, int place) {
-
-        int[] freqs = new int[10];
-        for (int i = 0; i < arr.length; i++) {
-            int elementPlace = (arr[i] / place) % 10;
-            freqs[elementPlace]++;
-        }
-        for (int i = 1; i < 10; i++)
-            freqs[i] += freqs[i - 1];
-
-        for (int i = arr.length - 1; i >= 0; i--) {
-            int elementPlace = (arr[i] / place) % 10;
-            int index = --freqs[elementPlace];
-            sortedInput[index] = arr[i];
-        }
-        System.arraycopy(sortedInput, 0, arr, 0, arr.length);
-    }
-
     public void bucketSort(float[] arr) {
 
         final int SIZE = arr.length;

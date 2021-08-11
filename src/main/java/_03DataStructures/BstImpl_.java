@@ -76,17 +76,64 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
 
     @Override
     public K min() {
-        return null;
+
+        return min(root).key;
+    }
+
+    private Node min(Node x) {
+
+        if (x.left == null) return x;
+
+        return min(x.left);
     }
 
     @Override
     public K floor(K key) {
-        return null;
+
+        Node x = floor(root, key);
+        if (x == null)
+            return null;
+
+        return x.key;
+    }
+
+    private Node floor(Node x, K key) {
+
+        if (x == null)
+            return null;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0)
+            return x;
+
+        if (cmp < 0)
+            return floor(x.left, key);
+
+        Node t = floor(x.right, key);
+
+        if (t != null)
+            return t;
+        else
+            return x;
     }
 
     @Override
     public K select(int k) {
-        return null;
+
+        return select(root, k).key;
+    }
+
+    private Node select(Node x, int k) {
+
+        if (x == null)
+            return null;
+        int t = size(x.left);
+        if (t > k)
+            return select(x.left, k);
+        else if (t < k)
+            return select(x.right, k - t - 1);
+        else
+            return x;
     }
 
     @Override

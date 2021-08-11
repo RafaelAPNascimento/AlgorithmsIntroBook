@@ -4,46 +4,33 @@ import java.util.Arrays;
 
 public class RadixSort {
 
-    public void radixSort(int array[]) {
+    private int[] sorted;
 
-        int max = Arrays.stream(array).max().getAsInt();
+    public void radixSort(int[] arr) {
 
-        for (int place = 1; max / place > 0; place *= 10) {
-            countingSort(array, array.length, place);
-        }
+        sorted = new int[arr.length];
+        int max = Arrays.stream(arr).max().getAsInt();
+        for (int place = 1; max / place > 0; place *= 10)
+            countingSort(arr, place);
     }
 
-    public void countingSort(int array[], int size, int place) {
-
-        int[] output = new int[size + 1];
+    private void countingSort(int[] arr, int place) {
 
         int[] freq = new int[10];
-
-        // Calculate count of elements
-        for (int i = 0; i < size; i++) {
-            freq[(array[i] / place) % 10]++;
+        for (int i = 0; i < arr.length; i++) {
+            int element = (arr[i] / place) % 10;
+            freq[element]++;
         }
-        // Calculate cummulative count
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 10; i++)
             freq[i] += freq[i - 1];
-        }
-        // Place the elements in sorted order
-        for (int i = size - 1; i >= 0; i--) {
-            int pos = (array[i] / place) % 10;
-            output[freq[pos] - 1] = array[i];
-            freq[pos]--;
-        }
 
-        System.arraycopy(output, 0, array, 0, array.length);
-    }
-    // Function to get the largest element from an array
-    public int getMax(int array[], int n) {
-        int max = array[0];
-        for (int i = 1; i < n; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int element = (arr[i] / place) % 10;
+            int index = --freq[element];
+            sorted[index] = arr[i];
         }
-        return max;
+        System.arraycopy(sorted, 0, arr, 0, arr.length);
     }
+
+
 }
