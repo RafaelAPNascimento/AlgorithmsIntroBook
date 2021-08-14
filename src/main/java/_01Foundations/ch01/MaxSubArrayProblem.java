@@ -44,7 +44,6 @@ public class MaxSubArrayProblem {
                     init = i;
                     end = j;
                 }
-
             }
         }
         return new MaxSubArrayResult(max, init, end);

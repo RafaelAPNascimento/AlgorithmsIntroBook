@@ -138,17 +138,66 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
 
     @Override
     public int rank(K key) {
-        return 0;
+
+        return rank(key, root);
+    }
+
+    private int rank(K key, Node x) {
+        if (x == null)
+            return 0;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0)
+            return rank(key, x.left);
+        else if (cmp > 0)
+            return 1 + size(x.left) + rank(key, x.right);
+        else
+            return size(x.left);
     }
 
     @Override
     public void deleteMin() {
+        root = deleteMin(root);
+    }
 
+    private Node deleteMin(Node x) {
+
+        if (x.left == null)
+            return x.right;
+
+        x.left = deleteMin(x.left);
+        x.nodeCount = size(x.left) + size(x.right) + 1;
+        return x;
     }
 
     @Override
     public void delete(K key) {
+        root = delete(root, key);
+    }
 
+    private Node delete(Node x, K key) {
+
+        if (x == null)
+            return null;
+
+        int cmp = key.compareTo(x.key);
+        if (cmp < 0)
+            x.left = delete(x.left, key);
+        else if (cmp > 0)
+            x.right = delete(x.right, key);
+        else {
+            if (x.right == null)
+                return x.left;
+            if (x.left == null)
+                return x.right;
+
+            Node t = x;
+            x = min(t.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }
+        x.nodeCount = size(x.left) + size(x.right) + 1;
+        return x;
     }
 
     @Override
