@@ -14,11 +14,11 @@ public class BstTest_ {
 
         BST_<String, Integer> bst = new BstImpl_<>();
         bst.put("A", 3);
-        bst.put("B", 5);
+        bst.put("B", 9);
         bst.put("C", 2);
 
         Assertions.assertEquals(3, bst.get("A"));
-        Assertions.assertEquals(5, bst.get("B"));
+        Assertions.assertEquals(9, bst.get("B"));
         Assertions.assertEquals(2, bst.get("C"));
     }
 
