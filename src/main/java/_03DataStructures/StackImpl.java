@@ -2,40 +2,38 @@ package _03DataStructures;
 
 import java.lang.reflect.Array;
 
-/**
- * LIFO
- * @param <E>
- */
 public class StackImpl<E> implements Stack<E> {
 
-    private E[] arr;
-    private int top;
+    private E[] elements;
+    private int counter;
 
     public StackImpl(Class<E> clazz, int limit) {
-        this.arr = (E[]) Array.newInstance(clazz, limit);
-        top = -1;
+        elements = (E[]) Array.newInstance(clazz, limit);
+        counter = 0;
     }
 
     @Override
     public boolean isEmpty() {
-        return top == -1;
+        return counter == 0;
+    }
+
+    private boolean isFull() {
+        return counter == elements.length;
     }
 
     @Override
     public void push(E e) {
+        if (isFull())
+            throw new RuntimeException("Overflows");
 
-        if (top + 1 == arr.length)
-            throw new IndexOutOfBoundsException("Stack overflow");
-
-        arr[++top] = e;
+        elements[counter++] = e;
     }
 
     @Override
     public E pop() {
-
         if (isEmpty())
-            throw new RuntimeException("Stack underflow");
+            throw new RuntimeException("Underflow");
 
-        return arr[top--];
+         return elements[--counter];
     }
 }
