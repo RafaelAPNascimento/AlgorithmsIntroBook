@@ -10,6 +10,8 @@ public interface BST_<K extends Comparable<K>, V>{
 
     K min();
 
+    K max();
+
     K floor(K key);
 
     K select(int k);

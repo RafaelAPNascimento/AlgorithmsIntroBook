@@ -10,7 +10,7 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
         private Node left, right;
         private int nodeCount;      // nodes in subtree rooted here
 
-        public Node(K key, V value, int nodeCount) {
+        Node(K key, V value, int nodeCount) {
             this.key = key;
             this.value = value;
             this.nodeCount = nodeCount;
@@ -36,15 +36,16 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
     }
 
     private V get(Node x, K key) {
-
+        // Return value associated with key in the subtree rooted at x;
+        // return null if key not present in subtree rooted at x.
         if (x == null) return null;
 
         int cmp = key.compareTo(x.key);
         if (cmp < 0)
-            return get(x.left, key);
+            return get(x.left, key);     // recursive search in the appropriate subtree
 
         else if (cmp > 0)
-            return get(x.right, key);
+            return get(x.right, key);   // recursive search in the appropriate subtree
 
         else
             return x.value;
@@ -52,23 +53,26 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
 
     @Override
     public void put(K key, V value) {
+        // Search for key. Update value if found; grow table if new.
         root = put(root, key, value);
     }
 
     private Node put(Node x, K key, V value) {
-
+        // Change key’s value to val if key in subtree rooted at x.
+        // Otherwise, add new node to subtree associating key with val.
         if (x == null)
             return new Node(key, value, 1);
 
         int cmp = key.compareTo(x.key);
         if (cmp < 0)
-            x.left = put(x.left, key, value);
+            x.left = put(x.left, key, value);   // if the search key is less than the key at the root, we set the left link to the result
 
         else if (cmp > 0)
-            x.right = put(x.right, key, value);
+            x.right = put(x.right, key, value);     // therwise, we set the right link to the result of inserting the key into the right subtree
 
         else
             x.value = value;
+
         x.nodeCount = size(x.left) + size(x.right) + 1;
 
         return x;
@@ -85,6 +89,19 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
         if (x.left == null) return x;
 
         return min(x.left);
+    }
+
+    @Override
+    public K max() {
+
+        return max(root).key;
+    }
+
+    private Node max(Node x) {
+
+        if (x.right == null) return x;
+
+        return max(x.right);
     }
 
     @Override
@@ -124,7 +141,7 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
     }
 
     private Node select(Node x, int k) {
-
+        // Return Node containing key of rank k
         if (x == null)
             return null;
         int t = size(x.left);
@@ -143,6 +160,7 @@ public class BstImpl_<K extends Comparable<K>, V> implements BST_<K, V> {
     }
 
     private int rank(K key, Node x) {
+        // Return number of keys less than x.key in the subtree rooted at x
         if (x == null)
             return 0;
 

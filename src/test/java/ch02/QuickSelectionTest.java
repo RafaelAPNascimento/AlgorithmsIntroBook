@@ -1,6 +1,7 @@
 package ch02;
 
 import _02SortingAndOrderStatistics.QuickSelection;
+import _02SortingAndOrderStatistics.QuickSelection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -13,7 +14,7 @@ public class QuickSelectionTest {
 
         int[] arr = {7, 4, 6, 3, 9, 1};
         QuickSelection qs = new QuickSelection(arr);
-        Assertions.assertEquals(3, qs.findKthSmalest(2));
+        Assertions.assertEquals(3, qs.findKthSmallest(2));
     }
 
     @Test
@@ -21,7 +22,7 @@ public class QuickSelectionTest {
 
         int[] arr = {7, 4, 6, 3, 9, 1};
         QuickSelection qs = new QuickSelection(arr);
-        Assertions.assertEquals(4, qs.findKthSmalest(3));
+        Assertions.assertEquals(4, qs.findKthSmallest(3));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class QuickSelectionTest {
 
         int[] arr = {10, 4, 5, 8, 6, 11, 26};
         QuickSelection qs = new QuickSelection(arr);
-        Assertions.assertEquals(5, qs.findKthSmalest(2));
+        Assertions.assertEquals(5, qs.findKthSmallest(2));
     }
 
     @Test
@@ -37,6 +38,6 @@ public class QuickSelectionTest {
 
         int[] arr = {10, 4, 5, 8, 6, 11, 26};
         QuickSelection qs = new QuickSelection(arr);
-        Assertions.assertEquals(26, qs.findKthSmalest(7));
+        Assertions.assertEquals(26, qs.findKthSmallest(7));
     }
 }

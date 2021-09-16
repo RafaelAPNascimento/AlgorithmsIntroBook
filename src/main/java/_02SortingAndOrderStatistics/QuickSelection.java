@@ -9,7 +9,7 @@ public class QuickSelection {
         this.arr = arr;
     }
 
-    public int findKthSmalest(int kth) {
+    public int findKthSmallest(int kth) {
 
         return quickSelection(arr, 0, arr.length - 1, kth);
     }
