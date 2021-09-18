@@ -2,202 +2,149 @@ package ch03;
 
 import _03DataStructures.BST;
 import _03DataStructures.BstImpl;
-import ch01.util.TestUtil;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BstTest {
 
-    @DisplayName("Should return in order after insert")
+    @DisplayName("Should insert then get")
     @Test
-    public void shouldReturnInOrderAfterInsert() {
+    public void shouldInsertThenGet() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("A", 3);
+        bst.put("B", 5);
+        bst.put("C", 2);
+        bst.put("K", 1);
+        bst.put("K", 9);    // replace K value from 1 to 9
 
-        List<Integer> list = bst.inOrderWalk();
+        assertEquals(3, bst.get("A"));
+        assertEquals(5, bst.get("B"));
+        assertEquals(2, bst.get("C"));
+        assertEquals(9, bst.get("K"));
 
-        boolean sorted = TestUtil.isSorted(list, comparator);
-        Assertions.assertTrue(sorted);
     }
 
-    @DisplayName("Should return in order after insert")
+    @DisplayName("Should get correct size")
     @Test
-    public void shouldReturnInOrderAfterInsert2() {
+    public void shouldGetCorrectSize() {
 
-        int[] itens = TestUtil.getRandomIntArray(100, 1_000);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("A", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-
-        Arrays.stream(itens).forEach(i -> bst.insert(i));
-
-        List<Integer> list = bst.inOrderWalk();
-
-        boolean sorted = TestUtil.isSorted(list, comparator);
-        Assertions.assertTrue(sorted);
+        assertEquals(5, bst.size());
     }
 
-    @DisplayName("Should return correct size after inserting")
+    @DisplayName("Should get correct min")
     @Test
-    public void shouldReturnCorrectSizeAfterInsert() {
+    public void shouldGetMin() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertEquals(6, bst.getSize());
+        assertEquals("B", bst.min());
     }
 
-    @DisplayName("Should return max")
+    @DisplayName("Should get correct max")
     @Test
-    public void shouldReturnMax() {
+    public void shouldGetMax() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertEquals(10, bst.maximum());
+        assertEquals("Y", bst.max());
     }
 
-    @DisplayName("Should return min")
+    @DisplayName("Should get largest smaller than this")
     @Test
-    public void shouldReturnMin() {
+    public void shouldFloor() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("L", 5); bst.put("Y", 3);
 
-        Assertions.assertEquals(3, bst.minimum());
+        assertEquals("D", bst.floor("H"));
+        assertEquals("Y", bst.floor("Z"));
+        assertEquals(null, bst.floor("A"));
+        assertEquals("Y", bst.floor("Z"));
+        assertEquals("L", bst.floor("O"));
+        assertEquals("L", bst.floor("L"));
     }
 
-    @DisplayName("Should contain")
+    @DisplayName("Should return node at rank k")
     @Test
-    public void shouldContain() {
+    public void shouldSelect() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertTrue(bst.contains(9));
+        assertEquals("D", bst.select(2));       // there are 2 elements smaller than key D
+        assertEquals("Y", bst.select(4));       // there are 4 elements smaller than key Y
     }
 
-    @DisplayName("Should not contain")
+    @DisplayName("Should return the number of keys smaller than or equal to this")
     @Test
-    public void shouldNotContain() {
+    public void shouldRank() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertFalse(bst.contains(11));
+        assertEquals(2, bst.rank("D"));       // there are 2 elements smaller than key D
+        assertEquals(4, bst.rank("Y"));       // there are 4 elements smaller than key Y
     }
 
-    @DisplayName("Should return correct higher")
+    @DisplayName("Should delete min")
     @Test
-    public void shouldReturnCorrectHigher() {
+    public void shouldDeleteMin() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertEquals(7, bst.higher(5));
+        bst.deleteMin();
+        assertEquals("C", bst.min());
+
+        bst.deleteMin();
+        assertEquals("D", bst.min());
     }
 
-    @DisplayName("Should return correct lower")
+    @DisplayName("Should delete key")
     @Test
-    public void shouldReturnCorrectLower() {
+    public void shouldDeleteKey() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertEquals(7, bst.lower(8));
+        bst.delete("B");
+        assertEquals("C", bst.min());
+
+        assertEquals("Y", bst.max());
+        bst.delete("Y");
+        assertEquals("X", bst.max());
     }
 
+    @DisplayName("After several operation, BST should keep its invariants")
     @Test
-    public void shouldDelete() {
+    public void shouldKeepInvariantsAfterOperations() {
 
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
-        Assertions.assertTrue(bst.contains(9), "Inserted Item notpresent");
-        Assertions.assertEquals(6, bst.getSize(), "Size is wrong");
-        bst.delete(9);
-        Assertions.assertFalse(bst.contains(9), "Item not removed");
-        Assertions.assertEquals(5, bst.getSize(), "Size is wrong, after removing");
+        assertEquals(5, bst.size());
+
+        bst.put("J", 9);
+        assertEquals(6, bst.size());
+
+        assertEquals("X", bst.floor("X"));
+        bst.delete("X");
+        assertEquals("J", bst.floor("X"));
+
+        assertEquals(5, bst.size());
+
+        assertEquals(3, bst.rank("J"));
+
+        assertEquals("D", bst.select(2));
     }
 
-    @Test
-    public void shouldDeleteAll() {
-
-        Comparator<Integer> comparator = Comparator.comparingInt(i -> i);
-        BST<Integer> bst = new BstImpl(Integer.class, comparator);
-        bst.insert(5);
-        bst.insert(10);
-        bst.insert(3);
-        bst.insert(8);
-        bst.insert(7);
-        bst.insert(9);
-
-        bst.delete(5);
-        bst.delete(10);
-        bst.delete(3);
-        bst.delete(8);
-        bst.delete(7);
-        bst.delete(9);
-
-        Assertions.assertEquals(0, bst.getSize(), "Size is wrong");
-    }
 
 }

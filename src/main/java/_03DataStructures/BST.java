@@ -1,34 +1,32 @@
 package _03DataStructures;
 
-import java.util.List;
+public interface BST<K extends Comparable<K>, V>{
 
-public interface BST<E> {
+    int size();
 
-    int getSize();
+    V get(K key);
 
-    List<E> inOrderWalk();
+    void put(K key, V value);
 
-    boolean contains(E key);
+    K min();
 
-    E minimum();
+    K max();
 
-    E maximum();
+    K floor(K key);
 
-    /**
-     * Returns the smallest element greater than or equal to key or null if there is no such element
-     * @param key
-     * @return
-     */
-    E higher(E key);
+    K ceiling(K key);
 
-    /**
-     * Returns the greatest element smaller than or equal to key or null if there is no such element
-     * @param key
-     * @return
-     */
-    E lower(E key);
+    K select(int k);
 
-    boolean insert(E key);
+    int rank(K key);
 
-    boolean delete(E key);
+    void deleteMin();
+
+    void delete(K key);
+
+    Iterable<K> keys();
+
+    Iterable<K> keys(K lo, K hi);
+
+
 }
