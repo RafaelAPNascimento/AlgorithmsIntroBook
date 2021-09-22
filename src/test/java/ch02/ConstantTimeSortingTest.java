@@ -11,7 +11,6 @@ import org.junit.jupiter.api.TestInstance;
 import java.util.Arrays;
 
 import static ch01.util.TestUtil.isSorted;
-import static java.util.Arrays.stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ConstantTimeSortingTest {
@@ -43,8 +42,8 @@ public class ConstantTimeSortingTest {
         radixSort.radixSort(input);
 
         Assertions.assertTrue(isSorted(input), "array is not sorted");
-        Assertions.assertEquals(min, input[0]);
-        Assertions.assertEquals(max, input[input.length - 1]);
+        Assertions.assertEquals(min, input[0], "minimum value is wrong");
+        Assertions.assertEquals(max, input[input.length - 1], "max value is wrong");
     }
 
     @Test

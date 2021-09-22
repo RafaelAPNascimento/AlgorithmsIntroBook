@@ -1,5 +1,8 @@
 package _03DataStructures;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node root;
@@ -225,11 +228,29 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public Iterable<K> keys() {
-        return null;
+        return keys(min(), max());
     }
 
     @Override
     public Iterable<K> keys(K lo, K hi) {
-        return null;
+
+        Queue<K> queue = new ArrayDeque<>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
+
+    private void keys(Node x, Queue<K> queue, K lo, K hi) {
+        if (x == null)
+            return;
+
+        int cmplo = lo.compareTo(x.key);
+        int comphi = hi.compareTo(x.key);
+        if (cmplo < 0)
+            keys(x.left, queue, lo, hi);
+        if (cmplo <= 0 && comphi >= 0)
+            queue.add(x.key);
+        if (comphi > 0)
+            keys(x.right, queue, lo, hi);
+
     }
 }
