@@ -78,6 +78,14 @@ public class LinkedListTest {
     }
 
     @Test
+    public void shouldNotRemoveBecauseDoesntExist() {
+
+        LinkedList<String> lk = new LinkedListImpl<>();
+        lk.push("E");
+        Assertions.assertFalse(lk.remove("A"));
+    }
+
+    @Test
     public void shouldBeEmptyAfterRemovingAll() {
 
         LinkedList<Integer> lk = new LinkedListImpl<>();

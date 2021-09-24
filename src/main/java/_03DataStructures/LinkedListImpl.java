@@ -1,5 +1,7 @@
 package _03DataStructures;
 
+import javax.xml.crypto.Data;
+
 public class LinkedListImpl<E> implements LinkedList<E> {
 
     private Node<E> head;
@@ -42,18 +44,10 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 
     @Override
     public boolean remove(E e) {
-
         if (counter == 0)
             return false;
 
-        else if (counter == 1) {
-            head = tail = null;
-            counter--;
-            return true;
-        }
-
         Node current = head;
-
         while (current != null) {
             if (current.data == e) {
                 removeNode(current);
