@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.Arrays;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 import static ch01.util.TestUtil.isSorted;
 
@@ -52,8 +54,15 @@ public class ConstantTimeSortingTest {
         float[] input = {(float) 0.897, (float) 0.565, (float) 0.656, (float) 0.1234, (float) 0.665, (float) 0.3434};
 
         ConstantTimeSorting countingSort = new ConstantTimeSorting();
+
+        float min = (float) 0.1234;
+        float max = (float) 0.897;
+
         countingSort.bucketSort(input);
+
         Assertions.assertTrue(TestUtil.isSorted(countingSort.getSortedInputFloats()));
+        Assertions.assertEquals(min, countingSort.getSortedInputFloats()[0], "minimum value is wrong");
+        Assertions.assertEquals(max, countingSort.getSortedInputFloats()[input.length - 1], "max value is wrong");
     }
 
 }
