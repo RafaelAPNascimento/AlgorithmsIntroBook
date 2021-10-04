@@ -10,7 +10,7 @@ public class InsertionSort {
 
     public void insertionSort() {
 
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
 
             int j = i;
             int key = arr[j];

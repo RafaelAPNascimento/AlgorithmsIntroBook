@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class PeakFinder1DTest {
 
-    final int NUMBER_OF_TESTS = 10_000;
+    final int NUMBER_OF_TESTS = 1000;
 
     @TestFactory
     public DynamicTest[] myDTest() {

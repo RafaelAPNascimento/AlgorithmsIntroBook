@@ -2,23 +2,24 @@ package ch01.util;
 
 import org.junit.jupiter.api.Assertions;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestUtil {
 
     /**
      * Returns an array whose length is some value between initRange and endRange
-     * @param initRange
-     * @param endRange
+     * @param minSize
+     * @param maxSize
      * @return
      */
-    public static int[] getRandomIntArray(int initRange, int endRange) {
+    public static int[] getRandomIntArray(int minSize, int maxSize) {
 
-        final int SIZE = ThreadLocalRandom.current().nextInt(initRange, endRange);
+        final int SIZE = ThreadLocalRandom.current().nextInt(minSize, maxSize);
         int[] arr = new int[SIZE];
         for (int i = 0; i < SIZE; i++) {
             arr[i] = ThreadLocalRandom.current().nextInt(0, 999);
@@ -56,5 +57,11 @@ public class TestUtil {
                 return false;
         }
         return true;
+    }
+
+    public static void assertSortingProperties(int[] arr, int min, int max) {
+        assertEquals(min, arr[0], "min value is incorrect");
+        assertEquals(max, arr[arr.length - 1], "max value is incorrect");
+        assertTrue(isSorted(arr), "array is not sorted");
     }
 }

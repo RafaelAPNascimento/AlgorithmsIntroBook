@@ -21,17 +21,17 @@ public class PeakFinder2D {
 
     private int[] findPeak(int startCol, int endCol) {
 
-        int midColIndex = (startCol + endCol) / 2;
-        int maxRowInCol = findMaxInCol(midColIndex);     // line index with max value in col
+        int midCol = (startCol + endCol) / 2;
+        int maxRowInCol = findMaxInCol(midCol);
 
-        if (midColIndex > 0 && arr[maxRowInCol][midColIndex] < arr[maxRowInCol][midColIndex - 1])
-            return findPeak(startCol, midColIndex - 1);
+        if (midCol > 0 && arr[maxRowInCol][midCol] < arr[maxRowInCol][midCol - 1])
+            return findPeak(startCol, midCol - 1);
 
-        else if (midColIndex < arr[0].length && arr[maxRowInCol][midColIndex] < arr[maxRowInCol][midColIndex + 1])
-            return findPeak(midColIndex + 1, endCol);
+        else if (midCol + 1 < arr[0].length && arr[maxRowInCol][midCol] < arr[maxRowInCol][midCol + 1])
+            return findPeak(midCol + 1, endCol);
 
         else
-            return new int[]{maxRowInCol, midColIndex};
+            return new int[] {maxRowInCol, midCol};
     }
 
     private int findMaxInCol(int COL) {

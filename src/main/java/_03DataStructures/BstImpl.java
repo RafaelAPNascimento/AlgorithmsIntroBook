@@ -10,10 +10,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     private class Node {
         private K key;
         private V value;
-        private Node left, right;
-        private int nodeCount;      // nodes in subtree rooted here
-
-        Node(K key, V value, int nodeCount) {
+        private Node left;
+        private Node right;
+        int nodeCount;
+        public Node(K key, V value, int nodeCount) {
             this.key = key;
             this.value = value;
             this.nodeCount = nodeCount;

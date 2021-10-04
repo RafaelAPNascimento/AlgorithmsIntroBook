@@ -7,8 +7,10 @@ import ch01.util.TestUtil;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import static ch01.util.TestUtil.isSorted;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Arrays;
+
+import static ch01.util.TestUtil.assertSortingProperties;
+import static ch01.util.TestUtil.getRandomIntArray;
 
 public class SortingTests {
 
@@ -16,41 +18,58 @@ public class SortingTests {
     public void shouldSortByInsertionSort() {
 
         int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
+
+        int min = Arrays.stream(arr).min().getAsInt();
+        int max = Arrays.stream(arr).max().getAsInt();
+
         InsertionSort insertionSort = new InsertionSort(arr);
         insertionSort.insertionSort();
 
-        assertTrue(isSorted(arr));
+        assertSortingProperties(arr, min, max);
     }
 
     @Test
     @RepeatedTest(5)
     public void shouldSortByInsertionSort02() {
 
-        int[] arr = TestUtil.getRandomIntArray(50, 200);
+        int[] arr = getRandomIntArray(50, 200);
+
+        int min = Arrays.stream(arr).min().getAsInt();
+        int max = Arrays.stream(arr).max().getAsInt();
+
         InsertionSort insertionSort = new InsertionSort(arr);
         insertionSort.insertionSort();
 
-        assertTrue(isSorted(arr));
+        assertSortingProperties(arr, min, max);
     }
 
     @Test
+    @RepeatedTest(5)
     public void shouldSortByQuickSort() {
 
-        int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
+        int[] arr = getRandomIntArray(50, 200);
+
+        int min = Arrays.stream(arr).min().getAsInt();
+        int max = Arrays.stream(arr).max().getAsInt();
+
         QuickSort quickSort = new QuickSort(arr);
         quickSort.quickSort();
 
-        assertTrue(isSorted(arr));
+        assertSortingProperties(arr, min, max);
     }
 
     @Test
     public void shouldSortByMergeSort() {
 
         int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
+
+        int min = Arrays.stream(arr).min().getAsInt();
+        int max = Arrays.stream(arr).max().getAsInt();
+
         MergeSort mergeSort = new MergeSort(arr);
         mergeSort.mergeSort();
 
-        assertTrue(isSorted(arr));
+        assertSortingProperties(arr, min, max);
     }
 
 

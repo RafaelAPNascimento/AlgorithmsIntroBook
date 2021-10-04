@@ -23,7 +23,7 @@ public class PeakFinder1D {
 
     private int findPeak(int start, int end) {
 
-        if (end - start < 2)
+        if (end < start)
             return arr[start] > arr[end] ? start : end;
 
         int mid = (start + end) / 2;
