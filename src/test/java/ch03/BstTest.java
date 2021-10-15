@@ -37,6 +37,16 @@ public class BstTest {
         assertEquals(5, bst.size());
     }
 
+    @DisplayName("Should replace value then get correct size")
+    @Test
+    public void shouldReplaceValueThenGetCorrectSize() {
+
+        BST<String, Integer> bst = new BstImpl<>();
+        bst.put("A", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
+        bst.put("C", 9);
+        assertEquals(5, bst.size());
+    }
+
     @DisplayName("Should get correct min")
     @Test
     public void shouldGetMin() {
@@ -70,6 +80,20 @@ public class BstTest {
         assertEquals("Y", bst.floor("Z"));
         assertEquals("L", bst.floor("O"));
         assertEquals("L", bst.floor("L"));
+    }
+
+    @DisplayName("Should get largest smaller than this")
+    @Test
+    public void shouldFloor2() {
+
+        BST<Integer, Integer> bst = new BstImpl<>();
+        bst.put(65, 65); bst.put(60, 60); bst.put(55, 55);bst.put(70, 70); bst.put(80, 80);
+            bst.put(50, 50); bst.put(30, 30); bst.put(40, 40); bst.put(20, 20);
+
+        assertEquals(55, bst.floor(58));
+        assertEquals(70, bst.floor(72));
+        assertEquals(null, bst.floor(19));
+        assertEquals(40, bst.floor(49));
     }
 
     @DisplayName("Should return node at rank k")

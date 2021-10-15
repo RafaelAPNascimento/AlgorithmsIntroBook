@@ -8,15 +8,16 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     private Node root;
 
     private class Node {
+        private final int INITIAL_SIZE = 1;
         private K key;
         private V value;
         private Node left;
         private Node right;
         int nodeCount;
-        public Node(K key, V value, int nodeCount) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
-            this.nodeCount = nodeCount;
+            this.nodeCount = INITIAL_SIZE;  // each node has a default size that counts 1 (itself at least)
         }
     }
 
@@ -64,7 +65,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         // Change key’s value to val if key in subtree rooted at x.
         // Otherwise, add new node to subtree associating key with val.
         if (x == null)
-            return new Node(key, value, 1);
+            return new Node(key, value);
 
         int cmp = key.compareTo(x.key);
         if (cmp < 0)
@@ -109,32 +110,30 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public K floor(K key) {
-
-        Node x = floor(root, key);
-        if (x == null)
+        Node floor = floor(root, key);
+        if (floor != null)
+            return floor.key;
+        else
             return null;
-
-        return x.key;
     }
 
     private Node floor(Node x, K key) {
-
         if (x == null)
             return null;
 
-        int cmp = key.compareTo(x.key);
+        int cmp = x.key.compareTo(key);
         if (cmp == 0)
             return x;
 
-        if (cmp < 0)
+        else if (cmp > 0)
             return floor(x.left, key);
 
         Node t = floor(x.right, key);
-
         if (t != null)
             return t;
         else
             return x;
+
     }
 
     @Override
@@ -163,22 +162,19 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public int rank(K key) {
-
         return rank(key, root);
     }
 
     private int rank(K key, Node x) {
-        // Return number of keys less than x.key in the subtree rooted at x
-        if (x == null)
-            return 0;
 
-        int cmp = key.compareTo(x.key);
-        if (cmp < 0)
+        int cmp = x.key.compareTo(key);
+        if (cmp > 0)
             return rank(key, x.left);
-        else if (cmp > 0)
+        else if (cmp < 0)
             return 1 + size(x.left) + rank(key, x.right);
         else
             return size(x.left);
+
     }
 
     @Override
