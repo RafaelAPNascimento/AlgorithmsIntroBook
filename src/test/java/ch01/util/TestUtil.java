@@ -60,8 +60,12 @@ public class TestUtil {
     }
 
     public static void assertSortingProperties(int[] arr, int min, int max) {
-        assertEquals(min, arr[0], "min value is incorrect");
-        assertEquals(max, arr[arr.length - 1], "max value is incorrect");
-        assertTrue(isSorted(arr), "array is not sorted");
+
+        Objects.requireNonNull(arr, "Array is null");
+
+        assertTrue(arr.length > 0, "Array size is ZERO!");
+        assertEquals(min, arr[0], "Min value is incorrect");
+        assertEquals(max, arr[arr.length - 1], "Max value is incorrect");
+        assertTrue(isSorted(arr), "Array is not sorted");
     }
 }

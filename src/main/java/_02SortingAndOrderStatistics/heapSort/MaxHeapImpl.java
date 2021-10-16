@@ -131,7 +131,8 @@ public class MaxHeapImpl implements MaxHeap {
     }
 
     public int[] getHeap() {
-        return Arrays.copyOf(heap, size);
+        //return heap;
+        return Arrays.copyOf(heap, heap.length);
     }
 
 

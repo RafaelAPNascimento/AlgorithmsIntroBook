@@ -2,6 +2,7 @@ package ch02;
 
 import _02SortingAndOrderStatistics.heapSort.MaxHeap;
 import _02SortingAndOrderStatistics.heapSort.MaxHeapImpl;
+import ch01.util.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -90,9 +91,8 @@ public class MaxHeapTest {
         MaxHeap maxHeap = new MaxHeapImpl(arr);
         maxHeap.buildMaxHeap();
         maxHeap.heapSort();
-        assertTrue(isSorted(maxHeap.getHeap()));
+        TestUtil.assertSortingProperties(maxHeap.getHeap(), 0, 10);
     }
-
 
     public void shouldReturnCorrectParentIndex() {
 
@@ -101,16 +101,6 @@ public class MaxHeapTest {
 
     public void shouldReturnCorrectHeapHeight() {
 
-    }
-
-
-    private static boolean isSorted(int[] arr) {
-
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i] > arr[i + 1])
-                return false;
-        }
-        return true;
     }
 
     private static boolean isHeap(int[] arr) {
