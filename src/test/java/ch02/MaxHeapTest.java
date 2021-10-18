@@ -7,7 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MaxHeapTest {
@@ -32,11 +33,11 @@ public class MaxHeapTest {
         maxHeap.insert(3);
         maxHeap.insert(9);
         maxHeap.insert(7);
+        maxHeap.insert(99);
         maxHeap.insert(8);
         maxHeap.insert(10);
         maxHeap.insert(14);
         maxHeap.insert(16);
-        maxHeap.insert(99);
         assertTrue(isHeap(maxHeap.getHeap()));
     }
 
@@ -90,8 +91,8 @@ public class MaxHeapTest {
         int[] arr = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
         MaxHeap maxHeap = new MaxHeapImpl(arr);
         maxHeap.buildMaxHeap();
-        maxHeap.heapSort();
-        TestUtil.assertSortingProperties(maxHeap.getHeap(), 0, 10);
+        int[] sorted = maxHeap.heapSort();
+        TestUtil.assertSortingProperties(sorted, 0, 10);
     }
 
     public void shouldReturnCorrectParentIndex() {

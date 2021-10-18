@@ -20,7 +20,7 @@ public interface MaxHeap {
 
     void buildMaxHeap();
 
-    void heapSort();
+    int[] heapSort();
 
     int getMax();
 

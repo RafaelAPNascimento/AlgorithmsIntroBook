@@ -88,7 +88,7 @@ public class MaxHeapImpl implements MaxHeap {
             maxHeapify(i);
     }
 
-    public void heapSort() {
+    public int[] heapSort() {
 
         for (int i = getHeapSize() - 1; i > 0; i--) {
             swap(0, i);
@@ -96,6 +96,7 @@ public class MaxHeapImpl implements MaxHeap {
             maxHeapify(0);
         }
         size = 0;
+        return Arrays.copyOf(heap, heap.length);
     }
 
     // priority key operations
@@ -131,8 +132,7 @@ public class MaxHeapImpl implements MaxHeap {
     }
 
     public int[] getHeap() {
-        //return heap;
-        return Arrays.copyOf(heap, heap.length);
+        return Arrays.copyOf(heap, size);
     }
 
 
