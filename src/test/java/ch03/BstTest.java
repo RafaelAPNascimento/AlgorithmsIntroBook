@@ -105,6 +105,7 @@ public class BstTest {
 
         assertEquals("D", bst.select(2));       // there are 2 elements smaller than key D
         assertEquals("Y", bst.select(4));       // there are 4 elements smaller than key Y
+        assertEquals(null, bst.select(9));      // there is no element greater than 9 elements
     }
 
     @DisplayName("Should return the number of keys smaller than or equal to this")
