@@ -84,28 +84,43 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public K min() {
-
-        return min(root).key;
+        Node min = min(root);
+        if (min != null)
+            return min.key;
+        else
+            return null;
     }
 
     private Node min(Node x) {
+        if (x == null)
+            return null;
 
-        if (x.left == null) return x;
-
-        return min(x.left);
+        Node smaller = x.left;
+        if (smaller != null)
+            return min(smaller);
+        else
+            return x;
     }
 
     @Override
     public K max() {
-
-        return max(root).key;
+        Node max = max(root);
+        if (max != null)
+            return max.key;
+        else
+            return null;
     }
 
     private Node max(Node x) {
+        if (x == null)
+            return null;
 
-        if (x.right == null) return x;
+        Node greater = x.right;
 
-        return max(x.right);
+        if (greater != null)
+            return max(greater);
+        else
+            return x;
     }
 
     @Override
@@ -155,11 +170,11 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return null;
 
         int t = size(x.left);
-        if (t > k)
-            return select(x.left, k);
-        else if (t < k)
-            return select(x.right, k - t - 1);
 
+        if (k < t)
+            return select(x.left, k);
+        else if (k > t)
+            return select(x.right, k - t - 1);
         else
             return x;
     }

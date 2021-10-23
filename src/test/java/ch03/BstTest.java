@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class BstTest {
 
@@ -65,6 +66,14 @@ public class BstTest {
         bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
         assertEquals("Y", bst.max());
+    }
+
+    @DisplayName("Should return null when calling max() on a empty bst")
+    @Test
+    public void shouldGetMax2() {
+
+        BST<String, Integer> bst = new BstImpl<>();
+        assertNull(bst.max());
     }
 
     @DisplayName("Should get largest smaller than this")
