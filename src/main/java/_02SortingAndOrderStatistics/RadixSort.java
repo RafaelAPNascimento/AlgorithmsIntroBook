@@ -25,8 +25,8 @@ public class RadixSort {
             freq[i] += freq[i - 1];
 
         for (int i = arr.length - 1; i >= 0; i--) {
-            int element = (arr[i] / place) % 10;
-            int index = --freq[element];
+            int elementPlace = (arr[i] / place) % 10;
+            int index = --freq[elementPlace];
             sorted[index] = arr[i];
         }
         System.arraycopy(sorted, 0, arr, 0, arr.length);

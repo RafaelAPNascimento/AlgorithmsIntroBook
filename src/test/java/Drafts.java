@@ -16,36 +16,45 @@ public class Drafts {
 
 
     public static void main(String[] args) {
+        List<String> ls = null;
 
+        
     }
 
-    class Inventory {
+    static class Transmission {
 
-        private List<Supply> supplies = new ArrayList<>();
-
-        int getQuantity(Supply supply) {
-            if (supply == null) {
-                throw new NullPointerException("supply must not be null");
-            }
-
-            int quantity = 0;
-            for (Supply supplyInStock : supplies) {
-                if (supply.equals(supplyInStock)) {
-                    quantity++;
-                }
-            }
-
-            return quantity;
-        }
-
-        int getQuantity1(Supply supply) {
-
-            Objects.requireNonNull(supply, "supply must not be null");
-
-            return Collections.frequency(supplies, supply);
-        }
+        public static final int MESSAGE_LENGTH = 1;
+        public static final int ID_LENGTH = 1;
+        Transmission(int i1, String i2) {}
     }
 
+    static class TransmissionParser {
 
-    class Supply {}
+        static Transmission parse(String rawMessage) {
+            if (rawMessage != null
+                    && rawMessage.length() != Transmission.MESSAGE_LENGTH) {
+
+                throw new IllegalArgumentException(
+                        String.format("Expected %d, but got %d characters in '%s'",
+                                Transmission.MESSAGE_LENGTH, rawMessage.length(),
+                                rawMessage));
+            }
+            String rawId = rawMessage.substring(0, Transmission.ID_LENGTH);
+            String rawContent = rawMessage.substring(Transmission.ID_LENGTH);
+            try {
+                int id = Integer.parseInt(rawId);
+                String content = rawContent.trim();
+                return new Transmission(id, content);
+            }
+            catch (NumberFormatException e) {
+                throw new IllegalArgumentException(
+                        String.format("Expected number, but got '%s' in '%s'",
+                                rawId, rawMessage), e);
+            }
+        }
+
+        static IllegalArgumentException toIllegalEx(String msg, Throwable cause) {
+            throw new IllegalArgumentException(msg, cause);
+        }
+    }
 }

@@ -35,22 +35,19 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public V get(K key) {
-
         return get(root, key);
     }
 
     private V get(Node x, K key) {
-        // Return value associated with key in the subtree rooted at x;
-        // return null if key not present in subtree rooted at x.
-        if (x == null) return null;
+        if (x == null)
+            return null;
 
-        int cmp = key.compareTo(x.key);
+        int cmp = x.key.compareTo(key);
+
         if (cmp < 0)
-            return get(x.left, key);     // recursive search in the appropriate subtree
-
+            return get(x.right, key);
         else if (cmp > 0)
-            return get(x.right, key);   // recursive search in the appropriate subtree
-
+            return get(x.left, key);
         else
             return x.value;
     }
@@ -84,18 +81,16 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public K min() {
-        Node min = min(root);
-        if (min != null)
-            return min.key;
-        else
+        if (root == null)
             return null;
+
+        return min(root).key;
     }
 
     private Node min(Node x) {
-        if (x == null)
-            return null;
 
         Node smaller = x.left;
+
         if (smaller != null)
             return min(smaller);
         else
@@ -104,19 +99,16 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public K max() {
-        Node max = max(root);
-        if (max != null)
-            return max.key;
-        else
+
+        if (root == null)
             return null;
+
+        return max(root).key;
     }
 
     private Node max(Node x) {
-        if (x == null)
-            return null;
 
         Node greater = x.right;
-
         if (greater != null)
             return max(greater);
         else
@@ -157,24 +149,28 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     }
 
     @Override
-    public K select(int k) {
-        Node select = select(root, k);
+    public K select(int rank) {
+
+        Node select = select(root, rank);
         if (select != null)
             return select.key;
         else
             return null;
     }
 
-    private Node select(Node x, int k) {
+    private Node select(Node x, int rank) {
+
         if (x == null)
             return null;
 
         int t = size(x.left);
 
-        if (k < t)
-            return select(x.left, k);
-        else if (k > t)
-            return select(x.right, k - t - 1);
+        if (t > rank)
+            return select(x.left, rank);
+
+        else if (t < rank)
+            return select(x.right, rank - t - 1);
+
         else
             return x;
     }
@@ -185,15 +181,18 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     }
 
     private int rank(K key, Node x) {
+        if (x == null)
+            return 0;
 
         int cmp = x.key.compareTo(key);
         if (cmp > 0)
             return rank(key, x.left);
+
         else if (cmp < 0)
-            return 1 + size(x.left) + rank(key, x.right);
+            return size(x.left) + rank(key, x.right) + 1;
+
         else
             return size(x.left);
-
     }
 
     @Override

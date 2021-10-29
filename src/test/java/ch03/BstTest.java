@@ -128,6 +128,18 @@ public class BstTest {
         assertEquals(4, bst.rank("Y"));       // there are 4 elements smaller than key Y
     }
 
+    @DisplayName("Should return the number of keys smaller than or equal to this")
+    @Test
+    public void shouldRank2() {
+
+        BST<Integer, Integer> bst = new BstImpl<>();
+        bst.put(3, 3); bst.put(7, 7); bst.put(4, 4); bst.put(6, 6); bst.put(1, 1);
+        bst.put(8, 8); bst.put(10, 10); bst.put(14, 14); bst.put(13,13);
+
+        assertEquals(2, bst.rank(4));       // there are 2 elements smaller than key 4
+        assertEquals(6, bst.rank(10));       // there are 6 elements smaller than key 10
+    }
+
     @DisplayName("Should delete min")
     @Test
     public void shouldDeleteMin() {
