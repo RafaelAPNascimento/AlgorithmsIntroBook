@@ -9,26 +9,32 @@ public class RadixSort {
     public void radixSort(int[] arr) {
 
         sorted = new int[arr.length];
+
         int max = Arrays.stream(arr).max().getAsInt();
-        for (int place = 1; max / place > 0; place *= 10)
+        for (int place = 1; max / place > 0; place *= 10) {
             countingSort(arr, place);
+        }
     }
 
     private void countingSort(int[] arr, int place) {
 
         int[] freq = new int[10];
         for (int i = 0; i < arr.length; i++) {
-            int element = (arr[i] / place) % 10;
-            freq[element]++;
+            int el = (arr[i] / place) % 10;
+            freq[el]++;
         }
-        for (int i = 1; i < 10; i++)
+
+        for (int i = 1; i < freq.length; i++) {
             freq[i] += freq[i - 1];
+        }
 
         for (int i = arr.length - 1; i >= 0; i--) {
-            int elementPlace = (arr[i] / place) % 10;
-            int index = --freq[elementPlace];
+            int el = (arr[i] / place) % 10;
+            int index = --freq[el];
             sorted[index] = arr[i];
         }
+
         System.arraycopy(sorted, 0, arr, 0, arr.length);
     }
+
 }

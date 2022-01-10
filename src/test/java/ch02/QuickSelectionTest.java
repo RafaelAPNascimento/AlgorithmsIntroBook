@@ -1,7 +1,6 @@
 package ch02;
 
 import _02SortingAndOrderStatistics.QuickSelection;
-import _02SortingAndOrderStatistics.QuickSelection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

@@ -1,60 +1,28 @@
-import javax.crypto.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.*;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 public class Drafts {
 
+    public static void main(String[] args) throws DatatypeConfigurationException {
 
-    public static void main(String[] args) {
-        List<String> ls = null;
-
-        
+       int a = 1;
+       int c = ++a;
+        System.out.println(c);
     }
 
-    static class Transmission {
+    private Collection<? extends Object> x;
 
-        public static final int MESSAGE_LENGTH = 1;
-        public static final int ID_LENGTH = 1;
-        Transmission(int i1, String i2) {}
-    }
+    static <T> Collection<T> getIt(T[] arr) {
 
-    static class TransmissionParser {
-
-        static Transmission parse(String rawMessage) {
-            if (rawMessage != null
-                    && rawMessage.length() != Transmission.MESSAGE_LENGTH) {
-
-                throw new IllegalArgumentException(
-                        String.format("Expected %d, but got %d characters in '%s'",
-                                Transmission.MESSAGE_LENGTH, rawMessage.length(),
-                                rawMessage));
-            }
-            String rawId = rawMessage.substring(0, Transmission.ID_LENGTH);
-            String rawContent = rawMessage.substring(Transmission.ID_LENGTH);
-            try {
-                int id = Integer.parseInt(rawId);
-                String content = rawContent.trim();
-                return new Transmission(id, content);
-            }
-            catch (NumberFormatException e) {
-                throw new IllegalArgumentException(
-                        String.format("Expected number, but got '%s' in '%s'",
-                                rawId, rawMessage), e);
-            }
-        }
-
-        static IllegalArgumentException toIllegalEx(String msg, Throwable cause) {
-            throw new IllegalArgumentException(msg, cause);
-        }
+        Collection c = Arrays.asList(arr);
+        return c;
     }
 }
+
+

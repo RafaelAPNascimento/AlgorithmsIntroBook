@@ -23,9 +23,15 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public int size() {
+
         return size(root);
     }
 
+    /**
+     * Size
+     * @param x
+     * @return The quantity of nodes smaller than or equal to it
+     */
     private int size(Node x) {
         if (x == null)
             return 0;
@@ -35,41 +41,45 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public V get(K key) {
+
         return get(root, key);
     }
 
     private V get(Node x, K key) {
+
         if (x == null)
             return null;
 
         int cmp = x.key.compareTo(key);
 
-        if (cmp < 0)
-            return get(x.right, key);
-        else if (cmp > 0)
-            return get(x.left, key);
-        else
+        if (cmp == 0)
             return x.value;
+
+        if (cmp > 0)
+            return get(x.left, key);
+
+        else
+            return get(x.right, key);
     }
 
     @Override
     public void put(K key, V value) {
-        // Search for key. Update value if found; grow table if new.
+
         root = put(root, key, value);
     }
 
     private Node put(Node x, K key, V value) {
-        // Change key’s value to val if key in subtree rooted at x.
-        // Otherwise, add new node to subtree associating key with val.
+
         if (x == null)
             return new Node(key, value);
 
-        int cmp = key.compareTo(x.key);
-        if (cmp < 0)
-            x.left = put(x.left, key, value);   // if the search key is less than the key at the root, we set the left link to the result
+        int cmp = x.key.compareTo(key);
 
-        else if (cmp > 0)
-            x.right = put(x.right, key, value);     // therwise, we set the right link to the result of inserting the key into the right subtree
+        if (cmp > 0)
+            x.left = put(x.left, key, value);
+
+        else if (cmp < 0)
+            x.right = put(x.right, key, value);
 
         else
             x.value = value;
@@ -125,10 +135,12 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     }
 
     private Node floor(Node x, K key) {
+
         if (x == null)
             return null;
 
         int cmp = x.key.compareTo(key);
+
         if (cmp == 0)
             return x;
 
@@ -140,7 +152,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return t;
         else
             return x;
-
     }
 
     @Override
@@ -165,31 +176,35 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         int t = size(x.left);
 
-        if (t > rank)
+        if (t == rank)
+            return x;
+
+        else if (t > rank)
             return select(x.left, rank);
 
-        else if (t < rank)
+        else
             return select(x.right, rank - t - 1);
 
-        else
-            return x;
     }
 
     @Override
     public int rank(K key) {
+
         return rank(key, root);
     }
 
     private int rank(K key, Node x) {
+
         if (x == null)
             return 0;
 
         int cmp = x.key.compareTo(key);
+
         if (cmp > 0)
             return rank(key, x.left);
 
         else if (cmp < 0)
-            return size(x.left) + rank(key, x.right) + 1;
+            return rank(key, x.right) + size(x.left) + 1;
 
         else
             return size(x.left);
@@ -197,10 +212,14 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public void deleteMin() {
+
         root = deleteMin(root);
     }
 
     private Node deleteMin(Node x) {
+
+        if (x == null)
+            return null;
 
         if (x.left == null)
             return x.right;
@@ -210,8 +229,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         return x;
     }
 
+
     @Override
     public void delete(K key) {
+
         root = delete(root, key);
     }
 
@@ -242,6 +263,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public Iterable<K> keys() {
+
         return keys(min(), max());
     }
 

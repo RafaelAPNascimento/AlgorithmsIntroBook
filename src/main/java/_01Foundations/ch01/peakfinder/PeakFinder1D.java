@@ -31,10 +31,9 @@ public class PeakFinder1D {
         if (arr[mid] < arr[mid - 1])
             return findPeak(start, mid - 1);
 
-        else if (arr[mid] < arr[mid + 1])
+        else if (mid < arr.length - 1 && arr[mid] < arr[mid + 1])
             return findPeak(mid + 1, end);
 
-        else
-            return mid;
+        return mid;
     }
 }

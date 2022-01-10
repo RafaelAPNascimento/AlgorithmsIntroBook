@@ -63,21 +63,23 @@ public class MaxSubArrayProblem {
     public MaxSubArrayResult resolveWithKadenesShowRange() {
 
         int max = arr[0];
-        int localMax = max;
-        int init = 0;
-        int end = 0;
+        int local = arr[0];
+        int init = 0, end = 0;
+
         for (int i = 1; i < arr.length; i++) {
 
-            localMax += arr[i];
-            if (arr[i] > localMax) {
-                localMax = arr[i];
+            local += arr[i];
+            if (arr[i] > local) {
+                local = arr[i];
                 init = i;
             }
-            if (localMax > max) {
-                max = localMax;
+            if (local > max) {
+                max = local;
                 end = i;
             }
+
         }
+
         return new MaxSubArrayResult(max, init, end);
     }
 

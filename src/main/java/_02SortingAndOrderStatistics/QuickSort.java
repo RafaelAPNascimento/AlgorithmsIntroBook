@@ -18,25 +18,21 @@ public class QuickSort {
 
         if (start < end) {
             int pv = partition(arr, start, end);
-            quickSort(arr, pv + 1, end);
             quickSort(arr, start, pv - 1);
+            quickSort(arr, pv + 1, end);
         }
     }
 
     private int partition(int[] arr, int start, int end) {
 
-        int pvIndex = start;
-
+        int avIndex = start;
         for (int i = start; i < end; i++) {
-            if (arr[i] < arr[end]) {
-                swap(pvIndex, i);
-                pvIndex++;
-            }
+            if (arr[i] < arr[end])
+                swap(i, avIndex++);
         }
-        swap(pvIndex, end);
-        return pvIndex;
+        swap(avIndex, end);
+        return avIndex;
     }
-
 
     private void swap(int i1, int i2) {
         int tmp = arr[i1];

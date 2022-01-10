@@ -154,6 +154,21 @@ public class BstTest {
         assertEquals("D", bst.min());
     }
 
+    @DisplayName("Should delete min")
+    @Test
+    public void shouldDeleteMin2() {
+
+        BST<Integer, Integer> bst = new BstImpl<>();
+        bst.put(3, 3); bst.put(1, 1); bst.put(8, 8); bst.put(6, 6); bst.put(7, 7); bst.put(4, 4);
+        bst.put(10, 10); bst.put(14, 14); bst.put(13, 13);
+
+        bst.deleteMin();
+        assertEquals(3, bst.min());
+
+        bst.deleteMin();
+        assertEquals(4, bst.min());
+    }
+
     @DisplayName("Should delete key")
     @Test
     public void shouldDeleteKey() {
