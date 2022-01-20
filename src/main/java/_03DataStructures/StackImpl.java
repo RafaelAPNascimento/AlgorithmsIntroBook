@@ -1,6 +1,7 @@
 package _03DataStructures;
 
 import java.lang.reflect.Array;
+import java.util.Optional;
 
 public class StackImpl<E> implements Stack<E> {
 
@@ -34,6 +35,8 @@ public class StackImpl<E> implements Stack<E> {
         if (isEmpty())
             throw new RuntimeException("Underflow");
 
-         return elements[--counter];
+        E element = elements[counter - 1];
+        elements[--counter] = null;     // prevents memory leak, by eliminating obsolete references
+        return element;
     }
 }

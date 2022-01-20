@@ -1,27 +1,21 @@
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Drafts {
 
-    public static void main(String[] args) throws DatatypeConfigurationException {
+    public static void main(String[] args) {
 
-       int a = 1;
-       int c = ++a;
-        System.out.println(c);
-    }
+        Stream<String> words = Stream.of("Hello", "World");
 
-    private Collection<? extends Object> x;
+        List<String> ls =
+            words.map(w -> w.split(""))
+                .flatMap(arr -> Arrays.stream(arr))
+                .distinct()
+                .collect(Collectors.toList());
 
-    static <T> Collection<T> getIt(T[] arr) {
-
-        Collection c = Arrays.asList(arr);
-        return c;
+        System.out.println(ls);
     }
 }
 

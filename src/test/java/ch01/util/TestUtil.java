@@ -13,13 +13,16 @@ public class TestUtil {
 
     /**
      * Returns an array whose length is some value between initRange and endRange
-     * @param minSize
-     * @param maxSize
+     * @param minPossibleSize
+     * @param maxPossibleSize
      * @return
      */
-    public static int[] getRandomIntArray(int minSize, int maxSize) {
+    public static int[] getRandomIntArray(int minPossibleSize, int maxPossibleSize) {
 
-        final int SIZE = ThreadLocalRandom.current().nextInt(minSize, maxSize);
+        if (minPossibleSize > maxPossibleSize)
+            throw new IllegalArgumentException("Minimum value must be smaller than maximum value");
+
+        final int SIZE = ThreadLocalRandom.current().nextInt(minPossibleSize, maxPossibleSize);
         int[] arr = new int[SIZE];
         for (int i = 0; i < SIZE; i++) {
             arr[i] = ThreadLocalRandom.current().nextInt(0, 999);

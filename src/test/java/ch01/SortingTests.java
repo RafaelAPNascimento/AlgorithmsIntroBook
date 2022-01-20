@@ -47,7 +47,8 @@ public class SortingTests {
     @RepeatedTest(5)
     public void shouldSortByQuickSort() {
 
-        int[] arr = getRandomIntArray(50, 200);
+        int minPossibleSize = 50, maxPossibleSize = 200;
+        int[] arr = getRandomIntArray(minPossibleSize, maxPossibleSize);
 
         int min = Arrays.stream(arr).min().getAsInt();
         int max = Arrays.stream(arr).max().getAsInt();
@@ -59,9 +60,11 @@ public class SortingTests {
     }
 
     @Test
+    @RepeatedTest(5)
     public void shouldSortByMergeSort() {
 
-        int[] arr = {10,9,8,7,6,5,4,3,2,1,0};
+        int minPossibleSize = 500, maxPossibleSize = 1000;
+        int[] arr = getRandomIntArray(minPossibleSize, maxPossibleSize);
 
         int min = Arrays.stream(arr).min().getAsInt();
         int max = Arrays.stream(arr).max().getAsInt();

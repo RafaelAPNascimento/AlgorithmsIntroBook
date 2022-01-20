@@ -1,8 +1,6 @@
 package _02SortingAndOrderStatistics;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ConstantTimeSorting {
 
@@ -31,10 +29,10 @@ public class ConstantTimeSorting {
     public void bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
-        List<Float>[] buckets = new ArrayList[SIZE];
+        List<Float>[] buckets = new LinkedList[SIZE];
 
         for (int i = 0; i < buckets.length; i++)
-            buckets[i] = new ArrayList<>();
+            buckets[i] = new LinkedList<>();        // LL takes O(1) to insert elements
 
         // put array elements in different buckets
         for (int i = 0; i < SIZE; i++) {

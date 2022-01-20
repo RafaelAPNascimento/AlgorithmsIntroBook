@@ -3,6 +3,8 @@ package _02SortingAndOrderStatistics.heapSort;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static _02SortingAndOrderStatistics.heapSort.MaxHeap.swapp;
+
 public class MaxHeapImpl implements MaxHeap {
 
     private int[] heap;
@@ -90,14 +92,13 @@ public class MaxHeapImpl implements MaxHeap {
 
     @Override
     public int[] heapSort() {
-
-        for (int i = size - 1; i > 0; i--) {
+        int countAux = size;
+        for (int i = heap.length - 1; i > 0; i--) {
             swapp(0, i);
             size--;
             maxHeapify(0);
         }
-        size = 0;
-        return Arrays.copyOf(heap, heap.length);
+        return Arrays.copyOf(heap, countAux);
     }
 
     @Override

@@ -9,6 +9,7 @@ public class QuickSelection {
         this.arr = arr;
     }
 
+
     public int findKthSmallest(int kth) {
 
         return quickSelection(arr, 0, arr.length - 1, kth);
@@ -31,18 +32,16 @@ public class QuickSelection {
             return quickSelection(arr, start, index - 1, k);
     }
 
+
     private int partition(int[] arr, int start, int end) {
 
-        int storeIndex = start;
-
-        for (int i = start; i < end; i++ ) {
-
+        int avIndex = start;
+        for (int i = start; i < end; i++) {
             if (arr[i] < arr[end])
-                swap(arr, i, storeIndex++);
+                swap(arr, i, avIndex++);
         }
-        swap(arr, end, storeIndex);
-
-        return storeIndex;
+        swap(arr, avIndex, end);
+        return avIndex;
     }
 
     private void swap(int[] arr, int i, int j) {

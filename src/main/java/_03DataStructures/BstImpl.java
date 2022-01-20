@@ -8,6 +8,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     private Node root;
 
     private class Node {
+
         private final int INITIAL_SIZE = 1;
         private K key;
         private V value;
@@ -33,6 +34,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
      * @return The quantity of nodes smaller than or equal to it
      */
     private int size(Node x) {
+
         if (x == null)
             return 0;
         else
@@ -75,12 +77,11 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         int cmp = x.key.compareTo(key);
 
-        if (cmp > 0)
-            x.left = put(x.left, key, value);
-
-        else if (cmp < 0)
+        if (cmp < 0)
             x.right = put(x.right, key, value);
 
+        else if (cmp > 0)
+            x.left = put(x.left, key, value);
         else
             x.value = value;
 
@@ -179,12 +180,11 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         if (t == rank)
             return x;
 
-        else if (t > rank)
-            return select(x.left, rank);
-
-        else
+        else if (t < rank)
             return select(x.right, rank - t - 1);
 
+        else
+            return select(x.left, rank);
     }
 
     @Override
@@ -200,14 +200,14 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         int cmp = x.key.compareTo(key);
 
-        if (cmp > 0)
-            return rank(key, x.left);
+        if (cmp == 0)
+            return size(x.left);
 
         else if (cmp < 0)
-            return rank(key, x.right) + size(x.left) + 1;
+            return size(x.left) + rank(key, x.right) + 1;
 
         else
-            return size(x.left);
+            return rank(key, x.left);
     }
 
     @Override
@@ -228,7 +228,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         x.nodeCount = size(x.left) + size(x.right) + 1;
         return x;
     }
-
 
     @Override
     public void delete(K key) {
