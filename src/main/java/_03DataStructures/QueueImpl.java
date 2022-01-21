@@ -28,11 +28,12 @@ public class QueueImpl<E> implements Queue<E> {
             throw new RuntimeException("Underflow");
 
         E e = elements[head];
+
+        elements[head++] = null;
+
         counter--;
-        if (head == counter)
+        if (head == elements.length)
             head = 0;
-        else
-            head++;
 
         return e;
     }

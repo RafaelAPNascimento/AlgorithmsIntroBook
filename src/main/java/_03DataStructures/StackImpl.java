@@ -1,7 +1,6 @@
 package _03DataStructures;
 
 import java.lang.reflect.Array;
-import java.util.Optional;
 
 public class StackImpl<E> implements Stack<E> {
 
