@@ -176,6 +176,8 @@ public class BstTest {
         BST<String, Integer> bst = new BstImpl<>();
         bst.put("D", 3); bst.put("B", 5); bst.put("C", 2); bst.put("X", 5); bst.put("Y", 3);
 
+        assertEquals("B", bst.min());
+
         bst.delete("B");
         assertEquals("C", bst.min());
 

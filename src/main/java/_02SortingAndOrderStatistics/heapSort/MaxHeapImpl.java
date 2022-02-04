@@ -48,7 +48,7 @@ public class MaxHeapImpl implements MaxHeap {
     }
 
     @Override
-    public int getHeapSize() {
+    public int getSize() {
         return size;
     }
 

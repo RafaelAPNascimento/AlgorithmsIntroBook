@@ -8,21 +8,6 @@ public class InsertionSort {
         this.arr = arr;
     }
 
-    public void _insertionSort() {
-
-        for (int i = 1; i < arr.length; i++) {
-
-            int j = i;
-            int key = arr[j];
-
-            while (j > 0 && arr[j - 1] > key) {
-                arr[j] = arr[j - 1];
-                j--;
-            }
-            arr[j] = key;
-        }
-    }
-
     public void insertionSort() {
 
         for (int i = 1; i < arr.length; i++) {

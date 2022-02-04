@@ -48,7 +48,7 @@ public class MaxHeapTest {
         maxHeap.insert(1);
         maxHeap.insert(2);
         maxHeap.insert(3);
-        assertEquals(3, maxHeap.getHeapSize());
+        assertEquals(3, maxHeap.getSize());
     }
 
     @Test
@@ -63,9 +63,9 @@ public class MaxHeapTest {
     public void shouldDecreaseHeapSizeAfterExtracting() {
         int[] arr = {16, 14, 10, 8, 7, 9, 3, 2, 4 , 1};
         MaxHeap maxHeap = new MaxHeapImpl(arr);
-        int oldSize = maxHeap.getHeapSize();
+        int oldSize = maxHeap.getSize();
         maxHeap.extractMax();
-        assertEquals(oldSize - 1, maxHeap.getHeapSize());
+        assertEquals(oldSize - 1, maxHeap.getSize());
     }
 
     @Test
