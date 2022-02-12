@@ -43,5 +43,4 @@ public class PeakFinder2D {
 
         return maxI;
     }
-
 }

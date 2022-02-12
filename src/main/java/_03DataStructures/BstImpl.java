@@ -1,7 +1,11 @@
 package _03DataStructures;
 
 import java.util.ArrayDeque;
+import java.util.Objects;
 import java.util.Queue;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
@@ -131,8 +135,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public K floor(K key) {
+
         Node floor = floor(root, key);
-        if (floor != null)
+
+        if (nonNull(floor))
             return floor.key;
         else
             return null;
@@ -140,7 +146,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node floor(Node x, K key) {
 
-        if (x == null)
+        if (isNull(x))
             return null;
 
         int cmp = x.key.compareTo(key);
@@ -152,7 +158,8 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return floor(x.left, key);
 
         Node t = floor(x.right, key);
-        if (t != null)
+
+        if (nonNull(t))
             return t;
         else
             return x;
@@ -194,12 +201,12 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     @Override
     public int rank(K key) {
 
-        return rank(key, root);
+        return rank(root, key);
     }
 
-    private int rank(K key, Node x) {
+    private int rank(Node x, K key) {
 
-        if (x == null)
+        if (isNull(x))
             return 0;
 
         int cmp = x.key.compareTo(key);
@@ -208,10 +215,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return size(x.left);
 
         else if (cmp > 0)
-            return rank(key, x.left);
+            return rank(x.left, key);
 
         else
-            return size(x.left) + rank(key, x.right) + 1;
+            return size(x.left) + rank(x.right, key) + 1;
     }
 
     @Override
@@ -229,7 +236,9 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return x.right;
 
         x.left = deleteMin(x.left);
-        x.nodeCount = size(x.left) + size(x.right);
+
+        x.nodeCount = size(x.left) + size(x.right) + 1;
+
         return x;
     }
 
