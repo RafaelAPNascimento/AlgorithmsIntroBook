@@ -8,21 +8,22 @@ import static _02SortingAndOrderStatistics.heapSort.MaxHeap.swapp;
 public class MaxHeapImpl implements MaxHeap {
 
     private int[] heap;
-    private int size;
+    private int heapSize;
 
-    public MaxHeapImpl(int[] arr) {
+    public MaxHeapImpl(int[] heap) {
 
-        Objects.requireNonNull(arr, "Initial heap is null");
-        this.heap = Arrays.copyOf(arr, arr.length);
+        Objects.requireNonNull(heap, "Initial heap can not be null");
+        this.heap = Arrays.copyOf(heap, heap.length);
         buildMaxHeap();
     }
 
-    public MaxHeapImpl(int limit) {
+    public MaxHeapImpl(int capacity) {
 
-        if (limit <= 0)
-            throw new IllegalArgumentException("limit must be greater than 0");
+        if (capacity <= 0)
+            throw new IllegalArgumentException("Limit must be greater than zero");
 
-        heap = new int[limit];
+        heap = new int[capacity];
+        heapSize = 0;
     }
 
     @Override
@@ -33,23 +34,21 @@ public class MaxHeapImpl implements MaxHeap {
     @Override
     public int leftChild(int i) {
         return i * 2 + 1;
-        //return (i << 1) + 1;
     }
 
     @Override
     public int rightChild(int i) {
         return i * 2 + 2;
-        //return (i << 1) + 2;
     }
 
     @Override
     public boolean isLeaf(int i) {
-        return i >= size / 2;
+        return i >= heapSize / 2 - 1;
     }
 
     @Override
     public int getSize() {
-        return size;
+        return heapSize;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class MaxHeapImpl implements MaxHeap {
 
     @Override
     public int[] getHeap() {
-        return Arrays.copyOf(heap, size);
+        return Arrays.copyOf(heap, heapSize);
     }
 
     @Override
@@ -69,14 +68,14 @@ public class MaxHeapImpl implements MaxHeap {
         int left = leftChild(i);
         int right = rightChild(i);
 
-        if (left < size && heap[left] > heap[largest])
+        if (left < heapSize && heap[left] > heap[largest])
             largest = left;
 
-        if (right < size && heap[right] > heap[largest])
+        if (right < heapSize && heap[right] > heap[largest])
             largest = right;
 
         if (largest != i) {
-            swapp(largest, i);
+            swapp(heap, largest, i);
             maxHeapify(largest);
         }
     }
@@ -84,21 +83,26 @@ public class MaxHeapImpl implements MaxHeap {
     @Override
     public void buildMaxHeap() {
 
-        size = heap.length;
-        for (int i = size / 2 - 1; i >= 0; i--) {
+        heapSize = heap.length;
+
+        for (int i = heap.length / 2 - 1; i >= 0; i--) {
+
             maxHeapify(i);
         }
     }
 
     @Override
     public int[] heapSort() {
-        int countAux = size;
-        for (int i = heap.length - 1; i > 0; i--) {
-            swapp(0, i);
-            size--;
+
+        int tmp = heapSize;
+        for (int i = heapSize - 1; i > 0; i--) {
+
+            swapp(heap, 0, i);
+            --heapSize;
             maxHeapify(0);
         }
-        return Arrays.copyOf(heap, countAux);
+        heapSize = 0;
+        return Arrays.copyOf(heap, tmp);
     }
 
     @Override
@@ -110,7 +114,7 @@ public class MaxHeapImpl implements MaxHeap {
     public int extractMax() {
 
         int max = heap[0];
-        swapp(0, --size);
+        swapp(heap, 0, --heapSize);
         maxHeapify(0);
         return max;
     }
@@ -118,19 +122,13 @@ public class MaxHeapImpl implements MaxHeap {
     @Override
     public void insert(int key) {
 
-        int index = size;
-        heap[size++] = key;
+        int current = heapSize++;
+        heap[current] = key;
 
-        while (heap[parent(index)] < heap[index]) {
-            swapp(parent(index), index);
-            index = parent(index);
+        while (heap[parent(current)] < heap[current]) {
+
+            swapp(heap, current, parent(current));
+            current = parent(current);
         }
-    }
-
-    private void swapp(int i1, int i2) {
-
-        int tmp = heap[i1];
-        heap[i1] = heap[i2];
-        heap[i2] = tmp;
     }
 }
