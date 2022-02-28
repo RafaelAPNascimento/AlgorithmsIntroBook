@@ -145,23 +145,22 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node floor(Node x, K key) {
 
-       if (isNull(x))
-           return null;
+        if (isNull(x))
+            return null;
 
-       int cmp = x.key.compareTo(key);
+        int cmp = x.key.compareTo(key);
 
-       if (cmp == 0)
-           return x;
+        if (cmp == 0)
+            return x;
 
-       else if (cmp > 0)
-           return floor(x.left, key);
+        else if (cmp > 0)
+            return floor(x.left, key);
 
-       Node t = floor(x.right, key);
-
-       if (nonNull(t))
-           return t;
-       else
-           return x;
+        Node t = floor(x.right, key);
+        if (isNull(t))
+            return x;
+        else
+            return t;
     }
 
     @Override
