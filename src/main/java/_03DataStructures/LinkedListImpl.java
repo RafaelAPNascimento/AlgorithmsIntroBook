@@ -1,53 +1,61 @@
 package _03DataStructures;
 
-import javax.xml.crypto.Data;
-
 public class LinkedListImpl<E> implements LinkedList<E> {
 
-    private Node<E> head;
-    private Node<E> tail;
+    private Node head;
+    private Node tail;
     private int counter;
 
-    public LinkedListImpl() {
+    private class Node {
+        private Node prev;
+        private Node next;
+        private E data;
 
+        Node(E data) {
+            this.data = data;
+        }
     }
 
     @Override
     public void push(E e) {
-        Node neww = new Node(e);
-        if (counter == 0) {
-            head = neww;
-            tail = head;
-        }
+
+        Node neW = new Node(e);
+
+        if (isEmpty())
+            head = tail = neW;
+
         else {
-            neww.next = head;
-            head.prev = neww;
-            head = neww;
+            head.prev = neW;
+            neW.next = head;
+            head = neW;
         }
         counter++;
     }
 
     @Override
     public void append(E e) {
-        Node neww = new Node(e);
-        if (counter == 0) {
-            head = neww;
-            tail = head;
-        }
+
+        Node neW = new Node(e);
+
+        if (isEmpty())
+            head = tail = neW;
+
         else {
-            neww.prev = tail;
-            tail.next = neww;
-            tail = neww;
+            tail.next = neW;
+            neW.prev = tail;
+            tail = neW;
         }
         counter++;
     }
 
     @Override
     public boolean remove(E e) {
-        if (counter == 0)
+
+        if (isEmpty())
             return false;
 
         Node current = head;
+
         while (current != null) {
             if (current.data == e) {
                 removeNode(current);
@@ -59,30 +67,40 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         return false;
     }
 
-    private void removeNode(Node<E> node) {
-        if (getSize() == 1)
+    private void removeNode(Node current) {
+
+        if (counter == 1)
             head = tail = null;
 
         else {
-            Node<E> prev = node.prev;
-            Node<E> next = node.next;
+            Node prev = current.prev;
+            Node next = current.next;
+
             if (prev != null)
                 prev.next = next;
+
             if (next != null)
                 next.prev = prev;
         }
     }
 
+    private boolean isEmpty() {
+        return counter == 0;
+    }
+
     @Override
     public boolean contains(E e) {
-        if (counter > 0) {
-            Node current = head;
-            while (current != null) {
-                if (current.data == e)
-                    return true;
 
-                current = current.next;
-            }
+        if (isEmpty())
+            return false;
+
+        Node current = head;
+        while (current != null) {
+
+            if (current.data == e)
+                return true;
+
+            current = current.next;
         }
         return false;
     }
@@ -90,16 +108,5 @@ public class LinkedListImpl<E> implements LinkedList<E> {
     @Override
     public int getSize() {
         return counter;
-    }
-
-    class Node<E> {
-
-        private E data;
-        private Node<E> next;
-        private Node<E> prev;
-
-        private Node(E e) {
-            this.data = e;
-        }
     }
 }
