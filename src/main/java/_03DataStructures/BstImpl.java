@@ -157,10 +157,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return floor(x.left, key);
 
         Node t = floor(x.right, key);
-        if (isNull(t))
-            return x;
-        else
+        if (nonNull(t))
             return t;
+        else
+            return x;
     }
 
     @Override

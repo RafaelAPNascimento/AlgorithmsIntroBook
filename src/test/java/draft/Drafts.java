@@ -1,24 +1,22 @@
 package draft;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import _02SortingAndOrderStatistics.heapSort.MaxHeapImpl;
 
 public class Drafts {
 
     public static void main(String[] args) {
 
-        Stream<String> words = Stream.of("Hello", "World");
+        System.out.println(Runtime.getRuntime().freeMemory() / 1024);
 
-        List<String> ls =
-            words.map(w -> w.split(""))
-                .flatMap(arr -> Arrays.stream(arr))
-                .distinct()
-                .collect(Collectors.toList());
+        int[] c = {1,2,3,4,5,6,7,8,9,0};
 
-        System.out.println(ls);
+        for (int i = 0; i < 100; i++) {
+            new MaxHeapImpl(c);
+        }
+        System.out.println(Runtime.getRuntime().freeMemory() / 1024);
+        System.gc();
+        System.out.println(Runtime.getRuntime().freeMemory() / 1024);
     }
+
+
 }
-
-
