@@ -50,7 +50,7 @@ public class RodCutTest {
         Assertions.assertEquals(22, opt);
     }
 
-    @DisplayName("compare execution time between recursive and memoized approach")
+    @DisplayName("comparing execution time between recursive and memoized approach")
     @Test
     public void compareBothApproaches() {
 
