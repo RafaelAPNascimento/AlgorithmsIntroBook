@@ -6,7 +6,7 @@ public class RodCutting {
             https://www.youtube.com/watch?v=re9rF9SqRFc
             https://www.youtube.com/watch?v=ElFrskby_7M
         */
-    public int optimun(int[] prices, int length) {
+    public int optimum(int[] prices, int length) {
 
         if (length == 0)
             return 0;
@@ -15,29 +15,36 @@ public class RodCutting {
 
         for (int k = 1; k <= length; k++) {
 
-            int current = prices[k - 1] + optimun(prices, length - k);
+            int current = prices[k - 1] + optimum(prices, length - k);
             optimun = Math.max(optimun, current);
         }
         return optimun;
     }
 
-    // https://www.geeksforgeeks.org/cutting-a-rod-dp-13/
-    public int dpOptimun(int[] price, int n) {
+    public int optimumDp(int[] v, int n) {
 
-        int val[] = new int[n + 1];
-        val[0] = 0;
+        if (n == 0)
+            return 0;
 
-        // Build the table val[] in bottom up manner and return
-        // the last entry from the table
+        int[] opts = new int[n + 1];
+
+        int optimum = Integer.MIN_VALUE;
+
         for (int i = 1; i <= n; i++) {
-            int max_val = Integer.MIN_VALUE;
 
-            for (int j = 0; j < i; j++)
-                max_val = Math.max(max_val, price[j] + val[i-j-1]);
+            for (int k = 1; k <= i; k++) {
 
-            val[i] = max_val;
+                int tmp = v[k - 1] + opts[i - k];
+                optimum = Math.max(tmp, optimum);
+
+                // store maximums in the table so we don't need to calculate any optimum twice
+                if (i == k) {
+                    opts[i] = optimum;
+                }
+            }
         }
 
-        return val[n];
+        return optimum;
     }
+
 }
