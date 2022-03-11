@@ -23,9 +23,6 @@ public class RodCutting {
 
     public int optimumDp(int[] v, int n) {
 
-        if (n == 0)
-            return 0;
-
         int[] opts = new int[n + 1];
 
         int optimum = Integer.MIN_VALUE;
@@ -43,8 +40,6 @@ public class RodCutting {
                 }
             }
         }
-
         return optimum;
     }
-
 }
