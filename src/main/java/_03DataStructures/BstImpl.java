@@ -76,16 +76,17 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node put(Node x, K key, V value) {
 
-        if (x == null)
+        if (isNull(x))
             return new Node(key, value);
 
         int cmp = x.key.compareTo(key);
 
-        if (cmp < 0)
+        if (cmp > 0)
+            x.left = put(x.left, key, value);
+
+        else if (cmp < 0)
             x.right = put(x.right, key, value);
 
-        else if (cmp > 0)
-            x.left = put(x.left, key, value);
         else
             x.value = value;
 
