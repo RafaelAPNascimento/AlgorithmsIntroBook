@@ -28,7 +28,7 @@ public interface MaxHeap {
 
     void insert(int key);
 
-    static void swapp(int[] arr, int i1, int i2) {
+    default void swapp(int[] arr, int i1, int i2) {
         int tmp = arr[i1];
         arr[i1] = arr[i2];
         arr[i2] = tmp;

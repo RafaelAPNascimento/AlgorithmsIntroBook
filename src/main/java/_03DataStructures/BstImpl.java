@@ -91,7 +91,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             x.value = value;
 
         x.nodeCount = size(x.left) + size(x.right) + 1;
-
         return x;
     }
 
@@ -174,15 +173,15 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     public K select(int rank) {
 
         Node select = select(root, rank);
-        if (select != null)
-            return select.key;
-        else
+        if (isNull(select))
             return null;
+        else
+            return select.key;
     }
 
     private Node select(Node x, int rank) {
 
-        if (x == null)
+        if (isNull(x))
             return null;
 
         int size = size(x.left);

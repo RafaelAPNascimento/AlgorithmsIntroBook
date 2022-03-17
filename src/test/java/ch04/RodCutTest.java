@@ -72,8 +72,8 @@ public class RodCutTest {
 
         long timeMemoizedApproach = end - start;
 
-        LOG.info("Recursive approach " + timeRecursiveApproach);
-        LOG.info("DP approach " + timeMemoizedApproach);
+        LOG.info("Recursive approach " + timeRecursiveApproach + " nano seconds");
+        LOG.info("DP approach " + timeMemoizedApproach + " nano seconds");
 
         Assertions.assertEquals(opt1, opt2);
         Assertions.assertEquals(22, opt1);
