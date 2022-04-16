@@ -1,7 +1,8 @@
-package _03DataStructures;
+package _03DataStructures.impl;
+
+import _03DataStructures.BST;
 
 import java.util.ArrayDeque;
-import java.util.Objects;
 import java.util.Queue;
 
 import static java.util.Objects.isNull;
@@ -227,16 +228,16 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node deleteMin(Node x) {
 
-        if (x == null)
+        if (isNull(x))
             return null;
 
-        if (x.left == null)
+        if (nonNull(x.left))
+            x.left = deleteMin(x.left);
+
+        else
             return x.right;
 
-        x.left = deleteMin(x.left);
-
-        x.nodeCount = size(x.left) + size(x.right) + 1;
-
+        x.nodeCount = size(x.left) + size(x.right);
         return x;
     }
 

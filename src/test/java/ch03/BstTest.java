@@ -1,7 +1,7 @@
 package ch03;
 
 import _03DataStructures.BST;
-import _03DataStructures.BstImpl;
+import _03DataStructures.impl.BstImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

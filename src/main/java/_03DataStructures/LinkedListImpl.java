@@ -84,7 +84,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         }
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return counter == 0;
     }
 

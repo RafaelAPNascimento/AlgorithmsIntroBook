@@ -12,4 +12,6 @@ public interface LinkedList<E> {
 
     int getSize();
 
+    boolean isEmpty();
+
 }
