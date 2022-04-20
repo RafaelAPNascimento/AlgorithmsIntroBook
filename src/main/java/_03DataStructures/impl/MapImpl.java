@@ -92,10 +92,11 @@ public class MapImpl<K, V> implements Map<K, V> {
         if (isNull(head))
             return null;
 
-        if (isNull(prev))
-            bucketArray.set(bucketIndex, null);
-        else
+        if (nonNull(prev))
             prev.next = head.next;
+        else
+            bucketArray.set(bucketIndex, head.next);
+
 
         size--;
         return head.value;

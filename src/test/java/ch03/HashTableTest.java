@@ -105,5 +105,19 @@ public class HashTableTest {
         assertEquals(1_000, map.size());
     }
 
+    @Test
+    public void shouldUpdateElement2() {
+
+        Map<String, Object> names = new MapImpl<>();
+        names.add("A", new Object());
+        names.add("B", new Object());
+        names.add("C", new Object());
+        names.add("a", new Object());
+        names.add("b", new Object());
+
+        names.add("X", "K");
+
+        assertEquals("K", names.get("X"));
+    }
 
 }
