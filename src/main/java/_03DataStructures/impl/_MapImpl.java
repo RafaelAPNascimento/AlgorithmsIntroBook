@@ -9,6 +9,10 @@ import java.util.Objects;
 public class _MapImpl<K, V> implements Map<K, V> {
 
 
+    private class Node {
+
+    }
+
     @Override
     public int size() {
         return 0;
@@ -32,5 +36,13 @@ public class _MapImpl<K, V> implements Map<K, V> {
     @Override
     public void add(K key, V value) {
 
+    }
+
+    private int hashCode(K k) {
+        return Objects.hashCode(k);
+    }
+
+    private int getBucket(K key) {
+        return 0;
     }
 }

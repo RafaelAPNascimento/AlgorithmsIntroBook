@@ -1,14 +1,13 @@
 package draft;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Drafts {
 
     public static void main(String[] args) {
 
-        Random random = new Random();
-        int v = random.nextInt(5 - 0);
-        System.out.println(v);
+
     }
 
 

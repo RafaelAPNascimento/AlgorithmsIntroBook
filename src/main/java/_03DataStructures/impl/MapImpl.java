@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 public class MapImpl<K, V> implements Map<K, V> {
 
     private List<Node<K, V>> bucketArray;
@@ -44,16 +47,17 @@ public class MapImpl<K, V> implements Map<K, V> {
         }
     }
 
-    private int hashCode(K key) {
+    private int getHashCode(K key) {
         return Objects.hashCode(key);
     }
 
     private int getBucketIndex(K key) {
 
-        int hashCode = hashCode(key);
-        int index = hashCode % numBuckets;
+        int hash = getHashCode(key);
+        int index = hash % numBuckets;
 
         index = index < 0 ? index * -1 : index;
+
         return index;
     }
 
@@ -71,31 +75,29 @@ public class MapImpl<K, V> implements Map<K, V> {
     public V remove(K key) {
 
         int bucketIndex = getBucketIndex(key);
-        int hashCode = hashCode(key);
+        int hash = getHashCode(key);
 
         Node<K, V> head = bucketArray.get(bucketIndex);
-
         Node<K, V> prev = null;
 
-        while (head != null) {
+        while (nonNull(head)) {
 
-            if (head.key.equals(key) && hashCode == head.hashCode)
+            if (head.key.equals(key) && head.hashCode == hash)
                 break;
 
             prev = head;
             head = head.next;
         }
 
-        if (head == null)
+        if (isNull(head))
             return null;
 
-        size--;
-
-        if (prev != null)
-            prev.next = head.next;
+        if (isNull(prev))
+            bucketArray.set(bucketIndex, null);
         else
-            bucketArray.set(bucketIndex, head.next);
+            prev.next = head.next;
 
+        size--;
         return head.value;
     }
 
@@ -103,7 +105,7 @@ public class MapImpl<K, V> implements Map<K, V> {
     public V get(K key) {
 
         int bucketIndex = getBucketIndex(key);
-        int hashCode = hashCode(key);
+        int hashCode = getHashCode(key);
 
         Node<K, V> head = bucketArray.get(bucketIndex);
 
@@ -122,7 +124,7 @@ public class MapImpl<K, V> implements Map<K, V> {
     public void add(K key, V value) {
 
         int bucketIndex = getBucketIndex(key);
-        int hashCode = hashCode(key);
+        int hashCode = getHashCode(key);
 
         Node<K, V> head = bucketArray.get(bucketIndex);
 
