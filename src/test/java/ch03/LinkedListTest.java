@@ -1,7 +1,7 @@
 package ch03;
 
 import _03DataStructures.LinkedList;
-import _03DataStructures.LinkedListImpl;
+import _03DataStructures.impl.LinkedListImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

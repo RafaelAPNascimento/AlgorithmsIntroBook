@@ -17,9 +17,13 @@ public class MapImpl<K, V> implements Map<K, V> {
     private int size;
 
     public MapImpl() {
+        this(10);
+    }
+
+    public MapImpl(int numBuckets) {
 
         bucketArray = new ArrayList<>();
-        numBuckets = 10;
+        this.numBuckets = numBuckets;
         size = 0;
 
         for (int i = 0; i < numBuckets; i++)

@@ -1,4 +1,6 @@
-package _03DataStructures;
+package _03DataStructures.impl;
+
+import _03DataStructures.Stack;
 
 import java.lang.reflect.Array;
 

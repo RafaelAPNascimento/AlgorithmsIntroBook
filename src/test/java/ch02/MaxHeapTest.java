@@ -1,7 +1,7 @@
 package ch02;
 
-import _02SortingAndOrderStatistics.heapSort.MaxHeap;
-import _02SortingAndOrderStatistics.heapSort.MaxHeapImpl;
+import _03DataStructures.MaxHeap;
+import _03DataStructures.impl.MaxHeapImpl;
 import ch01.util.TestUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

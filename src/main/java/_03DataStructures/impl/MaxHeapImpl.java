@@ -1,4 +1,6 @@
-package _02SortingAndOrderStatistics.heapSort;
+package _03DataStructures.impl;
+
+import _03DataStructures.MaxHeap;
 
 import java.util.Arrays;
 import java.util.Objects;

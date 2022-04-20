@@ -1,7 +1,5 @@
 package draft;
 
-import _02SortingAndOrderStatistics.heapSort.MaxHeapImpl;
-
 import java.util.Random;
 
 public class Drafts {

@@ -1,7 +1,7 @@
 package ch03;
 
 import _03DataStructures.Queue;
-import _03DataStructures.QueueImpl;
+import _03DataStructures.impl.QueueImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

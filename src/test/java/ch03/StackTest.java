@@ -1,7 +1,7 @@
 package ch03;
 
 import _03DataStructures.Stack;
-import _03DataStructures.StackImpl;
+import _03DataStructures.impl.StackImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

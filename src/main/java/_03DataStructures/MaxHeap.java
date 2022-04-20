@@ -1,4 +1,4 @@
-package _02SortingAndOrderStatistics.heapSort;
+package _03DataStructures;
 
 public interface MaxHeap {
 

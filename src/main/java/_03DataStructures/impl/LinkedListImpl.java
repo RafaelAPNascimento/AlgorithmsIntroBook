@@ -1,4 +1,10 @@
-package _03DataStructures;
+package _03DataStructures.impl;
+
+import _03DataStructures.LinkedList;
+
+import java.util.Objects;
+
+import static java.util.Objects.nonNull;
 
 public class LinkedListImpl<E> implements LinkedList<E> {
 
@@ -56,7 +62,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
 
         Node current = head;
 
-        while (current != null) {
+        while (nonNull(current)) {
             if (current.data == e) {
                 removeNode(current);
                 counter--;
@@ -95,7 +101,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
             return false;
 
         Node current = head;
-        while (current != null) {
+        while (nonNull(current)) {
 
             if (current.data == e)
                 return true;
