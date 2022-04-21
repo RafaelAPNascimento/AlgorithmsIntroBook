@@ -237,7 +237,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         else
             return x.right;
 
-        x.nodeCount = size(x.left) + size(x.right);
+        x.nodeCount = size(x.left) + size(x.right) + 1;
         return x;
     }
 

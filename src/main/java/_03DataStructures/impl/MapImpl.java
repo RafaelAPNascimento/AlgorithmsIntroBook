@@ -55,9 +55,7 @@ public class MapImpl<K, V> implements Map<K, V> {
 
         int hash = getHashCode(key);
         int index = hash % numBuckets;
-
         index = index < 0 ? index * -1 : index;
-
         return index;
     }
 
@@ -105,20 +103,31 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
 
-        int bucketIndex = getBucketIndex(key);
         int hashCode = getHashCode(key);
+        int bucketIndex = getBucketIndex(key);
 
         Node<K, V> head = bucketArray.get(bucketIndex);
+        Node<K, V> prev = null;
 
-        while (head != null) {
+        while (nonNull(head)) {
 
             if (head.key.equals(key) && head.hashCode == hashCode)
-                return head.value;
+                break;
 
+            prev = head;
             head = head.next;
         }
-        // key not found
-        return null;
+
+        if (isNull(head))
+            return null;
+
+        if (nonNull(prev))
+            prev.next = head.next;
+        else
+            bucketArray.set(bucketIndex, head.next);
+
+        size--;
+        return head.value;
     }
 
     @Override

@@ -2,7 +2,6 @@ package ch03;
 
 import _03DataStructures.Map;
 import _03DataStructures.impl.MapImpl;
-import _03DataStructures.impl._MapImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -118,6 +117,13 @@ public class HashTableTest {
         names.add("X", "K");
 
         assertEquals("K", names.get("X"));
+    }
+
+    @Test
+    public void shouldPassWithDifferentObjectsSameHash() {
+
+        // create a test that adds different objects with same hash code to test if the buckets are working correctly
+        // how to generate same hash for different objects?
     }
 
 }

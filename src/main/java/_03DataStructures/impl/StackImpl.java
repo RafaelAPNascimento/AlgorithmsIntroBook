@@ -19,7 +19,8 @@ public class StackImpl<E> implements Stack<E> {
         return counter == 0;
     }
 
-    private boolean isFull() {
+    @Override
+    public boolean isFull() {
         return counter == elements.length;
     }
 
