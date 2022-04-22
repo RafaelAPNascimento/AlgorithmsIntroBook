@@ -105,25 +105,63 @@ public class HashTableTest {
     }
 
     @Test
-    public void shouldUpdateElement2() {
+    public void shouldRemoveSameIndexElementsFromBuckets() {
 
-        Map<String, Object> names = new MapImpl<>();
-        names.add("A", new Object());
-        names.add("B", new Object());
-        names.add("C", new Object());
-        names.add("a", new Object());
-        names.add("b", new Object());
+        Map<String, Integer> names = new MapImpl<>();
+        names.add("A", 56);
+        names.add("B", 91);
+        names.add("C", 20);   // bucket 7
+        names.add("a", 46);   // bucket 7
+        names.add("b", 99);
+        names.add("X", 5);
 
-        names.add("X", "K");
+        assertEquals(6, names.size());
 
-        assertEquals("K", names.get("X"));
+        Integer value = names.remove("a");
+
+        assertEquals(46, value);
+        assertEquals(5, names.size());
+
+        value = names.remove("C");
+        assertEquals(20, value);
+
+        // should not be in the buckets anymore
+        assertNull(names.get("a"));
+        assertNull(names.get("C"));
     }
 
     @Test
-    public void shouldPassWithDifferentObjectsSameHash() {
+    public void shouldPassWithDifferentObjectsSameBucket() {
 
-        // create a test that adds different objects with same hash code to test if the buckets are working correctly
-        // how to generate same hash for different objects?
+        Map<String, Integer> map = new MapImpl<>(9.9);
+
+        for (int i = 65; i <= 90; i++) {
+            char c = (char) i;
+            map.add(String.valueOf(c), i);
+        }
+        for (int i = 97; i <= 120; i++) {
+            char c = (char) i;
+            map.add(String.valueOf(c), i);
+        }
+
+        Integer vA = map.remove("A");
+        Integer vS = map.remove("s");
+        Integer vI = map.remove("i");
+        Integer vU = map.remove("U");
+
+        assertEquals(vA, 65);
+        assertEquals(vS, 115);
+        assertEquals(vI, 105);
+        assertEquals(vU, 85);
+
+        assertNull(map.get("A"));
+        assertNull(map.get("s"));
+        assertNull(map.get("i"));
+        assertNull(map.get("U"));
+
+        Integer vK = map.get("K");
+        assertEquals(75, vK);
+        assertNotNull(map.get("K"));
     }
 
 }

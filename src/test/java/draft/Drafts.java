@@ -7,8 +7,8 @@ public class Drafts {
 
     public static void main(String[] args) {
 
-        System.out.println(Objects.hash(new String("A")));
-        System.out.println(Objects.hash(new String("A")));
+        char c = 70; // 65-90
+        System.out.println(c);
     }
 
 
