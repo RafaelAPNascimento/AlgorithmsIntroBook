@@ -82,11 +82,11 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         int cmp = x.key.compareTo(key);
 
-        if (cmp > 0)
-            x.left = put(x.left, key, value);
-
-        else if (cmp < 0)
+        if (cmp < 0)
             x.right = put(x.right, key, value);
+
+        else if (cmp > 0)
+            x.left = put(x.left, key, value);
 
         else
             x.value = value;
@@ -222,7 +222,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public void deleteMin() {
-
         root = deleteMin(root);
     }
 
@@ -233,7 +232,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         if (nonNull(x.left))
             x.left = deleteMin(x.left);
-
         else
             return x.right;
 

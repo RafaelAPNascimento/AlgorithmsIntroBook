@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 public class MapImpl<K, V> implements Map<K, V> {
@@ -61,14 +62,14 @@ public class MapImpl<K, V> implements Map<K, V> {
     }
 
     private int getHashCode(K key) {
+
         return Objects.hashCode(key);
     }
 
     private int getBucketIndex(K key) {
 
-        int hashCode = getHashCode(key);
-        int index = hashCode % numBuckets;
-        // key.hashCode() could be negative.
+        int hash = Objects.hashCode(key);
+        int index = hash % numBuckets;
         index = index < 0 ? index * -1 : index;
         return index;
     }
@@ -86,59 +87,51 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public V remove(K key) {
 
-        // Apply hash function to find index for given key
-        int bucketIndex = getBucketIndex(key);
-        int hashCode = getHashCode(key);
+        int hash = getHashCode(key);
+        int bIndex = getBucketIndex(key);
 
-        // Get head of chain
-        Node<K, V> head = bucketArray.get(bucketIndex);
-
-        // Search for key in its chain
+        Node<K, V> head = bucketArray.get(bIndex);
         Node<K, V> prev = null;
 
         while (nonNull(head)) {
-            // If Key found
-            if (head.key.equals(key) && hashCode == head.hashCode)
+
+            if (head.key.equals(key) && head.hashCode == hash)
                 break;
 
-            // Else keep moving in chain
             prev = head;
-            head = head.next;
+            head = prev.next;
         }
 
-        // If key was not there
-        if (head == null)
+        if (isNull(head))
             return null;
 
-        // Reduce size
-        size--;
-
-        // Remove key
-        if (prev != null)
-            prev.next = head.next;
+        if (isNull(prev))
+            bucketArray.set(bIndex, head.next);
         else
-            bucketArray.set(bucketIndex, head.next);
+            prev.next = head.next;
 
+        size--;
         return head.value;
     }
 
     @Override
     public V get(K key) {
 
-        // Find head of chain for given key
-        int bucketIndex = getBucketIndex(key);
-        int hashCode = getHashCode(key);
+        int hash = getHashCode(key);
+        int bIndex = getBucketIndex(key);
 
-        Node<K, V> head = bucketArray.get(bucketIndex);
+        Node<K, V> head = bucketArray.get(bIndex);
 
-        // Search key in chain
-        while (head != null) {
-            if (head.key.equals(key) && head.hashCode == hashCode)
-                return head.value;
+        while (nonNull(head)) {
+
+            if (head.key.equals(key) && head.hashCode == hash)
+                break;
             head = head.next;
         }
 
-        // If key not found
+        if (nonNull(head))
+            return head.value;
+
         return null;
     }
 
