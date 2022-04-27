@@ -2,6 +2,7 @@ package ch03;
 
 import _03DataStructures.Map;
 import _03DataStructures.impl.MapImpl;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -164,4 +165,9 @@ public class HashTableTest {
         assertNotNull(map.get("K"));
     }
 
+    @Disabled
+    @Test
+    public void checkThreshould() {
+        //...
+    }
 }

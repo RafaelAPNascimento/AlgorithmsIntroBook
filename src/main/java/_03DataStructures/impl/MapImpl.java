@@ -68,7 +68,7 @@ public class MapImpl<K, V> implements Map<K, V> {
 
     private int getBucketIndex(K key) {
 
-        int hash = Objects.hashCode(key);
+        int hash = getHashCode(key);
         int index = hash % numBuckets;
         index = index < 0 ? index * -1 : index;
         return index;
@@ -117,15 +117,16 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
 
-        int hash = getHashCode(key);
-        int bIndex = getBucketIndex(key);
+        int hashCode = getHashCode(key);
+        int bucketIndex = getBucketIndex(key);
 
-        Node<K, V> head = bucketArray.get(bIndex);
+        Node<K, V> head = bucketArray.get(bucketIndex);
 
         while (nonNull(head)) {
 
-            if (head.key.equals(key) && head.hashCode == hash)
+            if (head.key.equals(key) && head.hashCode == hashCode)
                 break;
+
             head = head.next;
         }
 
@@ -138,29 +139,35 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public void add(K key, V value) {
 
-        // Find head of chain for given key
-        int bucketIndex = getBucketIndex(key);
-        int hashCode = getHashCode(key);
-        Node<K, V> head = bucketArray.get(bucketIndex);
+        int hash = getHashCode(key);
+        int bIndex = getBucketIndex(key);
 
-        // Check if key is already present
-        while (head != null) {
-            if (head.key.equals(key) && head.hashCode == hashCode) {
+        Node<K, V> head = bucketArray.get(bIndex);
+        Node<K, V> prev = null;
+
+        while (nonNull(head)) {
+            if (head.key.equals(key) && head.hashCode == hash) {
                 head.value = value;
                 return;
             }
+            prev = head;
             head = head.next;
         }
 
-        // Insert key in chain
-        size++;
-        head = bucketArray.get(bucketIndex);
-        Node<K, V> newNode = new Node<K, V>(key, value, hashCode);
-        newNode.next = head;
-        bucketArray.set(bucketIndex, newNode);
+        Node<K, V> neW = new Node<>(key, value, hash);
 
-        // If load factor goes beyond threshold, then
-        // double hash table size
+        if (nonNull(prev))
+            prev.next = neW;
+        else
+            bucketArray.set(bIndex, neW);
+
+        size++;
+
+        checkThreshould();
+    }
+
+    private void checkThreshould() {
+
         if ((1.0 * size) / numBuckets >= THRESHOLD) {
 
             List<Node<K, V> > temp = bucketArray;
@@ -172,6 +179,7 @@ public class MapImpl<K, V> implements Map<K, V> {
                 bucketArray.add(null);
 
             for (Node<K, V> headNode : temp) {
+
                 while (headNode != null) {
                     add(headNode.key, headNode.value);
                     headNode = headNode.next;

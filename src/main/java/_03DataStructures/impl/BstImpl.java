@@ -222,6 +222,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     @Override
     public void deleteMin() {
+
         root = deleteMin(root);
     }
 
