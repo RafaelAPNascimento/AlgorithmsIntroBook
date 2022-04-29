@@ -69,9 +69,10 @@ public class MapImpl<K, V> implements Map<K, V> {
     private int getBucketIndex(K key) {
 
         int hash = getHashCode(key);
-        int index = hash % numBuckets;
-        index = index < 0 ? index * -1 : index;
-        return index;
+        int bIndex = hash % numBuckets;
+        bIndex = bIndex < 0 ? bIndex * -1 : bIndex;
+
+        return bIndex;
     }
 
     @Override
@@ -168,7 +169,7 @@ public class MapImpl<K, V> implements Map<K, V> {
 
     private void checkThreshould() {
 
-        if ((1.0 * size) / numBuckets >= THRESHOLD) {
+        if ((size / numBuckets) >= THRESHOLD) {
 
             List<Node<K, V> > temp = bucketArray;
 
