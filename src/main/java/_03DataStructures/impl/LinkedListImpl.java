@@ -63,7 +63,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         Node current = head;
 
         while (nonNull(current)) {
-            if (current.data == e) {
+            if (current.data.equals(e)) {
                 removeNode(current);
                 counter--;
                 return true;
@@ -103,7 +103,7 @@ public class LinkedListImpl<E> implements LinkedList<E> {
         Node current = head;
         while (nonNull(current)) {
 
-            if (current.data == e)
+            if (current.data.equals(e))
                 return true;
 
             current = current.next;
