@@ -13,10 +13,13 @@ public class LcsArgumentProvider implements ArgumentsProvider {
 
     public LcsArgumentProvider() {
 
-        testElements = new TestElements[3];
+        testElements = new TestElements[6];
         testElements[0] = new TestElements("ABCDGH", "AEDFHR", 3);
         testElements[1] = new TestElements("AGGTAB", "GXTXAYB", 4);
         testElements[2] = new TestElements("abdace", "babce", 4);
+        testElements[3] = new TestElements("abcdef", "ghij", 0);
+        testElements[4] = new TestElements("abdace", "babce", 4);
+        testElements[5] = new TestElements("bd", "abcd", 2);
     }
 
     @Override
