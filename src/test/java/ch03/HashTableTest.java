@@ -134,7 +134,7 @@ public class HashTableTest {
     @Test
     public void shouldPassWithDifferentObjectsSameBucket() {
 
-        Map<String, Integer> map = new MapImpl<>(9.9);
+        Map<String, Integer> map = new MapImpl<>((float) 9.9);
 
         for (int i = 65; i <= 90; i++) {
             char c = (char) i;

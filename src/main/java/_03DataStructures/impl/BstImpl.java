@@ -260,18 +260,16 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             x.right = delete(x.right, key);
 
         else {
+            if (isNull(x.left))
+                return x.right;
             if (isNull(x.right))
                 return x.left;
 
-            if (isNull(x.right))
-                return x.left;
-
-            Node t = x;
-            x = min(t.right);
-            x.right = deleteMin(t.right);
-            x.left = t.left;
+            Node deleting = x;
+            x = min(deleting.right);
+            x.right = deleteMin(x.right);
+            x.left = deleting.left;
         }
-
         x.nodeCount = size(x.left) + size(x.right) + 1;
         return x;
     }

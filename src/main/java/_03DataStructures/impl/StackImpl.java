@@ -35,10 +35,10 @@ public class StackImpl<E> implements Stack<E> {
     @Override
     public E pop() {
         if (isEmpty())
-            throw new RuntimeException("Underflow");
+            throw new RuntimeException("underflow");
 
-        E element = elements[counter - 1];
-        elements[--counter] = null;     // prevents memory leak, by eliminating obsolete references
-        return element;
+        E e = elements[--counter];
+        elements[counter] = null;   // prevents memory leaks by eliminating obsolete references
+        return e;
     }
 }

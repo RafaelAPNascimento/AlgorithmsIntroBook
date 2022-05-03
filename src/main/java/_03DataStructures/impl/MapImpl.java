@@ -11,129 +11,117 @@ import static java.util.Objects.nonNull;
 
 public class MapImpl<K, V> implements Map<K, V> {
 
+    private final float THRESHOLD;
+
     private List<Node<K, V>> bucketArray;
+    private int bucketSize;
+    private int mapSize;
 
-    // current capacity
-    private int numBuckets;
+    private class Node<K, V> {
+        Node<K, V> next;
+        private V value;
+        private K key;
+        private int hash;
 
-    // current size of the list
-    private int size;
+        Node(int hash, K key, V value) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+        }
 
-    private double THRESHOLD = 0.7;
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Node<?, ?> node = (Node<?, ?>) o;
+
+            if (hash != node.hash) return false;
+            if (!value.equals(node.value)) return false;
+            return key.equals(node.key);
+        }
+
+        @Override
+        public int hashCode() {
+            return hash;
+        }
+    }
 
     public MapImpl() {
         this(10);
     }
 
-    public MapImpl(double threshold) {
-        this(10);
-        THRESHOLD = threshold;
+    public MapImpl(int loadFactor) {
+        this((float) 0.7);
     }
 
-    public MapImpl(int numBuckets, double threshold) {
-        this(10);
-        THRESHOLD = threshold;
+    public MapImpl(float threshold) {
+        this(threshold, 10);
     }
 
-    public MapImpl(int numBuckets) {
-
-        bucketArray = new ArrayList<>();
-        this.numBuckets = numBuckets;
-        size = 0;
-
-        for (int i = 0; i < numBuckets; i++)
+    public MapImpl(float threshold, int loadFactor) {
+        
+        this.THRESHOLD = threshold;
+        bucketArray = new ArrayList<>(loadFactor);
+        bucketSize = loadFactor;
+        mapSize = 0;
+        for (int i = 0; i < loadFactor; i++)
             bucketArray.add(null);
-    }
-
-    private class Node<K, V> {
-        K key;
-        V value;
-        final int hashCode;
-
-        // Reference to next node
-        Node<K, V> next;
-
-        // Constructor
-        public Node(K key, V value, int hashCode) {
-            this.key = key;
-            this.value = value;
-            this.hashCode = hashCode;
-        }
-    }
-
-    private int getHashCode(K key) {
-
-        return Objects.hashCode(key);
-    }
-
-    private int getBucketIndex(K key) {
-
-        int hash = getHashCode(key);
-        int bIndex = hash % numBuckets;
-        bIndex = bIndex < 0 ? bIndex * -1 : bIndex;
-
-        return bIndex;
     }
 
     @Override
     public int size() {
-        return size;
+        return mapSize;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return mapSize == 0;
     }
 
     @Override
     public V remove(K key) {
 
         int hash = getHashCode(key);
-        int bIndex = getBucketIndex(key);
+        int index = getIndex(key);
 
-        Node<K, V> head = bucketArray.get(bIndex);
+        Node<K, V> head = bucketArray.get(index);
         Node<K, V> prev = null;
 
         while (nonNull(head)) {
-
-            if (head.key.equals(key) && head.hashCode == hash)
+            if (head.key.equals(key) && head.hashCode() == hash)
                 break;
 
             prev = head;
-            head = prev.next;
+            head = head.next;
         }
 
         if (isNull(head))
             return null;
 
         if (isNull(prev))
-            bucketArray.set(bIndex, head.next);
-        else
+            bucketArray.set(index, head.next);
+        else {
             prev.next = head.next;
-
-        size--;
+        }
+        mapSize--;
         return head.value;
     }
 
     @Override
     public V get(K key) {
 
-        int hashCode = getHashCode(key);
-        int bucketIndex = getBucketIndex(key);
+        int hash = getHashCode(key);
+        int index = getIndex(key);
 
-        Node<K, V> head = bucketArray.get(bucketIndex);
+        Node<K, V> head = bucketArray.get(index);
 
         while (nonNull(head)) {
-
-            if (head.key.equals(key) && head.hashCode == hashCode)
-                break;
+            if (head.key.equals(key) && head.hashCode() == hash)
+                return head.value;
 
             head = head.next;
         }
-
-        if (nonNull(head))
-            return head.value;
-
         return null;
     }
 
@@ -141,13 +129,13 @@ public class MapImpl<K, V> implements Map<K, V> {
     public void add(K key, V value) {
 
         int hash = getHashCode(key);
-        int bIndex = getBucketIndex(key);
+        int index = getIndex(key);
 
-        Node<K, V> head = bucketArray.get(bIndex);
+        Node<K, V> head = bucketArray.get(index);
         Node<K, V> prev = null;
 
         while (nonNull(head)) {
-            if (head.key.equals(key) && head.hashCode == hash) {
+            if (head.key.equals(key) && head.hashCode() == hash) {
                 head.value = value;
                 return;
             }
@@ -155,37 +143,48 @@ public class MapImpl<K, V> implements Map<K, V> {
             head = head.next;
         }
 
-        Node<K, V> neW = new Node<>(key, value, hash);
+        Node<K, V> neW = new Node<>(hash, key, value);
 
-        if (nonNull(prev))
+        if (isNull(prev)) {
+            bucketArray.set(index, neW);
+        }
+        else {
             prev.next = neW;
-        else
-            bucketArray.set(bIndex, neW);
-
-        size++;
-
-        checkThreshould();
+        }
+        mapSize++;
+        checkThreshold();
     }
 
-    private void checkThreshould() {
+    private void checkThreshold() {
 
-        if ((size / numBuckets) >= THRESHOLD) {
+        if (mapSize / bucketSize >= THRESHOLD) {
 
-            List<Node<K, V> > temp = bucketArray;
+            List<Node<K, V>> tmp = bucketArray;
+            bucketSize *= 2;
+            bucketArray = new ArrayList<>(bucketSize);
+            mapSize = 0;
 
-            bucketArray = new ArrayList<>();
-            numBuckets = 2 * numBuckets;
-            size = 0;
-            for (int i = 0; i < numBuckets; i++)
+            for (int i = 0; i < bucketSize; i++) {
                 bucketArray.add(null);
-
-            for (Node<K, V> headNode : temp) {
-
-                while (headNode != null) {
-                    add(headNode.key, headNode.value);
-                    headNode = headNode.next;
+            }
+            for (Node<K, V> node : tmp) {
+                while (nonNull(node)) {
+                    add(node.key, node.value);
+                    node = node.next;
                 }
             }
         }
+    }
+
+    private int getHashCode(K key) {
+        return Objects.hashCode(key);
+    }
+
+    private int getIndex(K key) {
+
+        int hash = getHashCode(key);
+        int index = hash % bucketSize;
+        index = index < 0 ? index * -1 : index;
+        return index;
     }
 }
