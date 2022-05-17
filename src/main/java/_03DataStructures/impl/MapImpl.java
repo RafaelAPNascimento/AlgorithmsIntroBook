@@ -51,21 +51,17 @@ public class MapImpl<K, V> implements Map<K, V> {
         this(10);
     }
 
-    public MapImpl(int loadFactor) {
-        this((float) 0.7);
-    }
-
     public MapImpl(float threshold) {
         this(threshold, 10);
     }
 
-    public MapImpl(float threshold, int loadFactor) {
+    public MapImpl(float threshold, int initialBucketSize) {
         
         this.THRESHOLD = threshold;
-        bucketArray = new ArrayList<>(loadFactor);
-        bucketSize = loadFactor;
+        bucketArray = new ArrayList<>(initialBucketSize);
+        bucketSize = initialBucketSize;
         mapSize = 0;
-        for (int i = 0; i < loadFactor; i++)
+        for (int i = 0; i < initialBucketSize; i++)
             bucketArray.add(null);
     }
 

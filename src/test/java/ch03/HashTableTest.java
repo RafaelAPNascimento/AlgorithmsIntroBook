@@ -96,8 +96,8 @@ public class HashTableTest {
     @Test
     public void shouldIncreaseLoadFactor() {
 
-        final int INITIAL_LOAD_FACTOR = 10;
-        Map<Integer, String> map = new MapImpl<>(INITIAL_LOAD_FACTOR);
+        final int INITIAL_BUCKET_SIZE = 10;
+        Map<Integer, String> map = new MapImpl<>(INITIAL_BUCKET_SIZE);
 
         for (int i = 0; i < 1_000; i++)
             map.add(i, "A");

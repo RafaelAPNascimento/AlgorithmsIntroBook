@@ -15,13 +15,10 @@ public class MaxSubArrayProblem {
         int max = arr[0];
 
         for (int i = 0; i < arr.length; i++) {
-
-            int localMax = arr[i];
-
+            int local = arr[i];
             for (int j = i + 1; j < arr.length; j++) {
-
-                localMax += arr[j];
-                max = Math.max(max, localMax);
+                local += arr[j];
+                max = Math.max(local, max);
             }
         }
         return max;
@@ -39,7 +36,7 @@ public class MaxSubArrayProblem {
             for (int j = i + 1; j < arr.length; j++) {
 
                 local += arr[j];
-                if (local > max) {
+                if (local > max) {  // if I use >= it may return a smaller range
                     max = local;
                     init = i;
                     end = j;

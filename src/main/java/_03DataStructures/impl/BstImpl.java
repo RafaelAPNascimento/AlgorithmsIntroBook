@@ -174,10 +174,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     public K select(int rank) {
 
         Node select = select(root, rank);
-        if (isNull(select))
-            return null;
-        else
+        if (nonNull(select))
             return select.key;
+        else
+            return null;
     }
 
     private Node select(Node x, int rank) {
@@ -195,6 +195,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         else
             return select(x.right, rank - size - 1);
+
     }
 
     @Override
