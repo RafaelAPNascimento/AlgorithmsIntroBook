@@ -14,7 +14,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private class Node {
 
-        private final int INITIAL_SIZE = 1;
         private K key;
         private V value;
         private Node left;
@@ -23,7 +22,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
-            this.nodeCount = INITIAL_SIZE;  // each node has a default size that counts 1 (itself at least)
+            this.nodeCount = 1;  // each node has a default size that counts 1 (itself at least)
         }
     }
 

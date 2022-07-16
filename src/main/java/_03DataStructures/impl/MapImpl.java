@@ -78,6 +78,9 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public V remove(K key) {
 
+        if (isEmpty())
+            return null;
+
         int hash = getHashCode(key);
         int index = getIndex(key);
 
@@ -106,6 +109,9 @@ public class MapImpl<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
+
+        if (isEmpty())
+            return null;
 
         int hash = getHashCode(key);
         int index = getIndex(key);

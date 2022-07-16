@@ -31,7 +31,7 @@ public class ConstantTimeSortingTest {
 
     @Test
     @RepeatedTest(6)
-    public void shouldSortByRadixSort2() {
+    public void shouldSortByRadixSort() {
 
         int initRange = 50, endRange = 1_000;
 

@@ -16,7 +16,7 @@ public interface BST<K extends Comparable<K>, V>{
 
     K ceiling(K key);
 
-    K select(int k);
+    K select(int rank);
 
     int rank(K key);
 

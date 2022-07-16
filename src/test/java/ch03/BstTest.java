@@ -13,7 +13,7 @@ public class BstTest {
     @DisplayName("Should insert then get")
     @Test
     public void shouldInsertThenGet() {
-
+        
         BST<String, Integer> bst = new BstImpl<>();
         bst.put("A", 3);
         bst.put("B", 5);
