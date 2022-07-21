@@ -15,7 +15,10 @@ public class Main {
 	// fazer
 	// https://www.simplilearn.com/tutorials/java-tutorial/java-interview-questions
 	public static void main(String args[]) throws JsonProcessingException {
-		m1();
+
+		LocalDateTime dt = LocalDateTime.parse("2022-07-11T15:48:00");
+		System.out.println(dt);
+
 	}
 
 

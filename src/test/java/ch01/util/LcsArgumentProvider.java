@@ -13,7 +13,7 @@ public class LcsArgumentProvider implements ArgumentsProvider {
 
     public LcsArgumentProvider() {
 
-        testElements = new TestElements[7];
+        testElements = new TestElements[8];
         testElements[0] = new TestElements("ABCDGH", "AEDFHR", 3);
         testElements[1] = new TestElements("AGGTAB", "GXTXAYB", 4);
         testElements[2] = new TestElements("abdace", "babce", 4);
@@ -21,6 +21,7 @@ public class LcsArgumentProvider implements ArgumentsProvider {
         testElements[4] = new TestElements("abdace", "babce", 4);
         testElements[5] = new TestElements("bd", "abcd", 2);
         testElements[6] = new TestElements("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA", "GTCGTTCGGAATGCCGTTGCTCTGTAAA", 20);
+        testElements[7] = new TestElements("10010101", "010110110", 6);
 
     }
 

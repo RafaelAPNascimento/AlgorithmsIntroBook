@@ -3,7 +3,6 @@ package ch01;
 import _01Foundations.ch01.InsertionSort;
 import _01Foundations.ch01.MergeSort;
 import _02SortingAndOrderStatistics.QuickSort;
-import ch01.util.TestUtil;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
