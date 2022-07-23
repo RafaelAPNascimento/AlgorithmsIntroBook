@@ -1,8 +1,7 @@
-package ch03;
+package ch03DataStructures;
 
 import _03DataStructures.Map;
 import _03DataStructures.impl.MapImpl;
-import _03DataStructures.impl._MapImpl;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ public class HashTableTest {
     @Test
     public void shouldRetrieveByKey() {
 
-        Map<Integer, String> names = new _MapImpl<>();
+        Map<Integer, String> names = new MapImpl<>();
         names.add(1, "Adão");
         names.add(2, "Paulo");
         names.add(3, "Pedro");
@@ -28,7 +27,7 @@ public class HashTableTest {
     @Test
     public void shouldReturnNullByKey() {
 
-        Map<Integer, String> names = new _MapImpl<>();
+        Map<Integer, String> names = new MapImpl<>();
         names.add(1, "Adão");
         names.add(2, "Paulo");
         names.add(3, "Pedro");
@@ -41,7 +40,7 @@ public class HashTableTest {
     @Test
     public void shouldReturnCorrectSize() {
 
-        Map<Integer, String> map = new _MapImpl<>();
+        Map<Integer, String> map = new MapImpl<>();
 
         for (int i = 0; i < 1_000; i++)
             map.add(i, "A");
@@ -52,7 +51,7 @@ public class HashTableTest {
     @Test
     public void shouldBeEmptyAfterRemovingAll() {
 
-        Map<Integer, String> map = new _MapImpl<>();
+        Map<Integer, String> map = new MapImpl<>();
 
         for (int i = 0; i < 1_000; i++)
             map.add(i, "A");
@@ -66,7 +65,7 @@ public class HashTableTest {
     @Test
     public void shouldRemoveElement() {
 
-        Map<Integer, String> names = new _MapImpl<>();
+        Map<Integer, String> names = new MapImpl<>();
         names.add(1, "Adão");
         names.add(2, "Paulo");
         names.add(3, "Pedro");
@@ -82,7 +81,7 @@ public class HashTableTest {
     @Test
     public void shouldUpdateElement() {
 
-        Map<Integer, String> names = new _MapImpl<>();
+        Map<Integer, String> names = new MapImpl<>();
         names.add(1, "Adão");
         names.add(2, "Paulo");
         names.add(3, "Pedro");
@@ -98,7 +97,7 @@ public class HashTableTest {
     public void shouldIncreaseLoadFactor() {
 
         final int INITIAL_BUCKET_SIZE = 10;
-        Map<Integer, String> map = new _MapImpl<>(INITIAL_BUCKET_SIZE);
+        Map<Integer, String> map = new MapImpl<>(INITIAL_BUCKET_SIZE);
 
         for (int i = 0; i < 1_000; i++)
             map.add(i, "A");
@@ -109,7 +108,7 @@ public class HashTableTest {
     @Test
     public void shouldRemoveSameIndexElementsFromBuckets() {
 
-        Map<String, Integer> names = new _MapImpl<>();
+        Map<String, Integer> names = new MapImpl<>();
         names.add("A", 56);
         names.add("B", 91);
         names.add("C", 20);   // bucket 7
@@ -135,7 +134,7 @@ public class HashTableTest {
     @Test
     public void shouldPassWithDifferentObjectsSameBucket() {
 
-        Map<String, Integer> map = new _MapImpl<>((float) 9.9);
+        Map<String, Integer> map = new MapImpl<>((float) 9.9);
 
         for (int i = 65; i <= 90; i++) {
             char c = (char) i;

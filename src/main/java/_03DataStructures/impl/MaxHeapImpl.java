@@ -116,6 +116,9 @@ public class MaxHeapImpl implements MaxHeap {
         int max = heap[0];
         swapp(heap, 0, --heapSize);
         maxHeapify(0);
+
+        // heap[heapSize] = null; we could nullify to free memory if it was reference type rather than primitives 
+
         return max;
     }
 

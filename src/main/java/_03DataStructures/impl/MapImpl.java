@@ -81,8 +81,8 @@ public class MapImpl<K, V> implements Map<K, V> {
         if (isEmpty())
             return null;
 
-        int hash = getHashCode(key);
-        int index = getIndex(key);
+        int hash = findHashCode(key);
+        int index = findBucketIndex(key);
 
         Node<K, V> head = bucketArray.get(index);
         Node<K, V> prev = null;
@@ -113,8 +113,8 @@ public class MapImpl<K, V> implements Map<K, V> {
         if (isEmpty())
             return null;
 
-        int hash = getHashCode(key);
-        int index = getIndex(key);
+        int hash = findHashCode(key);
+        int index = findBucketIndex(key);
 
         Node<K, V> head = bucketArray.get(index);
 
@@ -130,8 +130,8 @@ public class MapImpl<K, V> implements Map<K, V> {
     @Override
     public void add(K key, V value) {
 
-        int hash = getHashCode(key);
-        int index = getIndex(key);
+        int hash = findHashCode(key);
+        int index = findBucketIndex(key);
 
         Node<K, V> head = bucketArray.get(index);
         Node<K, V> prev = null;
@@ -178,13 +178,13 @@ public class MapImpl<K, V> implements Map<K, V> {
         }
     }
 
-    private int getHashCode(K key) {
+    private int findHashCode(K key) {
         return Objects.hashCode(key);
     }
 
-    private int getIndex(K key) {
+    private int findBucketIndex(K key) {
 
-        int hash = getHashCode(key);
+        int hash = findHashCode(key);
         int index = hash % bucketSize;
         index = index < 0 ? index * -1 : index;
         return index;

@@ -1,4 +1,4 @@
-package ch03;
+package ch03DataStructures;
 
 import _03DataStructures.LinkedList;
 import _03DataStructures.impl.LinkedListImpl;
