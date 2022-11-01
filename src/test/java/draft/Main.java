@@ -12,12 +12,11 @@ import static java.util.Objects.isNull;
 
 public class Main {
 
-	// fazer
-	// https://www.simplilearn.com/tutorials/java-tutorial/java-interview-questions
 	public static void main(String args[]) throws JsonProcessingException {
 
-		LocalDateTime dt = LocalDateTime.parse("2022-07-11T15:48:00");
-		System.out.println(dt);
+		LocalDateTime inicio = LocalDateTime.parse("2022-07-11T15:48:00");
+		LocalDateTime fim = LocalDateTime.parse("2023-07-11T15:48:00");
+		System.out.println(inicio.isBefore(fim));
 
 	}
 

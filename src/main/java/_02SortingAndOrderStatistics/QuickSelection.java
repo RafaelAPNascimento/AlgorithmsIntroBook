@@ -17,22 +17,6 @@ public class QuickSelection {
 
     // index = k - 1, k'th smallest
     // index = N - k, k'th greatest
-    private int _quickSelection(int[] arr, int start, int end, int k) {
-
-        int index = partition(arr, start, end);
-
-        if (index == k - 1)
-
-            return arr[index];
-
-        else if (index < k)
-            return quickSelection(arr, index + 1, end, k);
-
-        else
-            return quickSelection(arr, start, index - 1, k);
-    }
-
-
     private int quickSelection(int[] arr, int start, int end, int k) {
 
         int pv = partition(arr, start, end);

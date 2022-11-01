@@ -166,7 +166,32 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
     @Override
     public K ceiling(K key) {
 
-        return null;
+        Node ceil = ceiling(root, key);
+        if (nonNull(ceil))
+            return ceil.key;
+        else
+            return null;
+    }
+
+    private Node ceiling(Node x, K key) {
+
+        if (isNull(x))
+            return null;
+
+        int cmp = x.key.compareTo(key);
+
+        if (cmp == 0)
+            return x;
+
+        else if (cmp < 0)
+            return ceiling(x.right, key);
+
+        Node t = ceiling(x.left, key);
+
+        if (nonNull(t))
+            return t;
+        else
+            return x;
     }
 
     @Override

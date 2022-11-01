@@ -209,5 +209,23 @@ public class BstTest {
         assertEquals("D", bst.select(2));
     }
 
+    @Test
+    public void shouldCeil() {
+
+        BST<Integer, String> bst = new BstImpl<>();
+        bst.put(14, "A");
+        bst.put(10, "A");
+        bst.put(12, "A");
+        bst.put(6, "A");
+        bst.put(2, "A");
+        bst.put(4, "A");
+        bst.put(8, "A");
+
+        assertEquals(12, bst.ceiling(11));
+        assertEquals(2, bst.ceiling(1));
+        assertEquals(14, bst.ceiling(13));
+        assertEquals(12, bst.ceiling(12));
+        assertNull(bst.ceiling(15));
+    }
 
 }

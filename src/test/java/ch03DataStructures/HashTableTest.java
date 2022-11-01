@@ -134,7 +134,8 @@ public class HashTableTest {
     @Test
     public void shouldPassWithDifferentObjectsSameBucket() {
 
-        Map<String, Integer> map = new MapImpl<>((float) 9.9);
+        float threshold = (float) 9.9;
+        Map<String, Integer> map = new MapImpl<>(threshold);
 
         for (int i = 65; i <= 90; i++) {
             char c = (char) i;
@@ -167,7 +168,26 @@ public class HashTableTest {
 
     @Disabled
     @Test
-    public void checkThreshould() {
+    public void checkThreshold() {
         //...
+    }
+
+    @Test
+    public void shouldCheckIfContainKey() {
+
+        Map<String, Integer> names = new MapImpl<>();
+        names.add("A", 56);
+        names.add("B", 91);
+        names.add("C", 20);   // bucket 7
+        names.add("a", 46);   // bucket 7
+        names.add("b", 99);
+        names.add("X", 5);
+
+        assertTrue(names.containsKey("B"));
+        assertTrue(names.containsKey("C"));
+        assertTrue(names.containsKey("b"));
+        assertFalse(names.containsKey("c"));
+        assertFalse(names.containsKey("H"));
+        assertFalse(names.containsKey(null));
     }
 }

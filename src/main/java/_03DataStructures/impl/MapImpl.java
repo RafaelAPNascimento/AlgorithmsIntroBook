@@ -61,8 +61,7 @@ public class MapImpl<K, V> implements Map<K, V> {
         bucketArray = new ArrayList<>(initialBucketSize);
         bucketSize = initialBucketSize;
         mapSize = 0;
-        for (int i = 0; i < initialBucketSize; i++)
-            bucketArray.add(null);
+        initiBucket();
     }
 
     @Override
@@ -163,12 +162,9 @@ public class MapImpl<K, V> implements Map<K, V> {
 
             List<Node<K, V>> tmp = bucketArray;
             bucketSize *= 2;
-            bucketArray = new ArrayList<>(bucketSize);
+            initiBucket();
             mapSize = 0;
 
-            for (int i = 0; i < bucketSize; i++) {
-                bucketArray.add(null);
-            }
             for (Node<K, V> node : tmp) {
                 while (nonNull(node)) {
                     add(node.key, node.value);
@@ -188,5 +184,26 @@ public class MapImpl<K, V> implements Map<K, V> {
         int index = hash % bucketSize;
         index = index < 0 ? index * -1 : index;
         return index;
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+
+        int hash = findHashCode(key);
+        int bucket = findBucketIndex(key);
+
+        Node head = bucketArray.get(bucket);
+
+        while (nonNull(head)) {
+            if (head.key.equals(key) && head.hash == hash)
+                return true;
+        }
+        return false;
+    }
+
+    private void initiBucket() {
+        bucketArray = new ArrayList<>(bucketSize);
+        for (int i = 0; i < bucketSize; i++)
+            bucketArray.add(null);
     }
 }

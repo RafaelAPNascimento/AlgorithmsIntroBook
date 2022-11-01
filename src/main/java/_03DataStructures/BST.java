@@ -12,8 +12,18 @@ public interface BST<K extends Comparable<K>, V>{
 
     K max();
 
+    /**
+     * Finds the largest key smaller than key.
+     * @param key
+     * @return largest key smaller than key or null.
+     */
     K floor(K key);
 
+    /**
+     * Finds the smallest key larger than key.
+     * @param key
+     * @return smallest key larger than key or null
+     */
     K ceiling(K key);
 
     K select(int rank);

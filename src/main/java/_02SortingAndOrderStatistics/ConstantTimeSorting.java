@@ -26,7 +26,7 @@ public class ConstantTimeSorting {
         }
     }
 
-    public void _bucketSort(float[] arr) {
+    public void bucketSort(float[] arr) {
 
         final int SIZE = arr.length;
         List<Float>[] buckets = new LinkedList[SIZE];
@@ -53,9 +53,9 @@ public class ConstantTimeSorting {
     }
 
     // the following impl apparently looks better, than above, analise it later...
-    public void bucketSort(float[] arr) {
+    public void xxx_bucketSort(float[] arr) {
 
-        List<Float>[] buckets = new ArrayList[10];
+        List<Float>[] buckets = new LinkedList[10];
 
         for (int i = 0; i < buckets.length; i++) {
             buckets[i] = new LinkedList<>();

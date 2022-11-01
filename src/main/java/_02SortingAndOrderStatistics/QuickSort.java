@@ -34,7 +34,6 @@ public class QuickSort {
         return avIndex;
     }
 
-
     private void swap(int i1, int i2) {
         int tmp = arr[i1];
         arr[i1] = arr[i2];

@@ -31,4 +31,11 @@ public interface Map<K, V> {
      * @param value
      */
     void add(K key, V value);
+
+    /**
+     * checks whether this map has a value mapped to this key
+     * @param key
+     * @return true if there is a value associated to this key
+     */
+    boolean containsKey(K key);
 }
