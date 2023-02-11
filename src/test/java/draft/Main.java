@@ -14,10 +14,13 @@ public class Main {
 
 	public static void main(String args[]) throws JsonProcessingException {
 
-		LocalDateTime inicio = LocalDateTime.parse("2022-07-11T15:48:00");
-		LocalDateTime fim = LocalDateTime.parse("2023-07-11T15:48:00");
-		System.out.println(inicio.isBefore(fim));
+		LocalDateTime ldt = LocalDateTime.now();
 
+		String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+		String s = ldt.format(formatter);
+		System.out.println(s);
 	}
 
 

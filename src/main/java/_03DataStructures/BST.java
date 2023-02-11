@@ -13,7 +13,7 @@ public interface BST<K extends Comparable<K>, V>{
     K max();
 
     /**
-     * Finds the largest key smaller than key.
+     * Finds the largest key smaller than key or equal to this key.
      * @param key
      * @return largest key smaller than key or null.
      */

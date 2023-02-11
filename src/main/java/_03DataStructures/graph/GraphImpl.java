@@ -1,75 +1,89 @@
 package _03DataStructures.graph;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GraphImpl<E> implements Graph<E> {
 
-    private int numberOfVertices;
-    private int numberOfEdges;
+    private List<E> vertices;
+    private List<Edge<E>> edges;
 
-    private List<Vertex> vertices;
+    public GraphImpl() {
+        vertices = new ArrayList<>();
+        edges = new ArrayList<>();
+    }
 
-    private class Vertex {
+    private class Edge<E> {
+        E vertex1;
+        E vertex2;
+        int weight;
 
-        List<Vertex> adj;
-        E data;
-
-        public Vertex(E data) {
-            this.data = data;
+        Edge(E vertex1, E vertex2, int weight) {
+            this.vertex1 = vertex1;
+            this.vertex2 = vertex2;
+            this.weight = weight;
         }
 
-        public void addAdjecent(Vertex e) {
-            adj.add(e);
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Edge<?> edge = (Edge<?>) o;
+
+            if (!vertex1.equals(edge.vertex1)) return false;
+            return vertex2.equals(edge.vertex2);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = vertex1.hashCode();
+            result = 31 * result + vertex2.hashCode();
+            return result;
         }
     }
 
     @Override
     public int vertices() {
-        return numberOfEdges;
+        return vertices.size();
     }
 
     @Override
-    public int edges() {
-        return numberOfEdges;
+    public void addEdge(E vertex1, E vertex2, int weight) {
+
+        if (!vertices.contains(vertex1) || !vertices.contains(vertex2))
+            throw new RuntimeException("Some vertex is not part of the graph yet");
+
+        Edge edge = new Edge(vertex1, vertex2, weight);
+        edges.add(edge);        // what if we add a already existing edge?
     }
 
     @Override
-    public void addEdge(E dataVertex1, E dataVertex2) {
+    public boolean removeEdge(E vertex1, E vertex2) {
 
-        int indexV1 = findIndex(dataVertex1);
-        int indexV2 = findIndex(dataVertex2);
-
-        if (indexV1 < 0 || indexV2 < 0)
-            throw new RuntimeException("some edge does not exist");
-
-        Vertex v1 = vertices.get(indexV1);
-        Vertex v2 = vertices.get(indexV2);
-
-        v1.adj.add(v2);
-        v2.adj.add(v1);
-
-        numberOfEdges++;
-    }
-
-    // auxilary method to find the index of some vertex containing the data @data
-    private int findIndex(E data) {
-        throw new  UnsupportedOperationException("not implemented yet");
+        Edge deleting = new Edge(vertex1, vertex2, 0);
+        int index = edges.indexOf(deleting);
+        deleting = edges.remove(index);
+        return deleting != null;
     }
 
     @Override
-    public Iterator<E> adj(int vertex) {
-        return null;
+    public boolean addVertex(E vertex) {
+        // I want unique vertices!
+        return vertices.add(vertex);
     }
 
     @Override
-    public void removeEdge() {
+    public boolean removeVertex(E vertex) {
 
+        int index = vertices.indexOf(vertex);
+        vertex = vertices.remove(index);
+        return vertex != null;
     }
 
     @Override
-    public boolean cointains(E edge) {
-        return false;
+    public boolean cointains(E vertex) {
+        return vertices.contains(vertex);
     }
 
     @Override

@@ -21,16 +21,16 @@ public class Graph<V> {
         boolean containsV2 = contains(v2);
 
         if (containsV1 && containsV2) {
-            updateWeight(v1, v2, weight);
+            //updateWeight(v1, v2, weight);
         }
         else if (containsV1) {
-            link(v1, v2, weight);
+            //link(v1, v2, weight);
         }
         else if (containsV2) {
-            link(v2, v1, weight);
+            //link(v2, v1, weight);
         }
         else {
-            addNewEdge(v1, v2, edge);
+            //addNewEdge(v1, v2, edge);
         }
     }
 

@@ -143,9 +143,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return null;
     }
 
+    // LSTE
     private Node floor(Node x, K key) {
 
-        if (isNull(x))
+        if (x == null)
             return null;
 
         int cmp = x.key.compareTo(key);
@@ -157,10 +158,11 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return floor(x.left, key);
 
         Node t = floor(x.right, key);
-        if (nonNull(t))
-            return t;
-        else
+
+        if (t == null)
             return x;
+        else
+            return t;
     }
 
     @Override
@@ -173,9 +175,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
             return null;
     }
 
+    //  SLT
     private Node ceiling(Node x, K key) {
 
-        if (isNull(x))
+        if (x == null)
             return null;
 
         int cmp = x.key.compareTo(key);
@@ -188,10 +191,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         Node t = ceiling(x.left, key);
 
-        if (nonNull(t))
-            return t;
-        else
+        if (t == null)
             return x;
+        else
+            return t;
     }
 
     @Override
@@ -206,7 +209,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node select(Node x, int rank) {
 
-        if (isNull(x))
+        if (x == null)
             return null;
 
         int size = size(x.left);
@@ -219,7 +222,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
         else
             return select(x.right, rank - size - 1);
-
     }
 
     @Override
@@ -230,7 +232,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private int rank(Node x, K key) {
 
-        if (isNull(x))
+        if (x == null)
             return 0;
 
         int cmp = x.key.compareTo(key);
@@ -241,8 +243,7 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         else if (cmp > 0)
             return rank(x.left, key);
 
-        else
-            return size(x.left) + rank(x.right, key) + 1;
+        return size(x.left) + rank(x.right, key) + 1;
     }
 
     @Override
@@ -273,28 +274,27 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
 
     private Node delete(Node x, K key) {
 
-        if (isNull(x))
+        if (x == null)
             return null;
 
         int cmp = x.key.compareTo(key);
-
         if (cmp > 0)
             x.left = delete(x.left, key);
-
         else if (cmp < 0)
             x.right = delete(x.right, key);
-
         else {
-            if (isNull(x.left))
+            if (x.left == null)
                 return x.right;
-            if (isNull(x.right))
+            if (x.right == null)
                 return x.left;
-
-            Node deleting = x;
-            x = min(deleting.right);
-            x.right = deleteMin(x.right);
-            x.left = deleting.left;
+            else {
+                Node del = x;
+                x = min(x.right);
+                x.right = deleteMin(del.right);
+                x.left = del.left;
+            }
         }
+
         x.nodeCount = size(x.left) + size(x.right) + 1;
         return x;
     }
