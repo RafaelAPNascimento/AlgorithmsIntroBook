@@ -25,5 +25,5 @@ public interface Graph<E> {
 
     boolean cointains(E vertex);
 
-    List<E> findPath(E startEdge, E endEdge);
+    List<E> findPath(E v1, E v2);
 }

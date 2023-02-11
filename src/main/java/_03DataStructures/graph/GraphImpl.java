@@ -31,6 +31,7 @@ public class GraphImpl<E> implements Graph<E> {
 
             Edge<?> edge = (Edge<?>) o;
 
+            //if (weight != edge.weight) return false;
             if (!vertex1.equals(edge.vertex1)) return false;
             return vertex2.equals(edge.vertex2);
         }
@@ -39,6 +40,7 @@ public class GraphImpl<E> implements Graph<E> {
         public int hashCode() {
             int result = vertex1.hashCode();
             result = 31 * result + vertex2.hashCode();
+            //result = 31 * result + weight;
             return result;
         }
     }
@@ -55,7 +57,11 @@ public class GraphImpl<E> implements Graph<E> {
             throw new RuntimeException("Some vertex is not part of the graph yet");
 
         Edge edge = new Edge(vertex1, vertex2, weight);
-        edges.add(edge);        // what if we add a already existing edge?
+
+        if (edges.contains(edge))
+            throw new RuntimeException(String.format("Edge %s to %s already exists", vertex1, vertex2));
+
+        edges.add(edge);
     }
 
     @Override
@@ -64,12 +70,16 @@ public class GraphImpl<E> implements Graph<E> {
         Edge deleting = new Edge(vertex1, vertex2, 0);
         int index = edges.indexOf(deleting);
         deleting = edges.remove(index);
+
         return deleting != null;
     }
 
     @Override
     public boolean addVertex(E vertex) {
-        // I want unique vertices!
+
+        if (vertices.contains(vertex))
+            return false;
+
         return vertices.add(vertex);
     }
 
@@ -87,7 +97,7 @@ public class GraphImpl<E> implements Graph<E> {
     }
 
     @Override
-    public List<E> findPath(E startEdge, E endEdge) {
+    public List<E> findPath(E v1, E v2) {
         return null;
     }
 }
