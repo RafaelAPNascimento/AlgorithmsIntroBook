@@ -1,14 +1,16 @@
 package _03DataStructures.graph;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class GraphImpl<E> implements Graph<E> {
+public class DefaultGraphImpl<E> implements Graph<E> {
 
     private List<E> vertices;
     private List<Edge<E>> edges;
 
-    public GraphImpl() {
+    public DefaultGraphImpl() {
         vertices = new ArrayList<>();
         edges = new ArrayList<>();
     }
@@ -88,12 +90,30 @@ public class GraphImpl<E> implements Graph<E> {
 
         int index = vertices.indexOf(vertex);
         vertex = vertices.remove(index);
+
+        removeRelatedEdges(vertex);
+
         return vertex != null;
+    }
+
+    private void removeRelatedEdges(E vertex) {
+
+        Set<Edge> deletingEdges = new HashSet<>();
+        for (Edge edge : edges) {
+            if (edge.vertex1.equals(vertex) || edge.vertex2.equals(vertex))
+                deletingEdges.add(edge);
+        }
+        edges.removeAll(deletingEdges);
     }
 
     @Override
     public boolean cointains(E vertex) {
         return vertices.contains(vertex);
+    }
+
+    @Override
+    public boolean isConnected(E v1, E v2) {
+        return false;
     }
 
     @Override
