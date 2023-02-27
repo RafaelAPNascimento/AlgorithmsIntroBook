@@ -1,12 +1,13 @@
 package ch03DataStructures;
 
-import _03DataStructures.graph.DefaultGraphImpl;
+import _03DataStructures.graph.DefaultUndirectedGraphImpl;
 import _03DataStructures.graph.Graph;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,15 +17,15 @@ public class GraphTest {
     @Test
     public void shouldThrowExceptionWhenAddingEdgeBeforeVertices() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
         assertThrows(RuntimeException.class, () -> graph.addEdge("A", "B", 2));
     }
 
-    @DisplayName("Should not throw exception when adding edge before vertices")
+    @DisplayName("Should not throw exception when adding edge after vertices")
     @Test
     public void shouldNotThrowExceptionWhenAddingEdgeBeforeVertices() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
         graph.addVertex("A");
         graph.addVertex("B");
         assertDoesNotThrow(() -> graph.addEdge("A", "B", 8));
@@ -34,7 +35,7 @@ public class GraphTest {
     @Test
     public void shouldThrowExceptionWhenAddingExistingEdge() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
         graph.addVertex("A");
         graph.addVertex("B");
         graph.addEdge("A", "B", 8);
@@ -45,7 +46,7 @@ public class GraphTest {
     @Test
     public void shouldReturnCorrectNumberOfVertices() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
 
         for (int i = 65; i <= 90; i++) { // A to Z
             String c = String.valueOf((char) i);
@@ -57,7 +58,7 @@ public class GraphTest {
     @Test
     public void shouldRemoveEdge() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
         graph.addVertex("A");
         graph.addVertex("B");
         graph.addEdge("A", "B", 8);
@@ -65,9 +66,19 @@ public class GraphTest {
     }
 
     @Test
+    public void shouldNotRemoveEdge() {
+
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addEdge("A", "B", 8);
+        assertFalse(graph.removeEdge("A", "C"));
+    }
+
+    @Test
     public void shouldRemoveVertex() {
 
-        Graph<String> graph = new DefaultGraphImpl<>();
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
         graph.addVertex("A");
         graph.addVertex("B");
         graph.addVertex("C");
@@ -76,6 +87,33 @@ public class GraphTest {
         assertEquals(3, graph.vertices());
         assertTrue(graph.removeVertex("A"));
         assertEquals(2, graph.vertices());
+    }
+
+    @Test
+    public void shouldBeConnected() {
+
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
+        graph.addVertex("M");
+        graph.addVertex("N");
+        graph.addVertex("O");
+        graph.addVertex("P");
+
+        graph.addEdge("M", "O", 5);
+        assertTrue(graph.isConnected("M", "O"));
+    }
+
+    @Test
+    public void shouldNotBeConnected() {
+
+        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
+        graph.addVertex("M");
+        graph.addVertex("N");
+        graph.addVertex("O");
+        graph.addVertex("P");
+
+        graph.addEdge("M", "O", 5);
+        graph.removeVertex("O");
+        assertFalse(graph.isConnected("M", "O"));
     }
 
 }

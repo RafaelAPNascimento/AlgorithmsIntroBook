@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DefaultGraphImpl<E> implements Graph<E> {
+public class DefaultUndirectedGraphImpl<E> implements Graph<E> {
 
     private List<E> vertices;
     private List<Edge<E>> edges;
 
-    public DefaultGraphImpl() {
+    public DefaultUndirectedGraphImpl() {
         vertices = new ArrayList<>();
         edges = new ArrayList<>();
     }
@@ -33,7 +33,6 @@ public class DefaultGraphImpl<E> implements Graph<E> {
 
             Edge<?> edge = (Edge<?>) o;
 
-            //if (weight != edge.weight) return false;
             if (!vertex1.equals(edge.vertex1)) return false;
             return vertex2.equals(edge.vertex2);
         }
@@ -42,8 +41,13 @@ public class DefaultGraphImpl<E> implements Graph<E> {
         public int hashCode() {
             int result = vertex1.hashCode();
             result = 31 * result + vertex2.hashCode();
-            //result = 31 * result + weight;
             return result;
+        }
+
+        public boolean edges(E v1, E v2) {
+            return
+                v1.equals(vertex1) && v2.equals(vertex2) ||
+                    v1.equals(vertex2) && v2.equals(vertex2);
         }
     }
 
@@ -71,6 +75,10 @@ public class DefaultGraphImpl<E> implements Graph<E> {
 
         Edge deleting = new Edge(vertex1, vertex2, 0);
         int index = edges.indexOf(deleting);
+
+        if (index == -1)
+            return false;
+
         deleting = edges.remove(index);
 
         return deleting != null;
@@ -113,6 +121,14 @@ public class DefaultGraphImpl<E> implements Graph<E> {
 
     @Override
     public boolean isConnected(E v1, E v2) {
+
+        if (!(vertices.contains(v1) || vertices.contains(v2)))
+            return false;
+
+        for (Edge<E> edge : edges) {
+            if (edge.edges(v1, v2))
+                return true;
+        }
         return false;
     }
 
@@ -120,4 +136,5 @@ public class DefaultGraphImpl<E> implements Graph<E> {
     public List<E> findPath(E v1, E v2) {
         return null;
     }
+    
 }

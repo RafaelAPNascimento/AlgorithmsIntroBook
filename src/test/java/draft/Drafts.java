@@ -18,11 +18,9 @@ public class Drafts {
 
     public static void main(String[] args) {
 
-        String x = "123456";
-
-        x = x.substring(0, x.length() - 2);
-        System.out.println(x);
-
+        String crm = "10AL";
+        crm = crm.substring(0, crm.length() - 2);
+        System.out.println(crm);
     }
 
     private static void test() throws Exception {

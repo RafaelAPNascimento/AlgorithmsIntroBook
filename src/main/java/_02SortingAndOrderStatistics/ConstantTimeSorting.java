@@ -28,28 +28,28 @@ public class ConstantTimeSorting {
 
     public void bucketSort(float[] arr) {
 
-        final int SIZE = arr.length;
-        List<Float>[] buckets = new LinkedList[SIZE];
+        List<Float>[] buckets = new List[10];
 
-        for (int i = 0; i < buckets.length; i++)
-            buckets[i] = new LinkedList<>();        // LL takes O(1) to insert elements
-
-        // put array elements in different buckets
-        for (int i = 0; i < SIZE; i++) {
-            int index = (int) (arr[i] * SIZE);
-            buckets[index].add(arr[i]);
+        for (int i = 0; i < 10; i++) {
+            buckets[i] = new LinkedList<>();    // LL takes O(1) to insert elements
         }
 
-        // sort individual buckets
-        for (List bucket : buckets)
+        for (Float el : arr) {
+            int bucket = (int) (el * 10);
+            buckets[bucket].add(el);
+        }
+
+        for (List<Float> bucket : buckets) {
             Collections.sort(bucket);
+        }
 
         // concatenate all buckets into sortedInput
         sortedInputFloats = new float[arr.length];
-        int index = 0;
-        for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < buckets[i].size(); j++)
-                sortedInputFloats[index++] = buckets[i].get(j);
+        for (int i = 0, c = 0; i < 10; i++) {
+            for (Float el : buckets[i]) {
+                sortedInputFloats[c++] = el;
+            }
+        }
     }
 
     public int[] getSortedInput() {
@@ -59,6 +59,4 @@ public class ConstantTimeSorting {
     public float[] getSortedInputFloats() {
         return sortedInputFloats;
     }
-
-
 }
