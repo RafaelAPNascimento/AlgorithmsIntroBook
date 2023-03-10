@@ -13,15 +13,28 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Drafts {
 
     public static void main(String[] args) {
 
-        String crm = "10AL";
-        crm = crm.substring(0, crm.length() - 2);
-        System.out.println(crm);
+        Set<Integer> current = Set.of(2);
+
+        Set<Integer> request = Set.of(55, 2);
+
+        request = request.stream().filter(e -> !current.contains(e)).collect(Collectors.toSet());
+
+        request.isEmpty();
+
+
+        System.out.println(request);
+
     }
+
+
+
 
     private static void test() throws Exception {
         try {

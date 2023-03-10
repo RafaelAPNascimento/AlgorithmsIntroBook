@@ -115,5 +115,4 @@ public class GraphTest {
         graph.removeVertex("O");
         assertFalse(graph.isConnected("M", "O"));
     }
-
 }
