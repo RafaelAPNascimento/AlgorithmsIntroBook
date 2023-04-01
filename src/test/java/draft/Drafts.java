@@ -20,17 +20,12 @@ public class Drafts {
 
     public static void main(String[] args) {
 
-        Set<Integer> current = Set.of(2);
-
-        Set<Integer> request = Set.of(55, 2);
-
-        request = request.stream().filter(e -> !current.contains(e)).collect(Collectors.toSet());
-
-        request.isEmpty();
-
-
-        System.out.println(request);
-
+        int j = (int) Math.pow(1 * 3, 3);
+        System.out.println(j);
+        j = (int) Math.pow(2 * 3, 3);
+        System.out.println(j);
+        j = (int) Math.pow(3 * 3, 3);
+        System.out.println(j);
     }
 
 

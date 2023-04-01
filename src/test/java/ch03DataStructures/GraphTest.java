@@ -1,7 +1,8 @@
 package ch03DataStructures;
 
-import _03DataStructures.graph.DefaultUndirectedGraphImpl;
-import _03DataStructures.graph.Graph;
+import _03DataStructures._graph.DefaultUndirectedGraphImpl;
+import _03DataStructures._graph.Graph;
+import _03DataStructures._graph.UndirectedGraph;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class GraphTest {
     @Test
     public void shouldThrowExceptionWhenAddingEdgeBeforeVertices() {
 
-        Graph<String> graph = new DefaultUndirectedGraphImpl<>();
+        UndirectedGraph<String> graph = new UndirectedGraph<>();
         assertThrows(RuntimeException.class, () -> graph.addEdge("A", "B", 2));
     }
 

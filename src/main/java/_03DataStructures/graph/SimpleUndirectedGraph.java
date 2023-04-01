@@ -1,51 +1,63 @@
 package _03DataStructures.graph;
 
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-public class SimpleGraphImpl {
+public class SimpleUndirectedGraph<E> {
 
-    private LinkedList<Integer>[] adj;
+    private Map<E, LinkedList<E>> adj;
     private int V;  // number of vertices
     private int E;  // number of edges
 
-    public SimpleGraphImpl(int nodes) {
+    public SimpleUndirectedGraph(int nodes) {
         this.V = nodes;
         this.E = 0;
-        this.adj = new LinkedList[nodes];
-        for (int i = 0; i < nodes; i++) {
-            adj[i] = new java.util.LinkedList<>();
-        }
+        this.adj = new HashMap<>();
     }
 
-    public void addEdge(int u, int v) {
-        adj[u].add(v);
-        adj[v].add(u);
+    public void addEdge(E v1, E v2) {
+
+        if (!adj.containsKey(v1))
+            adj.put(v1, new LinkedList<>());
+
+        if (!adj.containsKey(v2))
+            adj.put(v2, new LinkedList<>());
+
+        adj.get(v1).add(v2);
+        adj.get(v2).add(v1);
         E++;
     }
 
-    public Set<Integer> bfs() {
-        boolean[] visited = new boolean[V];
-        Queue<Integer> queue = new LinkedList<>();
-        visited[0] = true;
-        queue.offer(0);
+    public Set<E> bfs() {
 
-        Set<Integer> result = new HashSet<>();
+        Set<E> visited = new HashSet<>(V);
+        Queue<E> queue = new LinkedList<>();
+
+        visited.add(first());
+        queue.offer(first());
+
+        Set<E> result = new HashSet<>();
 
         while (!queue.isEmpty()) {
-            Integer el = queue.poll();
+            E el = queue.poll();
             result.add(el);
-            for (Integer node : adj[el]) {
-                if (!visited[node]) {
-                    visited[node] = true;
+            for (E node : adj.keySet()) {
+                if (!visited.contains(node)) {
+                    visited.add(node);
                     queue.offer(node);
                 }
             }
         }
         return result;
+    }
+
+    private E first() {
+        return adj.keySet().iterator().next();
     }
 
     @Override
@@ -55,7 +67,7 @@ public class SimpleGraphImpl {
         sb.append(V + " vertices, " + E + " edges\n");
         for (int v = 0; v < V; v++) {
             sb.append(v + ": ");
-            for (int w : adj[v]) {
+            for (E w : adj.get(v)) {
                 sb.append(w + " ");
             }
             sb.append("\n");
@@ -64,7 +76,7 @@ public class SimpleGraphImpl {
     }
 
     public static void main(String[] args) {
-        SimpleGraphImpl g = new SimpleGraphImpl(8);
+        SimpleUndirectedGraph<Integer> g = new SimpleUndirectedGraph<>(10);
         g.addEdge(0, 1);
         g.addEdge(0, 3);
         g.addEdge(2, 3);
