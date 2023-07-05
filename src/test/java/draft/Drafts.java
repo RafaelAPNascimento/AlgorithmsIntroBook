@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -20,12 +23,7 @@ public class Drafts {
 
     public static void main(String[] args) {
 
-        int j = (int) Math.pow(1 * 3, 3);
-        System.out.println(j);
-        j = (int) Math.pow(2 * 3, 3);
-        System.out.println(j);
-        j = (int) Math.pow(3 * 3, 3);
-        System.out.println(j);
+        System.out.println(5 / 6);
     }
 
 

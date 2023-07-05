@@ -23,6 +23,21 @@ public class PeakFinder1D {
 
     private int findPeak(int start, int end) {
 
+        int mid = (start + end) / 2;
+
+        if (arr[mid] < arr[mid + 1])
+            return findPeak(mid + 1, end);
+
+        else if (arr[mid] < arr[mid - 1])
+            return findPeak(start, mid - 1);
+
+        else
+            return mid;
+    }
+
+    @Deprecated // previous one looks simpler
+    private int _findPeak(int start, int end) {
+
         if (end < start)
             return arr[start] > arr[end] ? start : end;
 

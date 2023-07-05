@@ -74,5 +74,4 @@ public class SortingTests {
         assertSortingProperties(arr, min, max);
     }
 
-
 }
