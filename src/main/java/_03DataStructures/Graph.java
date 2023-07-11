@@ -1,4 +1,4 @@
-package _03DataStructures.graph;
+package _03DataStructures;
 
 import java.util.Set;
 

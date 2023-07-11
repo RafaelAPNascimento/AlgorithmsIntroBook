@@ -1,7 +1,7 @@
 package ch03DataStructures;
 
 
-import _03DataStructures.graph.Graph;
+import _03DataStructures.Graph;
 import _03DataStructures.graph.SimpleUndirectedGraphImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +49,7 @@ public class SimpleUndirectedGraphTest {
 
     @DisplayName("Adding existing edge should be idempotent")
     @Test
-    public void shouldThrowExceptionWhenAddingExistingEdge() {
+    public void shouldBeIdempotentWhenAddingExistingEdge() {
 
         Graph<String> graph = new SimpleUndirectedGraphImpl<>();
         graph.addVertex("A");
