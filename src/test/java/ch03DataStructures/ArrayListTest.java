@@ -80,5 +80,31 @@ public class ArrayListTest {
         assertEquals("name", list.get(8));
     }
 
+    @Test
+    public void shouldResizeThenInsertAtIndex() {
+
+        MyArrayList<String> list = new MyArrayListImpl<>(3);
+        list.add("name");
+        list.add("full name");
+        list.add("nick");
+        list.insert(2, "Bob");
+
+        assertEquals(4, list.size());
+        assertEquals("Bob", list.get(2));
+    }
+
+    @Test
+    public void shouldResizeThenInsertAtIndex2() {
+
+        MyArrayList<String> list = new MyArrayListImpl<>(1);
+        list.add("name");
+        list.add("full name");
+        list.add("nick");
+        list.insert(2, "Bob");
+
+        assertEquals(4, list.size());
+        assertEquals("Bob", list.get(2));
+    }
+
 
 }

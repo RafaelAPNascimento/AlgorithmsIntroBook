@@ -28,17 +28,20 @@ public class MaxHeapImpl implements MaxHeap {
 
     @Override
     public int parent(int i) {
-        return (i - 1) / 2;
+        // return (i - 1) / 2;
+        return (i - 1) >> 1;    // shifting one bit right is equivalent to divide by 2, except when the value is 0
     }
 
     @Override
     public int leftChild(int i) {
         return i * 2 + 1;
+        // return (i << 1) + 1;     // shifting one bit left is equivalent as multiply by 2
     }
 
     @Override
     public int rightChild(int i) {
-        return i * 2 + 2;
+        //return i * 2 + 2;
+        return (i << 1) + 2;
     }
 
     @Override

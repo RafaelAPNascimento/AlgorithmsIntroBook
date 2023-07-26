@@ -106,26 +106,4 @@ public class SimpleUndirectedGraphImpl<E> implements Graph<E> {
         }
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        SimpleUndirectedGraphImpl<Integer> g = new SimpleUndirectedGraphImpl<>();
-        g.addVertex(0);
-        g.addVertex(1);
-        g.addVertex(2);
-        g.addVertex(3);
-        g.addVertex(4);
-        g.addVertex(6);
-        g.addVertex(7);
-
-        g.addVertex(9);
-
-        g.addEdge(0, 1);
-        g.addEdge(0, 3);
-        g.addEdge(2, 3);
-        g.addEdge(2, 4);
-        g.addEdge(2, 1);
-        g.addEdge(1, 7);
-        g.addEdge(2, 6);
-        System.out.println(g.bfs());
-    }
 }

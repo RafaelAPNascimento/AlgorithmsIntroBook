@@ -283,10 +283,10 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
         else if (cmp < 0)
             x.right = delete(x.right, key);
         else {
-            if (x.left == null)
-                return x.right;
             if (x.right == null)
                 return x.left;
+            if (x.left == null)
+                return x.right;
             else {
                 Node del = x;
                 x = min(x.right);
@@ -294,7 +294,6 @@ public class BstImpl<K extends Comparable<K>, V> implements BST<K, V> {
                 x.left = del.left;
             }
         }
-
         x.nodeCount = size(x.left) + size(x.right) + 1;
         return x;
     }

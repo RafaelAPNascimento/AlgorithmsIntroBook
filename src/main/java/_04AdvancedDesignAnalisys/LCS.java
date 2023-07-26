@@ -21,7 +21,7 @@ public class LCS {
         return lcsDP(x, y, x.length, y.length);
     }
 
-    private int lcs(char[] x, char[] y, int m, int n)  {
+    private int lcs(char[] x, char[] y, int m, int n) {
 
         if (m == 0 || n == 0)
             return 0;
