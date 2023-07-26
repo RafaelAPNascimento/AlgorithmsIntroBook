@@ -9,29 +9,21 @@ public class LongestPalindromeSubstring {
     // It also returns the length
     // of the longest palindrome
     public String longestPalindromeBruteforce(String str) {
-
         String longest = "";
-
         for (int i = 0; i < str.length(); i++) {
-
-            String local;
 
             for (int j = 0; j <= i; j++) {
 
-                local = str.substring(j, i);
-                int localSize = local.length();
+                String local = str.substring(j, i);
 
-                for (int k = 0; k < localSize / 2; k++) {
-                    if (!(local.toLowerCase().charAt(k) == local.toLowerCase().charAt(localSize - k - 1))) {
+                for (int k = 0; k < local.length() / 2; k++) {
+                    if (local.toLowerCase().charAt(k) != local.toLowerCase().charAt(local.length() - k - 1)) {
                         local = null;
                         break;
                     }
                 }
-
-                if (local != null) {
-                    if (local.length() > longest.length())
-                        longest = local;
-                }
+                if (local != null && local.length() > longest.length())
+                    longest = local;
             }
         }
         return longest;
